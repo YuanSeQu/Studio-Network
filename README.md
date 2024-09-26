@@ -16,7 +16,7 @@
 4.UI设计/系统前端开发定制200一个页面，会匹配安排猿社区内开发者，不满意可用换人。
 
 # 系统图片
-![输入图片说明](https://gitee.com/apehub/Fashion-Clothing-Clothing/raw/master/1727286531481.jpg)
+![输入图片说明](https://gitee.com/apehub/Studio-Network/raw/master/1727373706730.jpg)
 
 # 配套资料
 DedeCMS使用（快速入门）手册：https://help.dedecms.com/chujie//<br/>
