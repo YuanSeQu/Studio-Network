@@ -18,10 +18,6 @@
 # 系统图片
 ![输入图片说明](https://gitee.com/apehub/Studio-Network/raw/master/1727373706730.jpg)
 
-# 配套资料
-DedeCMS使用（快速入门）手册：https://help.dedecms.com/chujie//<br/>
-DedeCMS模板手册：https://help.dedecms.com/mubanshouce/<br/>
-
 
 # 关于我们
 1.猿社区ApeHub，专为外贸企业与初创企业提供独立站解决方案社区。我们汇聚技术精英，提供前沿的底层建设方案，助力微创/出海企业构建高效、安全的网站<br/>
