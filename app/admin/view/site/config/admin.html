@@ -1,0 +1,72 @@
+<form class="layui-form w800 js-view-admin-config" method="post" action="{:U('Site/saveConfig')}" lay-label-w100 lay-filter="admin-config">
+    <div class="layui-form-item">
+        <label class="layui-form-label">开发模式</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="admin[app_debug]" lay-skin="switch" lay-text="开启|关闭" value="1" {$admin['app_debug']?'checked':''} unvalue="0"/>
+            <p class="mt10 cl-888 f12">开启后方便调试错误、修改模板没缓存及时预览前台效果，一改便生效。</p>
+            <p class="cl-888 f12">仅用于调试模版使用，正式运营时请关闭该模式提高网站性能。</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">升级提醒</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="admin[popup_upgrade]" lay-skin="switch" lay-text="开启|关闭" value="1" {$admin['popup_upgrade']?'checked':''} unvalue="0"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机站域名</label>
+        <div class="layui-input-block">
+            <input type="text" name="admin[wap_domain]" value="{$admin.wap_domain|default=''}" placeholder="请输手机站域名 如：http://m.rrzcms.com" autocomplete="off" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">启用https</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="admin[is_https]" lay-skin="switch" lay-text="开启|关闭" value="1" {$admin['is_https']?'checked':''} unvalue="0"/>
+            <p class="mt10 cl-888 f12">开启前，请先在空间正确配置SSL证书。在能正常访问https://域名的情况下开启。<br>开启后 sitemap.xml 中链接将使用https 生成。</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">后台路径</label>
+        <div class="layui-input-block flex">
+            <label class="lh38 f14 cl-666">{:U('/',[],false,true)}</label>
+            <input  class="layui-input w100 ml5" type="text" name="admin[app_map]"  value="{$admin.app_map|default='admin'}"
+                    autocomplete="off" onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'');"
+                    onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^0-9a-zA-Z_]/g,''));"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">后台LOGO</label>
+        <div class="layui-input-block">
+            {imgspace name="admin[logo]" value="$admin.logo|default=''" title="后台LOGO" watermark='false' /}
+        </div>
+    </div>
+    <div class="layui-form-item hide">
+        <label class="layui-form-label">数据备份路径</label>
+        <div class="layui-input-block">
+            <input type="text" name="admin[sqldatapath]" value="{$admin.sqldatapath|default=''}" placeholder="数据备份路径" autocomplete="off" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">后台登录超时</label>
+        <div class="layui-input-block flex">
+            <input type="text" name="admin[expiretime]"  value="{$admin.expiretime|default='3600'}" vtype="minLength:4" placeholder="后台登录超时" lay-verify="number" autocomplete="off" class="layui-input w200"/>
+            <label class="lh38">(秒)</label>
+            <div class="flex-c ml5">
+                <i class="layui-icon layui-icon-tips" lay-tips="默认3600秒等于1小时"></i>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item hide">
+        <label class="layui-form-label">隐藏插件菜单</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="admin[hide_plugin]" lay-skin="switch" lay-text="开启|关闭" value="1" {$admin['hide_plugin']?'checked':''} unvalue="0"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item mt30">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+        </div>
+    </div>
+</form>

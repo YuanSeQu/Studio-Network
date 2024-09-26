@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <title>{$rrz.seo_title}</title>
+    <meta name="description" content="{$rrz.seo_description}"/>
+    <meta name="keywords" content="{$rrz.seo_keywords}"/>
+    <meta name="author" content="order by rrzcms.com"/>
+    <link href="{rrz:env name='website.favicon' /}" rel="shortcut icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    {rrz:skin href="skin/css/cui.css,skin/css/style.css,skin/css/less.css"/}
+    {rrz:skin href="skin/js/jquery.js"/}
+</head>
+<body>
+
+    {include file="block/header" /}
+    <div id="bd">
+        <div class="cur">
+            <div class="wp">您的当前位置：{rrz:crumbs /} </div>
+        </div>
+        <div class="case-article">
+            <div class="case-article-bg">
+                <div class="wp pr">
+                    <div class="case-logo"></div>
+                    <h1 style="color:#000000">{$rrz.title}</h1>
+                    <div class="tc"> {$rrz.content|raw} </div>
+                </div>
+            </div>
+            <div class="case-back">
+                {if $rrz.typeInfo}<a href="{$rrz.typeInfo.url}">返回案例列表</a>{/if}
+            </div>
+        </div>
+    </div>
+    {include file="block/footer" /}
+    {rrz:skin href="skin/js/lib.js"/}
+
+
+</body>
+</html>

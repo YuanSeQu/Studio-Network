@@ -1,0 +1,51 @@
+<form class="layui-form ptb15 pr20" method="post" action="{:U('Goods/addAttr')}?id={$row.id??''}" lay-filter="vjs-view-addAttr">
+    <div class="layui-form-item">
+        <label class="layui-form-label"><em class="cl-r"> *</em> 参数名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" value="{$row.name??''}" vtype="required" placeholder="请输入参数名称" autocomplete="off" class="layui-input w200" maxlength="50" autofocus/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">输入方式</label>
+        <div class="layui-input-block">
+            <input type="radio"  lay-filter="vjs-attr-type"  name="type" value="0" title="单行文本框" {if !isset($row.type)|| !$row.type }checked{/if}/>
+            <input type="radio"  lay-filter="vjs-attr-type"  name="type" value="2" title="多行文本框" {if isset($row.type)&&$row.type=='2' }checked{/if}/>
+            <input type="radio"  lay-filter="vjs-attr-type"  name="type" value="1" title="下拉式列表" {if isset($row.type)&&$row.type=='1' }checked{/if}/>
+        </div>
+    </div>
+    <div class="layui-form-item vjs-values">
+        <label class="layui-form-label"><em class="cl-r"> *</em> 可选值列表</label>
+        <div class="layui-input-block">
+            <textarea name="values" rows="3" class="layui-textarea" vtype="required" placeholder="可选值列表" maxlength="300">{$row.values??''}</textarea>
+            <p class="f12 cl-999 mt5">一行代表一个可选项 </p>
+        </div>
+    </div>
+    <div class="layui-form-item hide">
+        <label class="layui-form-label">应用于筛选</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="is_filter" lay-skin="switch" lay-text="开启|关闭" value="1" {$row.is_filter?'checked':''} unvalue="0"/>
+            <p class="f12 cl-999 mt10">是否应用于列表的条件筛选中</p>
+        </div>
+    </div>
+    <div class="layui-form-item text-center mt30">
+        <button type="submit" class="layui-btn layui-btn-normal w100" lay-submit>保存</button>
+    </div>
+</form>
+<script>
+    (function () {
+        var $view = $('[lay-filter="vjs-view-addAttr"]');
+
+        function typeChange(elem) {
+            if (elem.checked) {
+                $('.vjs-values', $view)[$(elem).attr('value') == '1' ? 'show' : 'hide']();
+            }
+        }
+
+        var $type = $('[name="type"]:checked', $view);
+        $type.length && typeChange($type.get(0));
+
+        layui.form.on('radio(vjs-attr-type)', function (data) {
+            typeChange(data.elem);
+        });
+    })();
+</script>

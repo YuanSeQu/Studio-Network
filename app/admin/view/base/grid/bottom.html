@@ -1,0 +1,27 @@
+<div class="layui-table-page">
+    <div>
+        <div class="layui-box layui-laypage layui-laypage-default">
+            <span class="layui-laypage-limits">
+                <select>
+                    <option value="10" {if $limit==10} selected {/if}>10 条/页</option>
+                    <option value="20"{if $limit==20} selected {/if}>20 条/页</option>
+                    <option value="30"{if $limit==30} selected {/if}>30 条/页</option>
+                    <option value="40"{if $limit==40} selected {/if}>40 条/页</option>
+                    <option value="50"{if $limit==50} selected {/if}>50 条/页</option>
+                    <!--<option value="60"{if $limit==60} selected {/if}>60 条/页</option>-->
+                    <!--<option value="70"{if $limit==70} selected {/if}>70 条/页</option>-->
+                    <!--<option value="80"{if $limit==80} selected {/if}>80 条/页</option>-->
+                    <!--<option value="90"{if $limit==90} selected {/if}>90 条/页</option>-->
+                </select>
+            </span>
+            <span class="layui-laypage-count">共 {$count} 条</span>
+            <a href="javascript:;" class="layui-laypage-prev {$curr==1?'layui-disabled':''}" data-page="0"><i class="layui-icon"></i></a>
+            <span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>{$curr} / {$page_count}</em></span>
+            <a href="javascript:;" class="layui-laypage-next {:$curr>=$page_count?'layui-disabled':''}" data-page="2"><i class="layui-icon"></i></a>
+            <span class="layui-laypage-skip">
+                到第<input type="text" min="1" value="{$curr}" class="layui-input" maxlength="3"/>页
+                <button type="button" class="layui-laypage-btn">确定</button>
+            </span>
+        </div>
+    </div>
+</div>

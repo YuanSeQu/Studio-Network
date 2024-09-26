@@ -1,0 +1,160 @@
+<div class="layui-card">
+    <div class="layui-card-header layui-tab layui-tab-brief p0 bd-w0">
+        <ul class="layui-tab-title">
+            <li target="page" href="{:U('Seo/index')}">SEO配置</li>
+            <li class="layui-this">Sitemap</li>
+            <li target="page" href="{:U('Seo/links')}">友情链接</li>
+        </ul>
+    </div>
+    <div class="layui-card-body">
+        <form class="layui-form w700" method="post" action="{:U('Seo/sitemap')}" lay-label-w100>
+            <div class="layui-form-item">
+                <label class="layui-form-label">自动生成</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="auto" lay-skin="switch" lay-text="开启|关闭" value="1" {$sitemap['auto']?'checked':''} unvalue="0"/>
+                    <p class="cl-999 f12">更新内容时候自动更新网站地图</p>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">过滤内容</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="filter_ifpub" value="1" title="过滤未发布内容" lay-skin="primary" {$sitemap['filter_ifpub']?'checked':''} />
+                    <input type="checkbox" name="filter_isurl" value="1" title="过滤外部内容" lay-skin="primary"  {if empty($sitemap.filter_isurl) || $sitemap.filter_isurl}checked{/if}/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">Sitemap类型</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="type" title="Xml网站地图" value="xml" lay-skin="primary" checked/>
+                    <div class="mt5">
+                        适合谷歌和百度，地图网址
+                        <a class="cl-38f" href="{:getRootUrl(true)}sitemap.xml" target="_blank">{:getRootUrl(true)}sitemap.xml</a>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">更新频率</label>
+                <div class="layui-input-block">
+                    首页
+                    <div class="layui-inline w100">
+                        <select name="index_changefreq">
+                            <option value="always" {if condition="empty($sitemap.index_changefreq) || $sitemap.index_changefreq eq 'always'"}selected{/if}>经常</option>
+                            <option value="hourly" {if condition="!empty($sitemap.index_changefreq) && $sitemap.index_changefreq eq 'hourly'"}selected{/if}>每小时</option>
+                            <option value="daily" {if condition="!empty($sitemap.index_changefreq) && $sitemap.index_changefreq eq 'daily'"}selected{/if}>每天</option>
+                            <option value="weekly" {if condition="!empty($sitemap.index_changefreq) && $sitemap.index_changefreq eq 'weekly'"}selected{/if}>每周</option>
+                            <option value="monthly" {if condition="!empty($sitemap.index_changefreq) && $sitemap.index_changefreq eq 'monthly'"}selected{/if}>每月</option>
+                            <option value="yearly" {if condition="!empty($sitemap.index_changefreq) && $sitemap.index_changefreq eq 'yearly'"}selected{/if}>每年</option>
+                            <option value="never" {if condition="!empty($sitemap.index_changefreq) && $sitemap.index_changefreq eq 'never'"}selected{/if}>从不</option>
+                        </select>
+                    </div>
+                    &nbsp;&nbsp;
+                    列表页
+                    <div class="layui-inline w100">
+                        <select name="list_changefreq">
+                            <option value="always" {if condition="!empty($sitemap.list_changefreq) && $sitemap.list_changefreq eq 'always'"}selected="true"{/if}>经常</option>
+                            <option value="hourly" {if condition="empty($sitemap.list_changefreq) || $sitemap.list_changefreq eq 'hourly'"}selected{/if}>每小时</option>
+                            <option value="daily" {if condition="!empty($sitemap.list_changefreq) && $sitemap.list_changefreq eq 'daily'"}selected{/if}>每天</option>
+                            <option value="weekly" {if condition="!empty($sitemap.list_changefreq) && $sitemap.list_changefreq eq 'weekly'"}selected{/if}>每周</option>
+                            <option value="monthly" {if condition="!empty($sitemap.list_changefreq) && $sitemap.list_changefreq eq 'monthly'"}selected{/if}>每月</option>
+                            <option value="yearly" {if condition="!empty($sitemap.list_changefreq) && $sitemap.list_changefreq eq 'yearly'"}selected{/if}>每年</option>
+                            <option value="never" {if condition="!empty($sitemap.list_changefreq) && $sitemap.list_changefreq eq 'never'"}selected{/if}>从不</option>
+                        </select>
+                    </div>
+                    &nbsp;&nbsp;
+                    内容页
+                    <div class="layui-inline w100">
+                        <select name="view_changefreq">
+                            <option value="always" {if condition="!empty($sitemap.view_changefreq) && $sitemap.view_changefreq eq 'always'"}selected="true"{/if}>经常</option>
+                            <option value="hourly" {if condition="!empty($sitemap.view_changefreq) && $sitemap.view_changefreq eq 'hourly'"}selected="true"{/if}>每小时</option>
+                            <option value="daily" {if condition="empty($sitemap.view_changefreq) || $sitemap.view_changefreq eq 'daily'"}selected="true"{/if}>每天</option>
+                            <option value="weekly" {if condition="!empty($sitemap.view_changefreq) && $sitemap.view_changefreq eq 'weekly'"}selected="true"{/if}>每周</option>
+                            <option value="monthly" {if condition="!empty($sitemap.view_changefreq) && $sitemap.view_changefreq eq 'monthly'"}selected="true"{/if}>每月</option>
+                            <option value="yearly" {if condition="!empty($sitemap.view_changefreq) && $sitemap.view_changefreq eq 'yearly'"}selected="true"{/if}>每年</option>
+                            <option value="never" {if condition="!empty($sitemap.view_changefreq) && $sitemap.view_changefreq eq 'never'"}selected="true"{/if}>从不</option>
+                        </select>
+                    </div>
+                    <p class="cl-999 f12">XML地图文件使用，你输入的网站的网页内容更新的频率。</p>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">优先级别</label>
+                <div class="layui-input-block">
+                    首页
+                    <div class="layui-inline w100">
+                        <select name="index_priority">
+                            <option value="0.1" {if condition="!empty($sitemap.index_priority) && $sitemap.index_priority eq '0.1'"}selected="true"{/if}>0.1</option>
+                            <option value="0.2" {if condition="!empty($sitemap.index_priority) && $sitemap.index_priority eq '0.2'"}selected="true"{/if}>0.2</option>
+                            <option value="0.3" {if condition="!empty($sitemap.index_priority) && $sitemap.index_priority eq '0.3'"}selected="true"{/if}>0.3</option>
+                            <option value="0.4" {if condition="!empty($sitemap.index_priority) && $sitemap.index_priority eq '0.4'"}selected="true"{/if}>0.4</option>
+                            <option value="0.5" {if condition="!empty($sitemap.index_priority) && $sitemap.index_priority eq '0.5'"}selected="true"{/if}>0.5</option>
+                            <option value="0.6" {if condition="!empty($sitemap.index_priority) && $sitemap.index_priority eq '0.6'"}selected="true"{/if}>0.6</option>
+                            <option value="0.7" {if condition="!empty($sitemap.index_priority) && $sitemap.index_priority eq '0.7'"}selected="true"{/if}>0.7</option>
+                            <option value="0.8" {if condition="!empty($sitemap.index_priority) && $sitemap.index_priority eq '0.8'"}selected="true"{/if}>0.8</option>
+                            <option value="0.9" {if condition="!empty($sitemap.index_priority) && $sitemap.index_priority eq '0.9'"}selected="true"{/if}>0.9</option>
+                            <option value="1.0" {if condition="empty($sitemap.index_priority) || $sitemap.index_priority eq '1.0'"}selected="true"{/if}>1.0</option>
+                        </select>
+                    </div>
+                    &nbsp;&nbsp;
+                    列表页
+                    <div class="layui-inline w100">
+                        <select name="list_priority">
+                            <option value="0.1" {if condition="!empty($sitemap.list_priority) && $sitemap.list_priority eq '0.1'"}selected="true"{/if}>0.1</option>
+                            <option value="0.2" {if condition="!empty($sitemap.list_priority) && $sitemap.list_priority eq '0.2'"}selected="true"{/if}>0.2</option>
+                            <option value="0.3" {if condition="!empty($sitemap.list_priority) && $sitemap.list_priority eq '0.3'"}selected="true"{/if}>0.3</option>
+                            <option value="0.4" {if condition="!empty($sitemap.list_priority) && $sitemap.list_priority eq '0.4'"}selected="true"{/if}>0.4</option>
+                            <option value="0.5" {if condition="!empty($sitemap.list_priority) && $sitemap.list_priority eq '0.5'"}selected="true"{/if}>0.5</option>
+                            <option value="0.6" {if condition="!empty($sitemap.list_priority) && $sitemap.list_priority eq '0.6'"}selected="true"{/if}>0.6</option>
+                            <option value="0.7" {if condition="!empty($sitemap.list_priority) && $sitemap.list_priority eq '0.7'"}selected="true"{/if}>0.7</option>
+                            <option value="0.8" {if condition="empty($sitemap.list_priority) || $sitemap.list_priority eq '0.8'"}selected="true"{/if}>0.8</option>
+                            <option value="0.9" {if condition="!empty($sitemap.list_priority) && $sitemap.list_priority eq '0.9'"}selected="true"{/if}>0.9</option>
+                            <option value="1.0" {if condition="!empty($sitemap.list_priority) && $sitemap.list_priority eq '1.0'"}selected="true"{/if}>1.0</option>
+                        </select>
+                    </div>
+                    &nbsp;&nbsp;
+                    内容页
+                    <div class="layui-inline w100">
+                        <select name="view_priority">
+                            <option value="0.1" {if condition="!empty($sitemap.view_priority) && $sitemap.view_priority eq '0.1'"}selected="true"{/if}>0.1</option>
+                            <option value="0.2" {if condition="!empty($sitemap.view_priority) && $sitemap.view_priority eq '0.2'"}selected="true"{/if}>0.2</option>
+                            <option value="0.3" {if condition="!empty($sitemap.view_priority) && $sitemap.view_priority eq '0.3'"}selected="true"{/if}>0.3</option>
+                            <option value="0.4" {if condition="!empty($sitemap.view_priority) && $sitemap.view_priority eq '0.4'"}selected="true"{/if}>0.4</option>
+                            <option value="0.5" {if condition="empty($sitemap.view_priority) || $sitemap.view_priority eq '0.5'"}selected="true"{/if}>0.5</option>
+                            <option value="0.6" {if condition="!empty($sitemap.view_priority) && $sitemap.view_priority eq '0.6'"}selected="true"{/if}>0.6</option>
+                            <option value="0.7" {if condition="!empty($sitemap.view_priority) && $sitemap.view_priority eq '0.7'"}selected="true"{/if}>0.7</option>
+                            <option value="0.8" {if condition="!empty($sitemap.view_priority) && $sitemap.view_priority eq '0.8'"}selected="true"{/if}>0.8</option>
+                            <option value="0.9" {if condition="!empty($sitemap.view_priority) && $sitemap.view_priority eq '0.9'"}selected="true"{/if}>0.9</option>
+                            <option value="1.0" {if condition="!empty($sitemap.view_priority) && $sitemap.view_priority eq '1.0'"}selected="true"{/if}>1.0</option>
+                        </select>
+                    </div>
+                    <p class="cl-999 f12">XML地图文件使用，所抓取页面在您网站的重要性，告诉搜索引擎抓取的优先级。数值越大，优先级越高。</p>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">生成文档数量</label>
+                <div class="layui-input-block">
+                    <input name="articles_num" value="{$sitemap.articles_num|default='100'}" class="layui-input w60 lineblock"  lay-verify="number" />&nbsp;篇
+                    <p class="cl-999 f12">发布/编辑文档时，会同步更新sitemap.xml。</p>
+                    <p class="cl-999 f12">推荐设置100篇，数量设置越多，会对文档发布/编辑的速度造成一定影响。</p>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">生成Tag数量</label>
+                <div class="layui-input-block">
+                    <input name="tags_num" value="{$sitemap.tags_num|default='100'}" class="layui-input w60 lineblock"  lay-verify="number" />&nbsp;篇
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">百度蜘蛛token</label>
+                <div class="layui-input-block">
+                    <input name="zzbaidutoken" value="{$sitemap.zzbaidutoken|default=''}" class="layui-input"/>
+                    <p class="cl-999 f12">这里填入 <a href="https://ziyuan.baidu.com" target="_blank" style="color: red;">百度搜索资源平台</a> 的准入密钥，才能第一时间推送文章链接给百度蜘蛛。</p>
+                </div>
+            </div>
+            <div class="layui-form-item mt30">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

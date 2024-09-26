@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <title>{$rrz.seo_title}</title>
+    <meta name="description" content="{$rrz.seo_description}"/>
+    <meta name="keywords" content="{$rrz.seo_keywords}"/>
+    <meta name="author" content="order by rrzcms.com"/>
+    <link href="{rrz:env name='website.favicon' /}" rel="shortcut icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    {rrz:skin href="skin/css/cui.css,skin/css/style.css,skin/css/less.css"/}
+    {rrz:skin href="skin/js/jquery.js"/}
+</head>
+<body>
+    {include file="block/header" /}
+    <div class="bd">
+        <!--img(%IMAGES%/img1.jpg)-->
+        <div id="ban-in" style="background-image:url(%IMAGES%/img1.jpg)">
+            <div class="ban-bg"></div>
+        </div>
+        <!--img_end-->
+        <div class="wp">
+            {include file="block/top" /}
+            <ul class="ul-case">
+                {rrz:list limit ='12'}
+                <li>
+                    <div class="block">
+                        <div class="pic"><img src="{$item.img|default='%IMAGES%/default.gif'}" alt="{$item.title}"></div>
+                        <div class="txt">
+                            <a href="{$item.url}" style="width:100%;height:100%;display:block;">
+                                <b></b>
+                                <div class="pad">
+                                    <h5>{$item.type_name}</h5>
+                                    <em></em>
+                                    <h3>{$item.title}</h3>
+                                    <span class="more">案例详情</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                {/rrz:list}
+            </ul>
+            <div class="c"></div>
+            <div class="pagess">
+                <ul>
+                    {rrz:page item="index,end,pre,next,pageno" size="1" tag='li' style='thisclass' /}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    {include file="block/footer" /}
+    {rrz:skin href="skin/js/lib.js"/}
+    <script>
+        var isMobile;
+        function mobileCheck(){
+            isMobile  = $('#m-hd').is(':visible');
+        }
+
+        $(window).resize(function(event) {
+            mobileCheck();
+            $('.ul-case li').removeClass('on');
+            if(isMobile){
+                $('.ul-case').attr('id','ul-mobile');
+            }else{
+                $('.ul-case').attr('id','ul-pc');
+            }
+        });
+
+        $('body').on('mouseenter mouseleave', '#ul-pc li', function(){
+            $(this).toggleClass('on');
+        })
+
+        $('body').on('click', '#ul-mobile li', function(){
+            $(this).toggleClass('on');
+        })
+
+        $(window).load(function(){
+            $(window).trigger('resize');
+        })
+    </script>
+
+</body>
+</html>

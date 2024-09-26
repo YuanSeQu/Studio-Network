@@ -1,0 +1,59 @@
+{if !$data }
+<tr class="odd">
+    <td colspan="{:$cols_nums+($colsNo?1:0)+($checkType?1:0)}" align="center">没有数据</td>
+    {if condition="$fixedColumn"}
+    <td>&nbsp;&nbsp;</td>
+    {/if}
+</tr>
+{/if}
+{foreach name="data" item="row" key="_dkey" }
+<tr class="{:$_dkey%2==0?'odd':'even' } hover-show" data-id="{:$pk_field?$row[$pk_field]:''}" {if isset($trAttr)&&$trAttr&&is_array($trAttr) } {foreach $trAttr as $attr=>$rkey} {$attr}="{:$row[$rkey]??''}" {/foreach} {/if}>
+    {if $checkType}
+        <td class="checkbox" width="50" align="center">
+            <div class="layui-form" lay-filter="layui-grid-form">
+                <input type="checkbox" lay-filter="layui-grid-checkbox" class="{$checkType}" name="{$pk_field??''}" value="{:$pk_field?$row[$pk_field]:''}" lay-skin="primary" />
+            </div>
+        </td>
+    {/if}
+    {if condition="$colsNo" }
+        <td width="{:$fixedColumn?80:50}" align="center">{:$limit*($curr-1)+$_dkey+1}</td>
+    {/if}
+    {foreach name="columns" item="col" }
+    <?php isset($col['align']) or $col['align']='center'; ?>
+    <td field="{$col.title}" {foreach name="col" item="ov"} {if condition="!in_array($key,array('html','field','callfunc','tag','enum','callback','title'))"} {$key}="{$ov}" {/if} {/foreach}>
+        <div class="padding">
+        {if condition="isset($col['type'])&&$col['type']=='time'" }
+            {gt name="row[$col['field']]" value="0" }
+            {:date($col['format']?? 'Y-m-d H:i:s',$row[$col['field']]) }
+            {/gt}
+        {elseif condition="isset($col['type'])&&$col['type']=='enum'" /}
+            {$col['enum'][$row[$col['field']]]}
+        {elseif condition="isset($col['type'])&&$col['type']=='img'" /}
+            {notempty name="row[$col['field']]"}
+            <a href="{:$row[$col['field']]}" target="_blank"><img class="tips-img" src="{:$row[$col['field']]}" height="45" width="{$col.width?:'45'}" style="object-fit:contain;max-width:100%;"/></a>
+            {/notempty}
+        {elseif condition="isset($col['type'])&&$col['type']=='url'" /}
+            {notempty name="row[$col['field']]"}
+            <a href="{:$row[$col['field']]}" target="_blank" class="cl-38f">{:$row[$col['field']]}</a>
+            {/notempty}
+        {elseif condition="isset($col['type'])&&$col['type']=='icon'" /}
+            <div class="w45 h45 flex-al-c bg-eee"><img class="mxw mxh" src="{:$row[$col['field']]}" /></div>
+        {elseif condition="isset($col['type'])&&$col['type']=='html'" /}
+            {:$col['html']}
+        {else /}
+            <?php 
+                if(isset($col['callback'])&&$col['callback']&&($col['callback'] instanceof \Closure)){
+                    echo $col['callback']($row,$_dkey);
+                    continue;
+                }
+            ?>
+            {:$row[$col['field']]?? ''}
+        {/if}
+        </div>
+    </td>
+    {/foreach}
+    {if condition="$fixedColumn" }
+    <td>&nbsp;&nbsp;</td>
+    {/if}
+</tr>
+{/foreach}

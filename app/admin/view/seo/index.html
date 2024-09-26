@@ -1,0 +1,127 @@
+<div class="layui-card js-view-seo-config">
+    <div class="layui-card-header layui-tab layui-tab-brief p0 bd-w0">
+        <ul class="layui-tab-title">
+            <li class="layui-this">SEO配置</li>
+            <li target="page" href="{:U('Seo/sitemap')}">Sitemap</li>
+            <li target="page" href="{:U('Seo/links')}">友情链接</li>
+        </ul>
+    </div>
+    <div class="layui-card-body">
+        <form class="layui-form w700" method="post" action="{:U('Seo/index')}" lay-label-w100 lay-filter="seo-config">
+            <div class="layui-form-item">
+                <label class="layui-form-label">URL伪静态后缀</label>
+                <div class="layui-input-block">
+                    <div class="hide">
+                        <input name="url_suffix" value="{$seo.url_suffix|default='html'}" class="layui-input w100 lineblock"  lay-verify="required" />
+                        <span class="f12 cl-999">页面URL伪静态后缀</span>
+                    </div>
+                    <div class="mt5">
+                        <input type="checkbox" name="nav_hide_suffix" title="导航/栏目/分类 隐藏URL后缀" value="1" lay-skin="primary" {$seo.nav_hide_suffix?'checked':''} unvalue="0"/>
+                        <p class="f12 cl-999 mt5">勾选后导航菜单、文章栏目、产品分类 URL 不携带后缀</p>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">URL多级目录</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="url_level_dir" value="0" title="组合上级目录" {$seo.url_level_dir?'':'checked'}/>
+                    <input type="radio" name="url_level_dir" value="1" title="不组合上级目录" {$seo.url_level_dir?'checked':''}/>
+                    <p class="f12 cl-999"> 配置 URL 伪静态子级栏目是否组合上级目录 </p>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">SEO标题连接符</label>
+                <div class="layui-input-block">
+                    <input name="connector_title" value="{$seo.connector_title|default='_'}" class="layui-input w60 lineblock"  lay-verify="required" />
+                    <p class="f12 cl-999"> 当下面的配置中需要连接时使用 </p>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">列表页SEO标题</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="list_title" value="1" title="栏目名称" {if !isset($seo.list_title)||$seo.list_title=='1'}checked{/if}/><br/>
+                    <input type="radio" name="list_title" value="2" title="栏目名称_网站名称" {if isset($seo.list_title)&&$seo.list_title=='2'}checked{/if}/><br/>
+                    <input type="radio" name="list_title" value="3" title="栏目名称_第N页_网站名称" {if isset($seo.list_title)&&$seo.list_title=='3'}checked{/if}/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">内容页SEO标题</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="view_title" value="1" title="内容标题" {if !isset($seo.view_title)||$seo.view_title=='1'}checked{/if}/><br/>
+                    <input type="radio" name="view_title" value="2" title="内容标题_网站名称" {if isset($seo.view_title)&&$seo.view_title=='2'}checked{/if}/><br/>
+                    <input type="radio" name="view_title" value="3" title="内容标题_栏目名称_网站名称" {if isset($seo.view_title)&&$seo.view_title=='3'}checked{/if}/>
+                </div>
+            </div>
+            <div class="layui-form-item js-inlet">
+                <label class="layui-form-label">去除index.php</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" lay-filter="seo-config-inlet" lay-skin="switch" lay-text="开启|关闭" value="1" {$admin['inlet']?'checked':''} unvalue="0"/>
+                </div>
+            </div>
+            <div class="layui-form-item mt30">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    (function () {
+        var $view = $('.js-view-seo-config');
+        var root = '{:getRootUrl()}';
+        layui.form.on('switch(seo-config-inlet)', function (data) {
+            if (data.elem.checked) {
+                layer.open({
+                    type: 2,
+                    title: false,
+                    area: ['0px', '0px'],
+                    shade: 0.0,
+                    closeBtn: 0,
+                    shadeClose: true,
+                    content: root + '{:getAppName("admin")}/Login/setInlet.html',
+                    success: function (layero, index) {
+                        layer.close(index);
+                        var body = layer.getChildFrame('body', index);
+                        var content = body.html();
+                        if (content.indexOf("passing") == -1) {
+                            $('[lay-filter="seo-config-inlet"]', $view).prop('checked', false);
+                            layui.form.render('checkbox', 'seo-config');
+                            layer.alert('不支持去除index.php，请<a class="cl-38f" href="http://www.rrzcms.com/Admin/News/info/id/14.html" target="_blank">点击查看教程</a>', {
+                                icon: 2,
+                                title: false
+                            });
+                        }
+                    }
+                });
+            }
+        });
+
+        function checkInlet() {
+            layer.open({
+                type: 2,
+                title: false,
+                area: ['0px', '0px'],
+                shade: 0.0,
+                closeBtn: 0,
+                shadeClose: true,
+                content: root + '{:getAppName("admin")}/Login/setInlet.html',
+                success: function (layero, index) {
+                    layer.close(index);
+                    var body = layer.getChildFrame('body', index);
+                    var content = body.html();
+                    if (content.indexOf("passing") == -1) {
+                        $('[lay-filter="seo-config-inlet"]', $view).prop('checked', false);
+                        $.post(root + 'index.php/{:getAppName("admin")}/Login/setInlet', { inlet: 2 });
+                        $('.js-inlet', $view).show();
+                    } else {
+                        $('[lay-filter="seo-config-inlet"]', $view).prop('checked', true);
+                        $('.js-inlet', $view).hide();
+                    }
+                    layui.form.render('checkbox', 'seo-config');
+                }
+            });
+        }
+        checkInlet();
+    })();
+</script>

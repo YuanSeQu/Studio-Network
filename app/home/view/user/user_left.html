@@ -1,0 +1,16 @@
+<div class="overlay"></div>
+<div class="layui-col-xs2 rrz-user-left sidebar">
+    <div class="sidebar-box">
+        {rrz:each list='$user_menus'}
+        <ul class="layui-nav layui-nav-tree">
+            <li class="layui-nav-item title">{$item.title}</li>
+            {rrz:each list='$item.list' item='menu'}
+            <li class="layui-nav-item {$menu.class?'g-background':''}"><a href="{$menu.url}">{$menu.title}</a></li>
+            {/rrz:each}
+            {if !$key}
+            <li class="layui-nav-item layui-show-xs-block" style="display: none;"><a href="{:U('/user/logout')}">退出登录</a></li>
+            {/if}
+        </ul>
+        {/rrz:each}
+    </div>
+</div>

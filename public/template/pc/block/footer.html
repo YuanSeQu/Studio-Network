@@ -1,0 +1,92 @@
+<div class="c"></div>
+<div id="fd" class="index-fd pr">
+    <div class="map-bg3"></div>
+    <div class="wp">
+        <div class="fd-top">
+            {rrz:node id='3'}
+            <dl>
+                <dt>{$node.title}</dt>
+                <dd>
+                    <ul class="ul-fd">
+                        <li><a href="{$node.url}#whous">我们是谁</a></li>
+                        <li><a href="{$node.url}#ourcus">我们服务的客户</a></li>
+                        <li><a href="{$node.url}#ourteam">我们的团队</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            {/rrz:node}
+            {rrz:node id='2'}
+            <dl>
+                <dt>{$node.title}</dt>
+                <dd>
+                    <ul class="ul-fd">
+                        <li><a href="{$node.url}#webbuit">网站建设</a></li>
+                        <li><a href="{$node.url}#weiweb">H5响应式 交互网站</a></li>
+                        <li><a href="{$node.url}#webmobel">移动端 & 微网站定制</a></li>
+                        <li><a href="{$node.url}#servweb">服务流程</a></li>
+                        <li><a href="{$node.url}#solution">行业解决方案</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            {/rrz:node}
+            {rrz:nodes id='1,4' type='self' item='node'}
+            <dl>
+                <dt>{$node.title}</dt>
+                <dd>
+                    <ul class="ul-fd">
+                        {rrz:nodes type='son'}
+                        <li><a href="{$item.url}">{$item.title}</a></li>
+                        {/rrz:nodes}
+                    </ul>
+                </dd>
+            </dl>
+            {/rrz:nodes}
+            <dl>
+                <dt>联系我们</dt>
+                <dd class="pr">
+                    <p>
+                        <a href="" class="weixin"></a>
+                        <a href="" class="sina"></a>
+                        <span class="weixin-pic"><img src="{rrz:env name='webinfo.qrcode' /}" alt=""></span>
+                    </p>
+                    <p><b class="tel">{rrz:env name='webinfo.telephone' /}</b></p>
+                    <h5>公司服务热线</h5>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="fd-copy">
+        <div class="wp">
+            <p>
+                <span style="color:#CCCCCC;">{rrz:env name='website.copyright' /}</span>
+                {rrz:env name='website.recordnum'/}
+            </p>
+        </div>
+    </div>
+</div>
+<div class="side">
+    <ul>
+        <li><a href="http://wpa.qq.com/msgrd?v=3&uin={rrz:env name='webinfo.qq' /}&site=qq&menu=yes">
+            <div class="sidebox"><img src="%IMAGES%/side_icon01.png">在线咨询</div>
+        </a></li>
+        <li><a href="javascript:void(0);" >
+            <div class="sidebox"><img src="%IMAGES%/side_icon03.png">{rrz:env name='webinfo.telephone' /}</div>
+        </a></li>
+    </ul>
+</div>
+<div class="side2">
+    <ul>
+        <li><a href=""><img src="%IMAGES%/r_icon1.png" alt=""></a>
+            <div class="weixin"><em></em><img src="{rrz:env name='webinfo.qrcode' /}" alt=""></div>
+        </li>
+        <li><a href="javascript:goTop();" class="sidetop"><img src="%IMAGES%/r_icon2.png"></a></li>
+    </ul>
+</div>
+
+
+
+<!--第三方代码-->
+{rrz:env name="webinfo.thirdcode" /}
+
+
+

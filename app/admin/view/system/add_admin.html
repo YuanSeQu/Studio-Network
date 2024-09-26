@@ -1,0 +1,43 @@
+<form class="layui-form p15" method="post" action="{:U('System/addAdmin')}?id={$row.id??''}">
+    <table>
+        <tr>
+            <th width="70">用户头像</th>
+            <td>
+                {imgspace name="head_pic"  width="60px"  height="60px" type="img" value="$row.head_pic??'/static/images/dfboy.png'" title="用户头像" watermark='false' /}
+            </td>
+        </tr>
+        <tr>
+            <th><em>*</em>用户名</th>
+            <td>
+                <input name="user_name" value="{$row.user_name??''}" lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input" maxlength="20" autofocus size="30"/>
+            </td>
+        </tr>
+        <tr>
+            <th>{if !$row}<em>*</em>{/if}登陆密码</th>
+            <td>
+                <input type="text" onfocus="this.type='password'" name="password" value="" {if !$row}lay-verify="required"{/if} autocomplete="off" class="layui-input" maxlength="30"/>
+            </td>
+        </tr>
+        <tr>
+            <th>{if !$row}<em>*</em>{/if}确认密码</th>
+            <td>
+                <input type="text" onfocus="this.type='password'" name="password2" value="" {if !$row}lay-verify="required"{/if} autocomplete="off" class="layui-input" maxlength="30"/>
+            </td>
+        </tr>
+        <tr>
+            <th>真实姓名</th>
+            <td>
+                <input type="text" name="true_name" value="{$row.true_name??''}" autocomplete="off" class="layui-input" maxlength="30"/>
+            </td>
+        </tr>
+        <tr>
+            <th>手机号码</th>
+            <td>
+                <input type="text" name="mobile" value="{$row.mobile??''}" autocomplete="off" class="layui-input" maxlength="11"/>
+            </td>
+        </tr>
+    </table>
+    <div class="ptb20 tc">
+        <button type="submit" class="layui-btn layui-btn-normal w100" lay-submit>确认提交</button>
+    </div>
+</form>

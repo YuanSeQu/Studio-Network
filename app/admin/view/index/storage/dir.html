@@ -1,0 +1,10 @@
+<div class="flex h">
+    <div class="h plr10 ptb10" style="width: 125px;border-right: 1px solid #f0f0f0;overflow: hidden; overflow-y: auto;">
+        {foreach $dirList as $key=>$item}
+        <div data-path="{$item}" class="js-path mb5 vm pointer layui-unselect {$key==0?'dir-select':''}">
+            <img src="/static/images/dir_close.png" class="pr vm" style="top:-1px;"/><span class="ml5 vm">{$item}</span>
+        </div>
+        {/foreach}
+    </div>
+    <div class="cell h ptb10 pl15 file-list {$type=='images'?'img':$type}-list" style="overflow: hidden; overflow-y: auto;"></div>
+</div>

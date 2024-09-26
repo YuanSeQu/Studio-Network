@@ -1,0 +1,51 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge"/>-->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <!--<meta name="renderer" content="webkit" />-->
+    <title>浏览器版本过低</title>
+    <script type="text/javascript">
+        var uaMatch = function (ua) {
+            ua = ua.toLowerCase();
+            var match = /(chrome)[ \/]([\w.]+)/.exec(ua) ||
+            /(webkit)[ \/]([\w.]+)/.exec(ua) ||
+            /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) ||
+            /(msie) ([\w.]+)/.exec(ua) ||
+            ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) ||
+            [];
+            return {
+                browser: match[1] || "",
+                version: match[2] || "0"
+            };
+        }, getUrlParam = function (url, name) {
+            var query = url.substr(url.indexOf('?') + 1);
+            if (!query) return null;
+            //构造一个含有目标参数的正则表达式对象  
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
+            //匹配目标参数  
+            var r = query.match(reg);
+            //返回参数值  
+            if (r != null) return unescape(r[2]);
+            return null;
+        }, matched = uaMatch(navigator.userAgent), browser = {}; //判断是否为ie浏览器，及其版本
+
+        if (matched.browser) {
+            browser[matched.browser] = true;
+            browser.version = matched.version;
+        }
+        var ua = navigator.userAgent.toLowerCase();
+        if (!(ua.indexOf('msie') > -1 || ua.indexOf('rv:11') > -1 || ua.indexOf('trident/') > -1)) {
+            window.location.href = decodeURIComponent(getUrlParam(location.search, 'url')) || '/index';
+        }
+    </script>
+    <link href="static/css/browserCheck.min.css?v=1" rel="stylesheet" type="text/css" />
+    <script src="static/js/browserCheck.min.js?v=1" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onload = BrowserCheck.show;
+    </script>
+</head>
+<body>
+</body>
+</html>

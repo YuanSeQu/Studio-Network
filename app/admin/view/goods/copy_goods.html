@@ -1,0 +1,22 @@
+<div class="h250 pr20 pt30">
+    <form class="layui-form" method="post" action="{:U('Goods/copyGoods')}">
+        <table>
+            <tr>
+                <th width="110">复制到分类</th>
+                <td width="300">
+                    {select class="w js-select-nodes lay-panel-body" name="cat_id" value="" placeholder="请选择分类" }{$cats|raw}{/select}
+                    <input type="hidden" name="ids" value="{$ids|raw}"/>
+                </td>
+            </tr>
+            <tr>
+                <th>每篇复制数量</th>
+                <td>
+                    <input  class="layui-input w150" name="num" value="1" vtype="unsigned" size="5" maxlength="8" autocomplete="off"/>
+                </td>
+            </tr>
+        </table>
+        <div class="tc ptb20">
+            <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+        </div>
+    </form>
+</div>

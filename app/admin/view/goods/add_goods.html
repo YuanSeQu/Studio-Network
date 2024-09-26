@@ -1,0 +1,446 @@
+<style>
+    .table-sku-stock { width: 100%; background-color: #fff; text-align: left; font-size:12px; }
+    .table-sku-stock th { padding: 5px 10px !important; font-weight: 400; vertical-align: middle; text-align: left !important; }
+    .table-sku-stock td { border: 1px solid #e5e5e5; padding: 5px 8px !important; vertical-align: middle; }
+    .table-sku-stock .batch-opts { border: 0; padding: 10px 8px 5px !important; }
+    .table-sku-stock td:first-of-type { border-left: none; }
+    .table-sku-stock td:last-of-type { border-right: none; }
+    .table-sku-stock th.th-price { width: 150px; }
+    .table-sku-stock th.th-price:nth-child(2) { width: auto; }
+</style>
+<div class="layui-card js-view-addGoods">
+    <div class="layui-card-header">
+        <a class="cl-38f" target="page" href="{:U('Goods/index',['cat_id'=>session('cat_id')])}">产品列表</a> / {$row?'编辑':'添加'}产品
+    </div>
+    <div class="layui-card-body">
+        <form class="layui-form js-pform" method="post" action="{:U('Goods/addGoods')}?id={$row.id??''}" lay-filter="js-view-addGoods-form">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">产品信息</li>
+                    <li>产品详情</li>
+                    <li>产品参数</li>
+                    <li>高级参数</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <table lay-th-vtop>
+                            <tr>
+                                <th width="100"><em>*</em>产品名称</th>
+                                <td>
+                                    <input name="name" value="{$row.name??''}" vtype="required" autocomplete="off" class="layui-input" maxlength="200" size="70"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>副标题</th>
+                                <td>
+                                    <input type="text" name="subtitle" value="{$row.subtitle??''}" autocomplete="off" class="layui-input" maxlength="150"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>产品分类</th>
+                                <td>
+                                    {select class="w js-select-cats" name="cat_id" value="$catId" placeholder="请选择产品分类" }{$cats|raw}{/select}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>品牌设置</th>
+                                <td>
+                                    <select name="brand_id">
+                                        <option value="">请选择品牌</option>
+                                        {foreach $brands as $item}
+                                        <option value="{$item.id}" {if $row&&$row['brand_id']==$item['id'] }selected{/if}>{$item.title}</option>
+                                        {/foreach}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>产品属性</th>
+                                <td>
+                                    <input type="checkbox" name="is_head" value="1" unvalue="0" title="头条[h]" lay-skin="primary" {$row.is_head?'checked':''}/>
+                                    <input type="checkbox" name="is_recom" value="1" unvalue="0" title="推荐[c]" lay-skin="primary" {$row.is_recom?'checked':''}/>
+                                    <input type="checkbox" name="is_special" value="1" unvalue="0" title="特荐[a]" lay-skin="primary" {$row.is_special?'checked':''}/>
+                                    <input type="checkbox" name="is_news" value="1" unvalue="0" title="新品[n]" lay-skin="primary" {$row.is_news?'checked':''}/>
+                                    <input type="checkbox" name="is_jump" value="1" unvalue="0" title="跳转[j]" lay-filter="vjs-is_jump" lay-skin="primary" {$row.is_jump?'checked':''}/>
+                                </td>
+                            </tr>
+                            <tr class="{if !$row||!$row.is_jump}hide{/if} vjs-jump_url">
+                                <th class="vt">跳转网址</th>
+                                <td>
+                                    <input type="text" name="jump_url" value="{$row.jump_url??''}" placeholder="http://" autocomplete="off" class="layui-input" maxlength="200"/>
+                                    <p class="cl-999 f12">请输入完整的URL网址（包含http或https），设置后访问该条信息将直接跳转到设置的网址</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>TAG标签</th>
+                                <td class="pr">
+                                    <input type="text" name="tags" value="{$row.tags??''}" autocomplete="off" class="layui-input vjs-tags" placeholder="多个标签之间以逗号隔开"
+                                           onkeyup="this.value=this.value.replace(/[\，]/g,',');" onpaste="this.value=this.value.replace(/[\，]/g,',')"
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>产品简介</th>
+                                <td>
+                                    <textarea name="brief" class="layui-textarea" placeholder="产品简介" maxlength="200">{$row.brief??''}</textarea>
+                                    <p class="cl-888 f12"> 简短的产品介绍,请不要超过130个字</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>产品相册</th>
+                                <td>
+                                    <div>
+                                        <button class="layui-btn layui-btn-normal js-upimgs" type="button"><i class="layui-icon">&#xe67c;</i>上传图片</button>
+                                        <span class="cl-888 f12">图片不得大于2M，图片建议尺寸：600 x 600 像素</span>
+                                    </div>
+                                    <div class="all-pics pt15 layui-border-box clearfix js-all-imgs">
+                                        {if isset($row['imgs']) && $row['imgs'] }
+                                        {foreach $row['imgs'] as $item}
+                                        <div class="fl mr10 mb10 pr w100 h100 bd-ddd bd-cl-e7">
+                                            <div class="flex-c w h">
+                                                <img src="{$item}" class="tips-img mxh mxw">
+                                            </div>
+                                            <input name="imgs[]" value="{$item}" type="hidden"/>
+                                            <i class="close-modal">×</i>
+                                        </div>
+                                        {/foreach}
+                                        {/if}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>产品规格</th>
+                                <td width="600">
+                                    {include file="goods/sku/sku-group" /}
+                                    <p class="cl-888 mt5 f12">如有颜色、尺码等多种规格，请添加商品规格</p>
+                                </td>
+                            </tr>
+                            <tr class="js-sku-stock hide">
+                                <th>规格明细</th>
+                                <td>
+                                    <div class="main-whiteBox p10 pb5"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="vertical-align: middle;">
+                                    <span class="pr"style="top: -3px;">价格</span>
+                                </th>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <input  class="layui-input js-pprice w100" name="price" value="{$row.price??''}" vtype="unsigned" size="10" maxlength="8" autocomplete="off"/>
+                                            </td>
+                                            <td>市场价</td>
+                                            <td>
+                                                <input  class="layui-input js-pprice w100" name="del_price" value="{$row.del_price??''}" vtype="unsigned" size="10" maxlength="8" autocomplete="off"/>
+                                            </td>
+                                            <td>库存</td>
+                                            <td>
+                                                <input  class="layui-input js-pstore w100" name="store" value="{$row.store??999}" vtype="unsigned&&digits" size="10" maxlength="6" autocomplete="off"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>上架时间</th>
+                                <td>
+                                    <input type="text" name="pubtime" value="{$row.pubtime??''}" placeholder="yyyy-MM-dd HH:mm:ss" class="layui-input layui-date" autocomplete="off" readonly/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>上架</th>
+                                <td>
+                                    <input type="checkbox" name="ifpub" lay-skin="switch" lay-text="是|否" value="true" {if !isset($row['ifpub'])||$row['ifpub']!='false'}checked{/if} unvalue="false"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="js-custom-fields"></div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div style="width: 780px;">
+                            产品详情
+                            <div class="mt10">
+                                {editor name="content" type="ueditor"} {$row.content??''} {/editor}
+                            </div>
+                            <div class="mt10">
+                                手机端内容<span class="ml10 f12 cl-999">（选填）手机端模板内容，不设置默认和上面一样</span>
+                                <span class="fr"><input type="checkbox" value="1" lay-filter="show-wapContent" title="显示手机端内容" lay-skin="primary" checked/></span>
+                            </div>
+                            <div class="mt10" id="vjs-wap-content-view">
+                                {editor name="wap_content" type="ueditor"} {$row.wap_content??''} {/editor}
+                            </div>
+                            <script>
+                                (function () {
+                                    layui.form.on('checkbox(show-wapContent)', function (data) {
+                                        if (data.elem.checked) {
+                                            $('#vjs-wap-content-view').show();
+                                        } else {
+                                            $('#vjs-wap-content-view').hide();
+                                        }
+                                        $.cookie('wapContent', data.elem.checked ? 2 : 1);
+                                    });
+                                    $('input[lay-filter="show-wapContent"]').prop('checked', $.cookie('wapContent') == 2);
+                                    if ($.cookie('wapContent') == 2) {
+                                        $('#vjs-wap-content-view').show();
+                                    } else {
+                                        $('#vjs-wap-content-view').hide();
+                                    }
+                                })();
+                            </script>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item vjs-attrs"></div>
+                    <div class="layui-tab-item">
+                        <table lay-th-vtop>
+                            <tr>
+                                <th width="100">产品模板</th>
+                                <td>
+                                    <select name="tmpl_path">
+                                        {foreach $templist as $key=>$item}
+                                        <option value="{$key}" {if $row&&$key==$row['tmpl_path'] }selected{/if}>{$item}</option>
+                                        {/foreach}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>产品销量</th>
+                                <td>
+                                    <input name="sales"  value="{$row.sales??'0'}" lay-verify="number" autocomplete="off" class="layui-input w100" maxlength="10"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>浏览量</th>
+                                <td>
+                                    <input name="view_count"  value="{$row.view_count??'0'}" lay-verify="number" autocomplete="off" class="layui-input w100" maxlength="10"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>SEO标题</th>
+                                <td>
+                                    <input type="text" name="seo_title" value="{$row.seo_title??''}"  autocomplete="off" class="layui-input" placeholder="SEO标题" maxlength="150" />
+                                    <p class="cl-888 mt5 f12"> 一般不超过80个字符，为空时默认文章标题 </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>SEO关键词</th>
+                                <td>
+                                    <input type="text" name="seo_keywords" value="{$row.seo_keywords??''}" autocomplete="off" class="layui-input" placeholder="SEO关键词" maxlength="150"/>
+                                    <p class="cl-888 mt5 f12"> 一般不超过100个字符，多个关键词请用英文逗号","隔开，建议3到5个关键词</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>SEO描述</th>
+                                <td>
+                                    <textarea name="seo_description" class="layui-textarea" placeholder="SEO描述" maxlength="300">{$row.seo_description??''}</textarea>
+                                    <p class="cl-888 mt5 f12"> 一般不超过200个字符，不填写时系统自动提取正文的前200个字符</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="mt30 pl100 pb30">
+                <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    (function () {
+        var $view = $('.js-view-addGoods'),
+            $imgs = $('.js-all-imgs', $view);
+
+        layui.form.on('checkbox(vjs-is_jump)', function (data) {
+            if (data.elem.checked) {
+                $('tr.vjs-jump_url', $view).removeClass('hide');
+            } else {
+                $('tr.vjs-jump_url', $view).addClass('hide');
+            }
+        });
+
+        $('.js-upimgs', $view).click(function () {
+            window.ImgSpace(function (url, data) {
+                var list = data || [];
+                $.each(list, function (index, value) {
+                    $('<div>', {
+                        class: 'fl mr10 mb10 pr w100 h100 bd-ddd bd-cl-e7',
+                        html: '<div class="flex-c w h">\n' +
+                            '   <img src="' + value + '" class="tips-img mxh mxw">\n' +
+                            '  </div>\n' +
+                            '  <input name="imgs[]" value="' + value + '" type="hidden"/>\n' +
+                            '  <i class="close-modal">×</i>',
+                    }).appendTo($imgs);
+                });
+            }, true);
+            return false;
+        });
+        $imgs.on('click','i.close-modal',function () {
+            $(this).parent().remove();
+        });
+        $imgs.dad({ draggable: 'img' });
+
+        function getCustomFieldHtml(typeId) {
+            var p = {
+                type: 'goods',
+                typeId: typeId,
+                dataId: '{$row.id??0}',
+                thWidth: '100',
+            };
+            $.post('{:U("Channeltype/getCustomFieldHtml")}', p, function (rs) {
+                $('.js-custom-fields', $view).html(rs);
+                layui.form.render(null, 'js-view-addGoods-form');
+            });
+        }
+
+        function getAttrHtml(catId){
+            var p = {
+                catId: catId,
+                goodsId: '{$row.id??0}',
+            };
+            $.post('{:U("Goods/getAttrHtml")}', p, function (rs) {
+                $('.vjs-attrs', $view).html(rs);
+                layui.form.render(null, 'js-view-addGoods-form');
+            });
+        }
+
+        getCustomFieldHtml('{$catId}');
+        getAttrHtml('{$catId}');
+
+        $('.js-select-cats', $view).on('change', function (e, item) {
+            getCustomFieldHtml(item.id);
+            getAttrHtml(item.id);
+        });
+
+        function getCommonList(key, callback) {
+            if ($.isFunction(key)) {
+                callback = key;
+                key = '';
+            }
+            $.get('{:U("Tags/getCommonList")}?type=2', { key: key }, function (rs) {
+                if (rs.code && rs.data) callback(rs.data || []);
+            }, 'json');
+        }
+
+        function setTag(text, $a) {
+            var tags = $('.vjs-tags', $view).val().replace(/[\，]/g, ',');
+            tags = tags ? tags.split(',') : [];
+            if (tagsPop && tags) {
+                tags.pop();
+                tagsPop = '';
+            }
+
+            var cur = true;
+            tags = $.grep(tags, function (item) {
+                item = $.trim(item);
+                if (!item || item == text) {
+                    if (item == text) cur = false;
+                    return false;
+                }
+                return true;
+            });
+            if (cur) {
+                $a.addClass('cur');
+                tags.push(text);
+            } else {
+                $a.removeClass('cur');
+            }
+            $('.vjs-tags', $view).val(tags ? tags.join(',') : '');
+        }
+
+        $('body').off('click.tags').on('click.tags', '.tags-select a', function () {
+            setTag($(this).text().trim(), $(this));
+        });
+
+        $('.vjs-tags',$view).on('selectShow',function () {
+            var tags = ',' + $('.vjs-tags', $view).val().replace(/[\，]/g, ',') + ',';
+            $('.tags-select a').each(function () {
+                var text = ',' + $(this).text().trim() + ',';
+                if (tags.indexOf(text) >= 0) {
+                    if (tagsPop == $(this).text().trim()) {
+                        tagsPop = '';
+                    }
+                    $(this).addClass('cur');
+                } else {
+                    $(this).removeClass('cur');
+                }
+            });
+        });
+
+        function tagsReload(data){
+            var html = [];
+            for (var i = 0, item; item = data[i++];) {
+                html.push('<a data-id="' + item.id + '">' + item.title + '</a>');
+            }
+            $('.tags-select').html(html);
+            $('.vjs-tags', $view).trigger('selectShow');
+        }
+
+        $('.vjs-tags', $view).on('common_reload', function () {
+            var data = $(this).data('common_data');
+            tagsReload(data);
+        });
+
+        $('.vjs-tags',$view).on('focus',function () {
+            var that = this, common_data = $(this).data('common_data');
+            if ($(this).is('.common-loaded')) {
+
+                $(that).trigger('selectShow');
+                return;
+            }
+
+            function setCommonList(data) {
+                var html = [];
+                for (var i = 0, item; item = data[i++];) {
+                    html.push('<a data-id="' + item.id + '">' + item.title + '</a>');
+                }
+                layui.dropdown.render({
+                    elem: $(that),
+                    content: html.join(''),
+                    className: 'tags-select',
+                    show: true,
+                    ready: function (elemPanel, elem) {
+                        $(that).after(elemPanel);
+                        $(that).trigger('selectShow');
+                    }
+                });
+                $(that).after($('.tags-select'));
+                tagsReload(data);
+                $(that).data('common_data', data);
+                $(that).addClass('common-loaded');
+            }
+            if (common_data) {
+                setCommonList(common_data);
+                return;
+            }
+            getCommonList(setCommonList);
+        });
+        var timerHandler = null;
+        var tagsPop = '';
+        $('.vjs-tags', $view).on('input', function () {
+            var that = this, tags = $(this).val().replace(/[\，]/g, ',').trim().split(','),
+                end = tags.pop().trim(), common_data = $(this).data('common_data');
+
+            if (timerHandler) clearTimeout(timerHandler);
+            if (!end) {
+                $(this).trigger('common_reload');
+                return;
+            }
+
+            timerHandler = setTimeout(function () {
+                tagsPop = end;
+                getCommonList(end, function (data) {
+                    var html = [];
+                    if (!data.length) {
+                        data = common_data;
+                        tagsPop = '';
+                    }
+                    tagsReload(data);
+                });
+            }, 1000);
+
+        });
+
+    })();
+</script>
+{include file="seo/zzbaidu" view="js-view-addGoods"/}

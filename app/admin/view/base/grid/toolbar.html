@@ -1,0 +1,43 @@
+{if condition="$search || $toolbar_html || $actions" }
+<div class="layui-grid-toolbar">
+    <form class="layui-grid-search">
+    {foreach name="search" item="vo" }
+        <?php if(is_string($vo)){echo($vo);continue;}?>
+        {$vo['placeholder']?'<lable>&nbsp;&nbsp;'.$vo['placeholder'].'：</lable>':''}
+        {if condition="$vo['tag']=='select'" }
+            <?php $options=$vo['options'];unset($vo['options']); ?>
+            <select {foreach name="vo" item="vl" } {$key}="{$key=='name'?'search['.$vl.']':$vl}" {/foreach} >
+            {foreach name="options" item="op"}
+                <option value="{$key==='null'?'':$key}" {if condition="isset($vo['value'])&&$key==$vo['value']"} selected='selected'{/if} >{$op|raw}</option>
+            {/foreach}
+            </select>
+        {/if}
+        {if condition="$vo['tag']=='input'"}
+            <input class="layui-input layui-input-sm {$vo.class??''}" {foreach name="vo" item="vl"} <?php if($key=='class') continue; ?> {$key}="{$key=='name'?'search['.$vl.']':$vl}"{/foreach}/>
+        {/if}
+    {/foreach}
+    {$toolbar_html}
+    {if condition="$search"}
+        <button class="layui-btn layui-btn-normal layui-btn-sm" type="submit">搜索</button>
+    {/if}
+    </form>
+    {foreach name="actions" item="act"}
+    <?php if(is_string($act)){echo($act);continue;}?>
+    <?php $isGroup=(isset($act['group'])&&$act['group']); ?>
+    <ul class="layui-nav">
+        {if $isGroup}
+        <li class="layui-nav-item layui-toolbar-group">
+            <a class="layui-btn layui-btn-normal layui-btn-sm" href="javascript:;">{$act.label??''}</a>
+            <dl class="layui-nav-child">
+                {foreach name="act['group']" item="vo"}
+                <dd><a {foreach name="vo" item="vl"} {$key}="{$vl}"{/foreach} >{$vo.label??''}</a></dd>
+                {/foreach}
+            </dl>
+        </li>
+        {else /}
+        <button class="layui-btn layui-btn-normal layui-btn-sm {$act.class??''}" {foreach name="act" item="vl"} <?php if($key=='class') continue; ?> {$key}="{$vl}"{/foreach} >{:$act.label??''}</button>
+        {/if}
+    </ul>
+    {/foreach}
+</div>
+{/if}

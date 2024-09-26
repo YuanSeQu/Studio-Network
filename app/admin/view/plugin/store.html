@@ -1,0 +1,75 @@
+<style>
+    .pview{}
+    .pitem{width:32%;margin:0 1% 15px 0;display: inline-block;border-radius: 2px;box-shadow: 0 1px 10px -2px rgba(0,0,0,.2);transition: -webkit-transform .3s ease,-webkit-box-shadow .3s ease;transition: transform .3s ease,box-shadow .3s ease;transition: transform .3s ease,box-shadow .3s ease,-webkit-transform .3s ease,-webkit-box-shadow .3s ease;}
+    .pitem .ptop{padding: 10px;height:90px;}
+    .pitem .plogo{width: 110px;float: left}
+    .pitem .plogo img{width: 100px;height: 100px;}
+    .pitem .pinfo{padding-top: 10px;}
+    .pitem .pinfo p{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .pitem .pbot{border-top:1px solid #dddddd;margin: 20px 10px 10px 10px;padding-top: 10px;}
+    .pitem .pbot li{text-align: center;}
+    .pitem .pbot li a{color: #1babf5}
+</style>
+<div class="layui-card">
+    <div class="layui-card-header layui-tab layui-tab-brief p0 bd-w0">
+        <ul class="layui-tab-title">
+            <li target="page" href="{:U('Plugin/index')}">我的插件</li>
+            <li class="layui-this">插件市场</li>
+        </ul>
+    </div>
+    <div class="layui-card-body">
+        <div class="pview">
+        {$pview|raw}
+        </div>
+        <div id="ppage"></div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        layui.use('laypage', function () {
+            var laypage = layui.laypage;
+            laypage.render({
+                elem: 'ppage',
+                count: '{$total}',
+                limit: 12,
+                jump: function (obj, first) {
+                    if (!first) {
+                        $.post('{:U("Plugin/store")}', {pindex: obj.curr}, function (rs) {
+                            $('.layui-card-body .pview').html(rs);
+                        });
+                    }
+                }
+            });
+        });
+        $('.layui-card-body').on('click','.goInstall', function () {
+            let pcode = $(this).data('pcode');
+            $.post('{:U("Plugin/store_install")}', {code: pcode}, function (rs) {
+                if (rs.code == 0) {
+                    if (rs.data['msgtype']=='confirm') {
+                        $.confirm(rs.msg, {
+                            title: "温馨提示",
+                            btn: ['前往购买', '前往绑定', '忽略'],
+                            yes: function (layero, index) {
+                                window.open("http://www.rrzcms.com/Plugins/plugininfo/code/" + pcode + ".html");
+                            },
+                            cancel: function (layero, index) {
+                                window.open("http://www.rrzcms.com/Main/index.html?menu=order&uri=%2FAdmin%2FOrder%2Fplugin");
+                            }
+                        });
+                    }
+                    else {
+                        $.showMsg(false, rs.msg);
+                    }
+                }
+                else {
+                    $.showMsg(true,rs.msg);
+                    $.openpage('{:U("Plugin/index")}');
+                }
+            }, 'json');
+        });
+        {if($errormsg)}
+        $.showMsg(false,'{$errormsg}');
+        {/if}
+    });
+</script>

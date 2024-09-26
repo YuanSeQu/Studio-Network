@@ -1,0 +1,18 @@
+<form class="layui-form ptb15 plr20 pr40" method="post" action="{:U('Users/addUsers')}" lay-filter="js-view-addUsers-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label"><em class="cl-r">*</em>用户名列表</label>
+        <div class="layui-input-block">
+            <textarea name="name" lay-verify="required" placeholder="一行代表一个用户名" class="layui-textarea h200"></textarea>
+            <p class="cl-999 f12 mt5">只允许汉字、字母、数字和_-@#的字符组合<br/>保存时系统自动过滤一些不符合的用户名</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><em class="cl-r">*</em>登录密码</label>
+        <div class="layui-input-block">
+            <input type="text" name="password" lay-verify="required" placeholder="登录密码" autocomplete="off" class="layui-input" maxlength="30" size="30"/>
+        </div>
+    </div>
+    <div class="layui-form-item text-center mt30">
+        <button type="submit" class="layui-btn layui-btn-normal w100" lay-submit>确认提交</button>
+    </div>
+</form>

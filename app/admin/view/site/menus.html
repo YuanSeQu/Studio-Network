@@ -1,0 +1,59 @@
+<script>
+    (function () {
+        var $view = $('.' + '{$grid_class}');
+
+        //折叠
+        function fold($row, isHide, isAll) {
+            var id = $row.data('id'),
+                $nexts = $('tr[pid="' + id + '"]', $view);
+            if (!$nexts.length) return false;
+            if (isHide) {
+                $nexts.find('i.layui-icon-subtraction').trigger('click');
+                $nexts.hide();
+            } else {
+                isAll === false || $nexts.find('i.layui-icon-addition').trigger('click', [true]);
+                $nexts.show();
+            }
+        }
+
+        //折叠按钮
+        $view.on('click','i.layui-icon-subtraction',  function () {
+            var $row = $(this).closest('tr');
+            if (fold($row, true) === false) {
+                return false;
+            }
+            $(this).addClass('layui-icon-addition').removeClass('layui-icon-subtraction');
+        });
+        //展开按钮
+        $view.on('click', 'i.layui-icon-addition', function (e, isAll) {
+            var $row = $(this).closest('tr');
+            $(this).addClass('layui-icon-subtraction').removeClass('layui-icon-addition');
+            fold($row, false, isAll ? isAll : false);
+        });
+        //全部展开或折叠
+        $view.on('click', '.layui-table thead .js-lanmu', function () {
+            var type = $(this).data('type') || '+', html = $(this).html();
+            if (type == '+') {
+                $('tr[pid="0"] i.layui-icon-addition', $view).trigger('click', [true]);
+                $(this).data('type', '-').html(html.replace('＋', '－'));
+            } else {
+                $('tr[pid="0"] i.layui-icon-subtraction', $view).trigger('click');
+                $(this).data('type', '+').html(html.replace('－', '＋'));
+            }
+        });
+        $('.layui-table thead .js-lanmu', $view).css('cursor', 'default');
+        $('tr[pid="0"] i.layui-icon-subtraction', $view).trigger('click');
+        //排序
+        $view.on('blur', '.js-sort', function () {
+            var $tr = $(this).closest('tr'), id = $tr.data('id'), vthis = this,
+                val = parseInt($(this).data('val') || 0) || 0,
+                sort = parseInt($(this).val().trim() || 0) || 0,
+                url = $(this).attr('href');
+            if (val == sort || !url) return;
+            $.post(url, { id: id, sort: sort }, function (rs) {
+                rs.code && $(vthis).data('val', sort);
+                $.callbackSuccess.call(vthis, rs);
+            }, 'json');
+        });
+    })();
+</script>

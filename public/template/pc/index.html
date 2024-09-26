@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit" />
+    <title>{$rrz.seo_title}</title>
+    <meta name="description" content="{$rrz.seo_description}" />
+    <meta name="keywords" content="{$rrz.seo_keywords}" />
+    <meta name="author" content="order by rrzcms.com" />
+    <link href="{rrz:env name='website.favicon' /}" rel="shortcut icon" />
+
+    <link rel="stylesheet" href="/plugins/layui-v2.5.6/css/layui.css">
+    <script src="/plugins/layui-v2.5.6/layui.all.js"></script>
+    <style>
+        .red{ color: red;margin-left: 3px; }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    {rrz:skin href="skin/css/cui.css,skin/css/style.css,skin/css/less.css"/}
+    {rrz:skin href="skin/js/jquery.js"/}
+</head>
+<body>
+    {include file="block/header" /}
+    <div id="bd">
+
+        <div id="banner">
+            <div class="banner-bg"></div>
+            <div class="flexslider">
+                <ul class="slides">
+                    <li class="s1">
+                        <img src="%IMAGES%/banner1.jpg" alt="某某网站建设，北京网站建设">
+                        <div class="ban-txt">
+                            <h5 data-animate="fadeInDown" class="animated">innovating for you</h5>
+                            <h2 data-animate="fadeInRight" class="animated">用整合的思想做互动</h2>
+                            <h3 data-animate="fadeInUp" class="animated">不只是建站，更提供有价值的思路和整体服务</h3>
+                        </div>
+                    </li>
+                    <li class="s2">
+                        <img src="%IMAGES%/banner2.jpg" alt="某某，8年专注高端网站定制服务">
+                        <div class="ban-txt">
+                            <h2 data-animate="fadeInRight" class="animated">9年资深网站建设经验</h2>
+                            <h3 data-animate="fadeInDown" class="animated">WEBSITE DESIGN</h3>
+                            <h4 data-animate="fadeInUp" class="animated">我们专注于品质化高端网站构建，企业品牌在网站中的整体树立，网络互动的体验，以及在手机等移动端的优质呈现。</h4>
+                            <h6 data-animate="fadeInUp" class="animated">www.rrzcms.com</h6>
+                        </div>
+                    </li>
+                    <li class="s3">
+                        <img src="%IMAGES%/banner3.jpg" alt="网站建设，北京网站建设">
+                        <div class="ban-txt">
+                            <h2 data-animate="fadeInDown" class="animated">高端定制 品牌设计</h2>
+                            <h3 data-animate="fadeInRight" class="animated">Corporate website</h3>
+                            <h4 data-animate="fadeInUp" class="animated">某某致力于为客户提供最具有竞争力的网站，将每个案例都做成经典。</h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row1 fix">
+            <div class="wp">
+                <div class="tit-i">
+                    <h3>我们的服务</h3>
+                    <h5>WEBTHINK <span>SERVICE</span></h5>
+                </div>
+                <ul class="ul-icon-i">
+                    <li class="li1">
+                        <div class="pad">
+                            <a href="javascript:;"> <span></span>
+                                <h3>高端网站建设</h3>
+                                <em></em>
+                                <p>根据用户的需求、市场状况、企业情况提供专业化的网站策划、交互设计、技术和营销解决方案。</p>
+                                <div class="pic"> <img src="%IMAGES%/m1.png" alt=""> <img src="%IMAGES%/m2.png" alt="" class="pic-icon"> </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="li2">
+                        <div class="pad">
+                            <a href="javascript:;"> <span></span>
+                                <h3>手机网站建设</h3>
+                                <em></em>
+                                <p>在移动互联时代，我们得出“简单使用，精彩体验”的移动应用开发理念，创造属于无线时代的精彩互联。</p>
+                                <div class="pic"> <img src="%IMAGES%/m3.png" alt=""> <img src="%IMAGES%/m4.png" alt="" class="pic-icon"> </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="li3">
+                        <div class="pad">
+                            <a href="javascript:;"> <span></span>
+                                <h3>微信应用开发</h3>
+                                <em></em>
+                                <p>为客户提供全方位的移动端营销服务，微信公众平台开发，微站设计。</p>
+                                <div class="pic"> <img src="%IMAGES%/m5.png" alt=""> <img src="%IMAGES%/m6.png" alt="" class="pic-icon"> </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="li4">
+                        <div class="pad">
+                            <a href="javascript:;"> <span></span>
+                                <h3>手机APP开发</h3>
+                                <em></em>
+                                <p>按客户意图来定制开发app系统，IOS 安卓任您挑选，持续为企业无线创造新价值。</p>
+                                <div class="pic"> <img src="%IMAGES%/m7.png" alt=""> <img src="%IMAGES%/m8.png" alt="" class="pic-icon"> </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        {rrz:node id='1'}
+        <div class="row2 fix">
+            <div class="wp">
+                <div class="tit-i">
+                    <h3>我们的案例</h3>
+                    <h5><span>case</span> of us</h5>
+                </div>
+                <div class="case-i">
+                    <div class="case-i-r" style="width: 100%;">
+                        <ul class="ul-case-i">
+                            {rrz:list row='8'}
+                            <li>
+                                <a href="{$item.url}">
+                                    <div class="pic"><img src="{$item.img|default='%IMAGES%/default.gif'}" alt="{$item.title}"></div>
+                                    <div class="hover"> <b></b>
+                                        <div class="txt">
+                                            <img src="%IMAGES%/logo_small.png" />
+                                            <h3>{$item.title}</h3>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            {/rrz:list}
+                        </ul>
+                    </div>
+                    <div class="c"></div>
+                    <div class="more-i"><a href="{$node.url}"></a></div>
+                </div>
+            </div>
+        </div>
+        {/rrz:node}
+
+        {rrz:node id='4'}
+        <div class="row3 news-bg">
+            <div class="wp">
+                <div class="tit-i tit-i-1">
+                    <h3>最新动态</h3>
+                    <h5>our <span>news</span></h5>
+                </div>
+                <ul class="ul-news-i">
+                    {rrz:list row='4'}
+                    <li>
+                        <div class="pad">
+                            <div class="txt">
+                                <span><em>{$item.pubtime|date='m/d'}</em>{$item.pubtime|date='Y'}</span>
+                                <h3><a href="{$item.url}">{$item.title}</a></h3>
+                                <p>{$item.brief|subtext=20}</p>
+                                <a href="{$item.url}" class="more"></a>
+                            </div>
+                            <div class="hover">
+                                <div class="img" style="background: url({$item.img|default='%IMAGES%/default.gif'}) 0 0 /100% 100% no-repeat;background: url({$item.img|default='%IMAGES%/default.gif'}) 0 0 no-repeat\9;"></div>
+                                <div class="pad">
+                                    <h3><a href="{$item.url}">{$item.title}</a></h3>
+                                    <p>{$item.brief|subtext=40}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {/rrz:list}
+                </ul>
+                <div class="c"></div>
+                <div class="news-more"><a href="{$node.url}">load more</a></div>
+            </div>
+        </div>
+        {/rrz:node}
+
+
+        <div class="row4 fix">
+            <div class="wp">
+                <div class="tit-i">
+                    <h3>联系我们</h3>
+                    <h5><span>contact</span> rrzcms.com</h5>
+                </div>
+                <div class="contact-l">
+                    <ul class="ul-contact">
+                        <li class="li1">{rrz:env name='webinfo.addr' /}</li>
+                        <li class="li2">
+                            <a href="tel:{rrz:env name='webinfo.telephone' /}">{rrz:env name='webinfo.telephone' /} (咨询)</a><br />
+                            <a href="tel:{rrz:env name='webinfo.mobile' /}">{rrz:env name='webinfo.mobile' /} (咨询)</a>
+                        </li>
+                        <li class="li3"><a href="mailto:{rrz:env name='webinfo.email' /}">{rrz:env name='webinfo.email' /}</a></li>
+                    </ul>
+                </div>
+                <div class="contact-r">
+                    {form id='1'}
+                    <form class="layui-form layui-form-pane" action="{$form.action}" method="post" style="max-width:600px">
+                        {foreach $form.config as $key=>$item }
+                        {if $item.type=='text'}
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">{$item.name} {if $item.required}<span class="red">*</span>{/if}</label>
+                            <div class="layui-input-block">
+                                <input class="layui-input" name="{$item.name}" lay-verify="{$item.required?'required':''}" {if $item.required}lay-reqText="{$item.name}不能为空"{/if}/>
+                            </div>
+                        </div>
+                        {elseif $item.type=='textarea'/}
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">{$item.name} {if $item.required}<span class="red">*</span>{/if}</label>
+                            <div class="layui-input-block">
+                                <textarea class="layui-textarea" name="{$item.name}" maxlength="300" lay-verify="{$item.required?'required':''}" {if $item.required}lay-reqText="{$item.name}不能为空"{/if}></textarea>
+                            </div>
+                        </div>
+                        {elseif $item.type=='radio'/}
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">{$item.name} {if $item.required}<span class="red">*</span>{/if}</label>
+                            <div class="layui-input-block">
+                                <select name="{$item.name}">
+                                    {foreach $item.option as $k=>$option}
+                                    <option value="{$option}">{$option}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        {elseif $item.type=='checkbox'/}
+                        <div class="layui-form-item" pane>
+                            <label class="layui-form-label">{$item.name} {if $item.required}<span class="red">*</span>{/if}</label>
+                            <div class="layui-input-block">
+                                {foreach name="item['option']" item="option" key="k"}
+                                <input type="checkbox" name="{$item.name}[]" data-name="{$item.name}" lay-verify="{$item.required?'requiredcheckbox':''}" value="{$option}" title="{$option}"/>
+                                {/foreach}
+                            </div>
+                        </div>
+                        {/if}
+                        {/foreach}
+                        <div class="contact-form">
+                            <input type="submit" value="提交您的需求" class="sub" lay-submit=""/>
+                        </div>
+                        <!--<div class="layui-form-item" style="text-align: center;">-->
+                        <!--<button class="layui-btn layui-btn-normal" lay-submit="" type="submit">提交</button>-->
+                        <!--</div>-->
+                    </form>
+                    <script>
+                        (function () {
+                            layui.form.verify({
+                                requiredcheckbox: function (value, item) {
+                                    var vform = $(item).closest('form');
+                                    if (!vform) return true;
+                                    var name = $(item).data('name');
+                                    return $('input[type=checkbox]' + (name ? '[name="' + name + '"]' : ''), vform).is(function (index) {
+                                        return this.checked == true;
+                                    }) ? '' : '请至少选择一项' + name;
+                                }
+                            });
+                            layui.form.render();
+                        })();
+                    </script>
+                    {/form}
+                </div>
+            </div>
+        </div>
+
+        <div class="map">
+            <div class="map-s"> <a href="javascript:void(0);" class="btn"><em></em>点击展开地图</a> </div>
+            <div class="map-pop"> <a href="javascript:void(0);" class="btn-down"></a>
+                <div class="map-bg1"></div>
+                <div class="map-bg2"></div>
+                <div id="map" class="map-i" style="width:100%; height: 100%;"> </div>
+            </div>
+        </div>
+
+    </div>
+    {include file="block/footer" /}
+    {rrz:skin href="skin/js/lib.js,skin/css/animate.css,skin/css/flexslider.css,skin/js/flexslider.js,skin/js/banner.js"/}
+    <script>
+        $('.ul-news-i li').hover(function(){
+            $(this).toggleClass('on');
+        })
+        $('.ul-icon-i li').hover(function(){
+            $(this).find('img:first').fadeIn(100);
+            $(this).find('.pic-icon').animate({top:0});
+        },function(){
+            $(this).find('.pic-icon').animate({top:-134});
+            $(this).find('img:first').fadeOut(100);
+        })
+
+        $('.case-img').hover(function(){
+            $(this).toggleClass('on');
+        })
+
+        $('.map .btn').click(function(){
+            $('.map-pop').show();
+            $(this).parents('.map').addClass('map-big-i');
+            var winW = $(window).width();
+            var winH = $(window).height();
+            console.log(winH);
+            if(winW < 768){
+                $('.map-pop').height($(window).height()-50-80);
+                $('.map-big-i').height($(window).height()-50-80);
+                $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+            }else{
+
+                $('.map-pop').height($(window).height()-344);
+                $('.map-big-i').height($(window).height()-344);
+                $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+            }
+            //initMap();
+        })
+        $('.map .btn-down').click(function(){
+            $('.map-pop').hide();
+            $(this).parents('.map').removeClass('map-big-i');
+            $('.map').height('107');
+        })
+
+    </script>
+
+</body>
+</html>

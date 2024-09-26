@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{rrz:env name="website.name" /}-{notempty name="$is_rrz_authorization"}人人站CMS企业网站管理系统{/notempty}{:C('config.sys_version')}</title>
+    <meta http-equiv="Content-Language" content="zh-cn"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta name="robots" content="noindex,nofollow"/>
+    <script src="/static/js/testBrowser.min.js?v={:C('config.version')}"></script>
+    <link rel="stylesheet" href="/static/css/comm/kb.min.css?v={:C('config.version')}">
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="/static/css/base.css?v={:C('config.version')}">
+
+    <link rel="stylesheet" href="/static/css/admin/index.css?v={:C('config.version')}">
+    <link rel="stylesheet" href="/static/css/admin/public.css?v={:C('config.version')}">
+
+    <script src="/plugins/jquery/jquery-3.2.1/jquery-3.2.1.min.js"></script>
+    <script src="/plugins/jquery/jquery.cookie.js" async="async"></script>
+
+    <script src="/static/js/admin/formplus.js?v={:C('config.version')}" async="async"></script>
+    <script src="/static/js/admin/public.js?v={:C('config.version')}"></script>
+
+    <link href="{rrz:env name='website.favicon' empty='/favicon.ico' /}" rel="shortcut icon" />
+</head>
+
+<body>
+    <div id="main-layout" class="layadmin-tabspage-none {$Request.cookie.LayAdminSide}">
+        <div class="layui-layout layui-layout-admin">
+            <div class="layui-header">
+                <!-- 头部区域 -->
+                <ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item layadmin-flexible" lay-unselect="">
+                        <a href="javascript:;" id="foldSidebar">
+                            <i class="layui-icon layui-icon-shrink-right"></i>
+                        </a>
+                    </li>
+                    <!--<li class="layui-nav-item" lay-unselect="">-->
+                        <!--<a href="javascript:;" title="刷新">-->
+                            <!--<i class="layui-icon layui-icon-refresh-3"></i>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li class="layui-nav-item layui-hide-xs" lay-unselect="">-->
+                        <!--<input type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search">-->
+                    <!--</li>-->
+                </ul>
+                <ul class="layui-nav layui-layout-right">
+                    <!--<li class="layui-nav-item" lay-unselect="">-->
+                        <!--<a lay-href="app/message/">-->
+                            <!--<i class="layui-icon layui-icon-notice"></i>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li class="layui-nav-item layui-hide-xs" lay-unselect="">-->
+                        <!--<a href="javascript:;">-->
+                            <!--<i class="layui-icon layui-icon-theme"></i>-->
+                        <!--</a>-->
+                    <!--</li>-->
+
+                    <!--<li class="layui-nav-item layui-hide-xs" lay-unselect="">-->
+                        <!--<a href="javascript:;" class="js-screen-full">-->
+                            <!--<i class="layui-icon layui-icon-screen-full"></i>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect="">
+                        <a href="{rrz:env name='rrz.cmsurl'/}" target="_blank" title="前台">
+                            <i class="layui-icon layui-icon-website"></i>
+                            <cite>网站首页</cite>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect="">
+                        <a href="{:U('System/clearCache')}" target="ajax" method="post" args="clearCache=all">
+                            <i class="layui-icon layui-icon-refresh-3"></i>
+                            <cite>清除缓存</cite>
+                        </a>
+                    </li>
+                    {notempty name="$is_rrz_authorization"}
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect="">
+                        <a href="javascript:;" title="购买后可去除所有版权提示">
+                            <i class="layui-icon layui-icon-note"></i>
+                            <cite>购买授权</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a target="_blank" href="http://www.rrzcms.com/Admin/Index/package.html">了解商业授权</a></dd>
+                            <dd><a target="ajax" href="{:U('Index/authortoken')}">检测是否正版</a></dd>
+                        </dl>
+                    </li>
+                    {/notempty}
+                    <li class="layui-nav-item" lay-unselect="">
+                        <a href="javascript:;">
+                            <img src="{$account.head_pic??'/static/images/dfboy.png'}" class="layui-nav-img">
+                            <cite>{$account.user_name}</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="{:U('System/addAdmin',['id'=>$account['id']])}" options="{title:'编辑账号',area:['400px']}" target="dialog" >修改密码</a></dd>
+                            <hr>
+                            <dd><a href="{:U('Login/logout')}">安全退出</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item" lay-unselect=""><a href="{:U('Login/logout')}">退出</a></li>
+                    <!--<li class="layui-nav-item layui-hide-xs" lay-unselect="">-->
+                        <!--<a href="javascript:;"><i class="layui-icon layui-icon-more-vertical"></i></a>-->
+                    <!--</li>-->
+                </ul>
+            </div>
+            <div class="layui-side layui-side-menu">
+                <div class="layui-side-panel">
+                    <a class="layui-logo" href="" title="点击刷新">
+                        <img src="{:sysConfig('admin.logo')}?v={:C('config.version')}"/>
+                    </a>
+                    <div class="layui-side-scroll ">
+                        <ul class="layui-menu layui-menu-lg layui-nav layui-nav-tree">
+                            {foreach $menus as $key=>$menu }
+                            <li class="layui-nav-item layui-nav-itemed layui-menu-item-parent {$menu.visible?'':'hide'}" lay-options="{type: 'parent'}" view-action="{$menu.action}">
+                                <a class="layui-menu-body-title" href="javascript:;" view-href="{:$menu['action']?U($menu['action']):''}" {if empty($menu['list'])} lay-tips="{$menu.title}" lay-direction="2"{/if}>
+                                    <i class="layui-icon {$menu.icon}"></i> <cite>{$menu.title}</cite>
+                                    {if $menu['list'] }
+                                    <span class="layui-nav-more"></span>
+                                    {/if}
+                                </a>
+                                {if !empty($menu['list'])}
+                                <div class="layui-menu-body-panel">
+                                    <ul>
+                                        {foreach $menu['list'] as $key2=>$menu2 }
+                                        <?php if(!$menu2['visible']) continue; ?>
+                                        <li class="layui-menu-item-parent"  lay-options="{type: 'parent'}">
+                                            <div class="layui-menu-body-title" view-href="{:$menu2['action']?U($menu2['action']):''}">
+                                                {$menu2.title}
+                                                {if !empty($menu2['list'])}
+                                                <i class="layui-icon layui-icon-right"></i>
+                                                {/if}
+                                            </div>
+                                            {if !empty($menu2['list'])}
+                                            <div class="layui-menu-body-panel">
+                                                <ul>
+                                                    {foreach $menu2['list'] as $key3=>$menu3 }
+                                                    <?php if(!$menu3['visible']) continue; ?>
+                                                    <li>
+                                                        <div class="layui-menu-body-title" view-href="{:$menu3['action']?U($menu3['action']):''}">{$menu3.title}</div>
+                                                    </li>
+                                                    {/foreach}
+                                                </ul>
+                                            </div>
+                                            {/if}
+                                        </li>
+                                        {/foreach}
+                                    </ul>
+                                </div>
+
+                                {if array_search(1, array_column($menu['list'], 'visible'))!==false}
+                                <dl class="layui-nav-child">
+                                    {foreach $menu['list'] as $key2=>$menu2 }
+                                    <?php if($menu2['visible']>1) continue; ?>
+                                    <dd class="{$menu2.visible?'':'hide'}" view-action="{$menu2.action}">
+                                        <a href="javascript:;" view-href="{:$menu2['action']?U($menu2['action']):''}">{$menu2.title}</a>
+                                        {if !empty($menu2['list']) && array_search(1, array_column($menu2['list'], 'visible'))!==false }
+                                        <dl class="layui-nav-child">
+                                            {foreach $menu2['list'] as $key3=>$menu3 }
+                                            <?php if($menu3['visible']>1) continue; ?>
+                                            <dd class="{$menu3.visible?'':'hide'}" view-action="{$menu3.action}">
+                                                <a href="javascript:;" view-href="{:$menu3['action']?U($menu3['action']):''}">{$menu3.title}</a>
+                                            </dd>
+                                            {/foreach}
+                                        </dl>
+                                        {/if}
+                                    </dd>
+                                    {/foreach}
+                                </dl>
+                                {/if}
+
+
+                                {/if}
+                            </li>
+                            {/foreach}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- 主体内容 -->
+            <div class="layui-body manage-container" id="manage-container">
+                <div class="page-container">{$dashboard|raw}</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window._global = {
+            root: '{:getAppRootUrl()}',
+        };
+    </script>
+    <script src="/plugins/layui/layui.js"></script>
+
+    <script src="/plugins/clipboard/clipboard.min.js"></script>
+
+    <script src="/static/js/admin/index.js?v={:C('config.version')}"></script>
+    <script src="/plugins/jquery/jquery.lazyload.js" async="async"></script>
+
+    <script src="/plugins/wxeditor/ueditor/ueditor.all.min.js?v=25"></script>
+    <script src="/plugins/wxeditor/wxeditor.js?v={:C('config.version')}" async="async"></script>
+
+    <link href="/plugins/jquery/jquery-dad/jquery.dad.css" rel="stylesheet" async="async"/>
+    <script src="/plugins/jquery/jquery-dad/jquery.dad.min.js?v=2" type="text/javascript" async="async"></script>
+
+    <link rel="stylesheet" href="/plugins/codemirror/codemirror.css" async="async"/>
+    <script type="text/javascript" src="/plugins/codemirror/codemirror.js"></script>
+    <script type="text/javascript" src="/plugins/codemirror/mode/xml/xml.js" async="async"></script>
+
+    <script src="/static/js/admin/storage.js?v={:C('config.version')}12" async="async"></script>
+
+</body>
+</html>

@@ -1,0 +1,306 @@
+/*可以在这里添加你自己的css*/
+
+* {
+    margin: 0;
+    padding: 0;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    -webkit-box-sizing: border-box !important;
+    word-wrap: break-word !important
+}
+
+html {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    line-height: 1.6;
+    overflow: hidden;
+}
+
+html body {
+    -webkit-touch-callout: none;
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+    background-color: #fff;
+    color: #3e3e3e;
+    line-height: inherit;
+    margin: 0;
+}
+
+.view {
+    height: 100%;
+    overflow-y: auto;
+}
+
+body.view {
+    min-height: 100%;
+    padding: 15px;
+    height: auto !important;
+    /* overflow-y: auto!important; */
+}
+
+a {
+    color: #607fa6;
+    text-decoration: none
+}
+
+p {
+    clear: both;
+    min-height: 1em;
+    /* white-space: pre-wrap; */
+}
+
+em {
+    font-style: italic
+}
+
+fieldset {
+    min-width: 0
+}
+
+.list-paddingleft-2 {
+    padding-left: 30px
+}
+
+blockquote {
+    margin: 0;
+    padding-left: 10px;
+    border-left: 3px solid #dbdbdb
+}
+
+.video_iframe {
+    /*display: block;*/
+    /*width: 100% !important;*/
+    /*background-color: #000;*/
+    /*border: 0;*/
+    /*background-size: 500px;*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: center;*/
+}
+
+.weishi_video.video_iframe {
+    /*border: 1px solid #ddd;*/
+}
+
+qqmusic, mpvoice {
+    display: block;
+}
+.qqmusic_iframe {
+    width: 100% !important;
+    height: 75px;
+
+}
+qqmusic.qqmusic_iframe {
+    position: relative;
+    font-size: 14px;
+    color: #fff;
+    display: inline-block;
+    border: 1px solid #e7e7eb;
+    padding: 9px 6px;
+    overflow: hidden;
+    width: 360px !important;
+    height: 60px;
+    background: url("default/images/icon_qqmusic_audio.png") no-repeat 310px 13px;
+}
+/* .cpc_iframe {
+    width: 360px!important;
+    height: 140px;
+    margin: 14px 0;
+    border: 0;
+} */
+
+qqmusic.qqmusic_iframe::before {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    color: #000;
+    content: attr(music_name);
+}
+
+qqmusic.qqmusic_iframe::after {
+    position: absolute;
+    left: 10px;
+    top: 34px;
+    color: #8d8d8d;
+    content: attr(singer);
+}
+
+.audio_iframe {
+    position: relative;
+    font-size: 14px;
+    color: #333;
+    display: inline-block;
+    border: 1px solid #e7e7eb;
+    padding: 9px 6px 9px 60px;
+    overflow: hidden;
+    width: 100%;
+    height: 60px;
+    background: #fcfcfc url("http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/images/icon/appmsg/audio/icon_audio_unread26f1f1.png") no-repeat 16px 16px;
+    background-size: 18px auto;
+}
+.audio_iframe::after {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    color: #8d8d8d;
+    content: attr(data-length);
+}
+
+.audio_iframe::before {
+    position: absolute;
+    left: 60px;
+    top: 10px;
+    color: #333;
+    content: attr(data-name);
+}
+
+.loadingclass {
+    display: inline-block;
+    cursor: default;
+    background: url('default/images/loading.gif') no-repeat center center transparent !important;
+    border: 1px solid #cccccc;
+    margin-left: 1px;
+    height: 22px;
+    width: 22px;
+}
+html body > .wxb-style {
+    overflow-x: hidden;
+}
+html body > .wxb-style:after {
+    content: ' ';
+    display: block;
+    clear: both;
+}
+
+.vote_area {
+    display: block;
+    position: relative;
+    min-height: 50px;
+}
+
+.vote_area iframe {
+    background: none;
+    border: 1px solid #ddd;
+}
+.vote_area:after {
+    position: absolute;
+    content: '这里是一个投票';
+    display: block;
+    left: 10px;
+    top: 10px;
+    font-size: 16px;
+}
+
+/* 一点资讯h1，h2样式，感觉如果要完全和来源统一，都得自己定制 */
+h1.text-yidian-h1 {
+    color: #b2775e;
+    text-align: left;
+    margin: 0 0 21px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 26px;
+}
+h2.text-yidian-h2 {
+    border-left: 9px solid #00aeef;
+    color: #222;
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 17px;
+    line-height: 18px;
+    padding-left: 7px;
+}
+h2.text-zhihu-h2 {
+    margin: 20px 0;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.wxb-editor-template {
+    display: block;
+    width: 100%;
+}
+
+.zhihu-video-link {
+    display: inline-block;
+    padding-left: 28px;
+    background: url(default/images/zhihu.video.png) 0 center no-repeat;
+    line-height: 27px;
+    color: #259;
+    font-size: 16px;
+}
+
+.zhihu-video-link:hover {
+    text-decoration: underline;
+}
+
+._wxEditor {
+    position: relative;
+}
+
+._wxEditor > .tool-border {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    border: 1px dashed red;
+    max-width: none !important;
+    z-index: -1;
+}
+
+/*h1, h2, h3, h4, h5, h6 {*/
+    /*font-weight: 400;*/
+    /*font-size: 16px;*/
+/*}*/
+
+.icon_emotion_single {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    display: inline-block;
+    -webkit-background-size: 20px auto;
+    background-size: 20px auto
+}
+
+.weapp_text_link {
+    font-size: 17px;
+}
+
+.weapp_text_link:before {
+    content: '';
+    display: inline-block;
+    line-height: 1;
+    background-size: 12px 12px;
+    background-repeat: no-repeat;
+    background-image: url(default/images/link.png);
+    vertical-align: middle;
+    font-size: 11px;
+    color: #888;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+    margin-right: 6px;
+    margin-top: -4px;
+    background-position: center;
+    height: 20px;
+    width: 20px;
+}
+
+.weapp_app_iframe {
+    height: 330px;
+    margin: 14px 0;
+}
+
+.vote_iframe {
+    width: 100% !important;
+}
+
+.cpc_iframe {
+    width: 100% !important;
+    height: 383px;
+    margin: 14px 0;
+    border: 0;
+}
+
+::-webkit-scrollbar {width: 5px;margin-right: 1px;}
+::-webkit-scrollbar-track {background-color: #e0e0e0;}
+::-webkit-scrollbar-thumb {background-color: rgba(0, 0, 0, 0.2);}
+::-webkit-scrollbar-button {background-color: #e0e0e0;}
+::-webkit-scrollbar-corner {background-color: black;}

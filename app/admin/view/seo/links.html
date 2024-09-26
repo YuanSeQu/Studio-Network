@@ -1,0 +1,23 @@
+<script>
+    (function () {
+        var $view = $('.' + '{$grid_class}');
+
+        layui.form.on('switch(links-status)', function (data) {
+            var checked = data.elem.checked,
+                $tr = $(data.elem).closest('tr'),
+                id = $tr.data('id');
+            $.post('{:U("Seo/setLinkStatus")}?id=' + id, { status: checked ? 1 : 0 }, function () {
+            }, 'json');
+        });
+        $view.on('blur', '.js-sort', function () {
+            var $tr = $(this).closest('tr'), id = $tr.data('id'), vthis = this,
+                val = parseInt($(this).data('val') || 0) || 0,
+                sort = parseInt($(this).val().trim() || 0) || 0;
+            if (val == sort) return;
+            $.post('{:U("Seo/sortLink")}?id=' + id, { sort: sort }, function (rs) {
+                rs.code && $(vthis).data('val', sort);
+            }, 'json');
+        });
+
+    })();
+</script>

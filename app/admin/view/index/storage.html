@@ -1,0 +1,77 @@
+{if $isAll}
+<div class="file-storage-type">
+    <a class="{$type=='images'?'hover':''}" data-type="images" href="{:U('Index/storage')}?type=images">图片</a>
+    <a class="{$type=='video'?'hover':''}" data-type="video" href="{:U('Index/storage')}?type=video">视频</a>
+    <a class="{$type=='audio'?'hover':''}" data-type="audio" href="{:U('Index/storage')}?type=audio">音频</a>
+    <a class="{$type=='other'?'hover':''}" data-type="other" href="{:U('Index/storage')}?type=other">其他</a>
+</div>
+{/if}
+<div class="file-storage m0 layui-tab flex flex-column h">
+    <div class="layui-card-header layui-tab-brief p0 bd-w0">
+        <ul class="layui-tab-title">
+            {foreach $tabs as $key=>$item}
+            <li class="{$key?'':'layui-this'}" data-type="{$item.name}" data-url="{$item.url}">
+                {if $type=='images'}
+                {$item.title}
+                {else}
+                {$item.title|str_replace='图片','文件',###}
+                {/if}
+            </li>
+            {/foreach}
+        </ul>
+    </div>
+    <div class="layui-tab-content p0 cell layui-border-box" style="overflow:hidden auto;">
+        {foreach $tabs as $i=>$tab}
+        {if $tab.name=='local'}
+        <div class="layui-tab-item {$i?'':'layui-show'} h type-local">
+            {include file="index/storage/dir" /}
+        </div>
+        {elseif $tab.name=='network'}
+        <div class="layui-tab-item {$i?'':'layui-show'} type-network">
+            <div class="layui-form pt50 pl50 pr50">
+                {if $type=='images'}
+                <div class="flex">
+                    <div class="flex flex-al-c">
+                        <label>图片地址：</label>
+                    </div>
+                    <div class="cell">
+                        <input type="text" placeholder="http://，请填写网络图片完整地址" class="layui-input js-webpath">
+                    </div>
+                    <div>
+                        <button class="layui-btn layui-btn-normal js-btn-ylimg" type="button"><i class="layui-icon layui-icon-picture"></i> 预览图片</button>
+                    </div>
+                </div>
+                <div class="p20 h350">
+                    <img class="w h js-ylwebpath bd-e7" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" style="object-fit: contain;">
+                </div>
+                {else}
+                <div class="flex">
+                    <div class="flex flex-al-c">
+                        <label>网络地址：</label>
+                    </div>
+                    <div class="cell">
+                        <input type="text" placeholder="http://，请填写完整的网络地址" class="layui-input js-webpath">
+                    </div>
+                    <div>
+                        <button class="layui-btn layui-btn-normal js-btn-ylimg" type="button">预览文件</button>
+                    </div>
+                </div>
+                {/if}
+            </div>
+        </div>
+        {else}
+        <div class="layui-tab-item {$i?'':'layui-show'} h type-{$tab.name}"></div>
+        {/if}
+        {/foreach}
+    </div>
+    <div class="btn-up layui-form">
+        <button class="layui-btn layui-btn-normal layui-btn-sm pr btn-lay-upload" type="button" style="top: -1px;">
+            <i class="layui-icon"></i>{$type=='images'?'上传图片':'上传文件'}
+        </button>
+        {if $type=='images' && $isWatermark}
+        <div class="ml15 inline-block">
+            <input type="checkbox" name="isWatermark" lay-filter="imgspace-watermark" title="添加水印" value="1" lay-skin="primary" checked unvalue="0"/>
+        </div>
+        {/if}
+    </div>
+</div>

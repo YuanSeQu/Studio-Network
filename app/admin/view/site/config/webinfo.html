@@ -1,0 +1,310 @@
+<div class="js-view-webinfo">
+    <form class="layui-form w800 " lay-filter="js-view-webinfo" method="post" action="{:U('Site/saveConfig')}" lay-label-w100>
+        <fieldset class="layui-elem-field pr15">
+            <legend class="f14 fn">站点资料</legend>
+            <div class="pt10">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单位名称</label>
+                    <div class="layui-input-block flex">
+                        <input type="text" name="webinfo[name]" value="{$webinfo.name|default=''}" placeholder="请输入单位名称" autocomplete="off" class="layui-input cell"/>
+                        <div class="layui-word-aux ml20 tc layui-form-mid">
+                           <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='webinfo.name' &#47;&#125;">复制标签</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">联系电话</label>
+                    <div class="layui-input-block flex">
+                        <input type="text" name="webinfo[telephone]" value="{$webinfo.telephone|default=''}" placeholder="请输入联系电话" autocomplete="off" class="layui-input cell"/>
+                        <div class="layui-word-aux ml20 tc layui-form-mid">
+                            <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='webinfo.telephone' &#47;&#125;">复制标签</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">手机号码</label>
+                    <div class="layui-input-block flex">
+                        <input type="text" name="webinfo[mobile]" value="{$webinfo.mobile|default=''}" placeholder="请输入手机号码" autocomplete="off" class="layui-input cell"/>
+                        <div class="layui-word-aux ml20 tc layui-form-mid">
+                            <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='webinfo.mobile' &#47;&#125;">复制标签</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">传真号码</label>
+                    <div class="layui-input-block flex">
+                        <input type="text" name="webinfo[fax]" value="{$webinfo.fax|default=''}" placeholder="请输入传真号码" autocomplete="off" class="layui-input cell"/>
+                        <div class="layui-word-aux ml20 tc layui-form-mid">
+                            <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='webinfo.fax' &#47;&#125;">复制标签</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">QQ号码</label>
+                    <div class="layui-input-block flex">
+                        <input type="text" name="webinfo[qq]" value="{$webinfo.qq|default=''}" placeholder="请输入QQ号码" autocomplete="off" class="layui-input cell"/>
+                        <div class="layui-word-aux ml20 tc layui-form-mid">
+                            <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='webinfo.qq' &#47;&#125;">复制标签</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">微信号</label>
+                    <div class="layui-input-block flex">
+                        <input type="text" name="webinfo[wx]" value="{$webinfo.wx|default=''}" placeholder="请输入微信号" autocomplete="off" class="layui-input cell"/>
+                        <div class="layui-word-aux ml20 tc layui-form-mid">
+                            <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='webinfo.wx' &#47;&#125;">复制标签</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">二维码</label>
+                    <div class="layui-input-block flex">
+                        <div class="cell">
+                            {imgspace name="webinfo[qrcode]" value="$webinfo.qrcode|default=''" title="二维码"  watermark='false' /}
+                        </div>
+                        <div class="layui-word-aux ml20 tc layui-form-mid">
+                            <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='webinfo.qrcode' &#47;&#125;">复制标签</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">联系邮箱</label>
+                    <div class="layui-input-block flex">
+                        <input type="text" name="webinfo[email]" value="{$webinfo.email|default=''}" placeholder="请输入联系邮箱" autocomplete="off" class="layui-input cell"/>
+                        <div class="layui-word-aux ml20 tc layui-form-mid">
+                            <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='webinfo.email' &#47;&#125;">复制标签</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">联系地址</label>
+                    <div class="layui-input-block flex">
+                        <input type="text" name="webinfo[addr]" value="{$webinfo.addr|default=''}" placeholder="请输入联系地址" autocomplete="off" class="layui-input cell"/>
+                        <div class="layui-word-aux ml20 tc layui-form-mid">
+                            <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='webinfo.addr' &#47;&#125;">复制标签</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">地址坐标</label>
+                    <div class="layui-input-block flex">
+                        <input type="text" name="webinfo[coord]" value="{$webinfo.coord|default=''}" placeholder="设置地址坐标" autocomplete="off" class="layui-input cell"/>
+                        <!--<button class="layui-btn layui-btn-normal js-btn-coord" type="button"><i class="layui-icon">&#xe715;</i>选择坐标点</button>-->
+                        <div class="layui-word-aux ml20 tc layui-form-mid">
+                            <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='webinfo.coord' &#47;&#125;">复制标签</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="vjs-custom" data-list='{$cusList}'></div>
+                <div class="layui-form-item pl15">
+                    <textarea name="webinfo[custom]" hidden>{$webinfo.custom|default=''}</textarea>
+                    <button type="button" class="layui-btn layui-btn-normal layui-btn-fluid vjs-custom-add">+添加配置</button>
+                </div>
+
+            </div>
+        </fieldset>
+        <fieldset class="layui-elem-field pr15">
+            <legend class="f14 fn">第三方代码</legend>
+            <div class="pt10">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">电脑PC端</label>
+                    <div class="layui-input-block flex">
+                        <textarea name="webinfo[thirdcode_pc]" placeholder="请输入内容" class="layui-textarea cell">{$webinfo.thirdcode_pc|default=''}</textarea>
+                        <div class="flex-c ml5">
+                            <i class="layui-icon layui-icon-tips" lay-tips="代码会放在 &lt;/body&gt; 标签以上（一般用于放置百度商桥代码、站长统计代码、谷歌翻译代码等）"></i>
+                        </div>
+                        <div class="layui-word-aux ml20 tc layui-form-mid flex-c">
+                            <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='webinfo.thirdcode_pc' &#47;&#125;">复制标签</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">手机移动端</label>
+                    <div class="layui-input-block flex">
+                        <textarea name="webinfo[thirdcode_wap]" placeholder="请输入内容" class="layui-textarea cell">{$webinfo.thirdcode_wap|default=''}</textarea>
+                        <div class="flex-c ml5">
+                            <i class="layui-icon layui-icon-tips" lay-tips="代码会放在 &lt;/body&gt; 标签以上（一般用于放置百度商桥代码、站长统计代码、谷歌翻译代码等）"></i>
+                        </div>
+                        <div class="layui-word-aux ml20 tc layui-form-mid flex-c">
+                            <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='webinfo.thirdcode_wap' &#47;&#125;">复制标签</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="layui-form-item mt30">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+            </div>
+        </div>
+    </form>
+    <script type="text/template" class="vjs-tpl-add">
+        <div class="layui-form pr25" lay-filter="view-tpl-add">
+            <div class="layui-form-item">
+                <label class="layui-form-label">配置标题</label>
+                <div class="layui-input-block"><input type="text" name="title" class="layui-input" placeholder="自定义配置标题，最大长度12个字符" maxlength="12"/></div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">配置名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" class="layui-input" placeholder="自定义配置名称，字母和数字组合" maxlength="30"
+                           onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'');"
+                           onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^0-9a-zA-Z_]/g,''));"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">配置类型</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="type" value="text" title="单行文本" checked/>
+                    <input type="radio" name="type" value="textarea" title="多行文本" />
+                    <input type="radio" name="type" value="img" title="上传图片" />
+                    <input type="radio" name="type" value="switch" title="开关类型" />
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/template" class="vjs-tpl-custom">
+        {{#  layui.each(d, function(index, item) {  }}
+        <div class="layui-form-item">
+            <label class="layui-form-label">{{  item.title   }}</label>
+            <div class="layui-input-block flex">
+                <div class="cell flex pr">
+                    <div class="{{ item.type!='switch'?'cell':'' }}">
+                        {{#  if (item.type=='text') {  }}
+                        <input type="text" name="custom[{{  item.name }}]" value="{{ item.value||'' }}" placeholder="{{  item.title   }}" autocomplete="off" class="layui-input"/>
+                        {{#  } else if (item.type=='textarea') {  }}
+                        <textarea name="custom[{{  item.name }}]" placeholder="{{  item.title   }}" class="layui-textarea">{{ item.value||'' }}</textarea>
+                        {{#  } else if (item.type=='img') {  }}
+                        <div class="imgspace" watermark="false" lay-type-input>
+                            <a class="layui-icon layui-icon-picture tips-img" href="{{ item.value||'' }}" target="_blank" src="{{ item.value||'' }}" lay-uphref="" lay-upsrc=""></a>
+                            <input type="text" name="custom[{{  item.name }}]" value="{{ item.value||'' }}" placeholder="{{  item.title   }}" autocomplete="off" class="layui-input" lay-upvalue="">
+                            <button class="layui-btn layui-btn-normal" type="button" lay-up=""><i class="layui-icon"></i>上传图片</button>
+                        </div>
+                        {{#  } else if (item.type=='switch') {  }}
+                        <input type="checkbox" name="custom[{{  item.name }}]" lay-skin="switch" lay-text="开启|关闭" value="1" {{ item.value? 'checked':'' }} unvalue="0"/>
+                        {{#  }  }}
+                    </div>
+                    <span class="close-modal {{ item.type=='switch'?'ps':'' }}">×</span>
+                </div>
+                <div class="layui-word-aux ml20 tc layui-form-mid {{ item.type=='textarea'?'flex-c':'' }}">
+                    <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='custom.{{  item.name }}' &#47;&#125;">复制标签</a>
+                </div>
+            </div>
+        </div>
+        {{#  }) }}
+    </script>
+</div>
+<script>
+    (function () {
+
+        var $view = $('.js-view-webinfo'),
+            curmaploc = '';
+        $('.js-btn-coord', $view).click(function () {
+            var $input = $(this).siblings('input'),
+                coord = $input.val();
+            curmaploc = '';
+            $.confirm({
+                type: 2,
+                title: false,
+                shadeClose: true,
+                area: ['450px', '540px'],
+                msg: '//apis.map.qq.com/tools/locpicker?search=1&type=1&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=myapp' + (coord ? '&coord=' + coord : ''),
+                success: function (layero, index) {
+                    $('.layui-layer-btn', layero).css('border-top', '1px solid #ddd');
+                },
+                yes: function (layero, index) {
+                    if (!curmaploc) {
+                        $.msg('请选择坐标所在的地址！')
+                        return false;
+                    }
+                    $input.val(curmaploc);
+                }
+            });
+        });
+        $(window).off('message.map').on('message.map', function (event) {
+            var loc = event.originalEvent.data;
+            if (loc && loc.module == 'locationPicker') {
+                curmaploc = loc.latlng.lat + ',' + loc.latlng.lng;
+            }
+        });
+
+        $('.vjs-custom-add', $view).click(function () {
+            $.confirm({
+                closeBtn: 2,
+                area: ['450px', '350px'],
+                title: '添加配置',
+                msg: $('.vjs-tpl-add', $view).html(),
+                success: function (layero, index) {
+                    layui.form.render(null, 'view-tpl-add');
+                },
+                yes: function (layero, index) {
+                    var data = {
+                            title: $('[name="title"]', layero).val().trim(),
+                            name: $('[name="name"]', layero).val().trim(),
+                            type: $('[name="type"]:checked', layero).val(),
+                            value: '',
+                        };
+                    if (!data.title) {
+                        $.showMsg(0,'请填写标题！');
+                        return false;
+                    }
+                    if (!data.name || /[^0-9a-zA-Z_]/.test(data.name)) {
+                        $.showMsg(0, '请填写正确的名称！');
+                        return false;
+                    }
+                    if ($('.vjs-custom [name="custom[' + data.name + ']"]').length) {
+                        $.showMsg(0, '该名称已存在请重新命名！');
+                        return false;
+                    }
+                    if (!data.type) {
+                        $.showMsg(0, '请选择类型！');
+                        return false;
+                    }
+
+                    customLoad([data]);
+                }
+            });
+        });
+
+        function customLoad(data) {
+            if (!data) return;
+            var tpl = $('.vjs-tpl-custom', $view).html()
+            layui.laytpl(tpl).render(data, function (html) {
+                $('.vjs-custom', $view).append(html).trigger('change');
+                layui.form.render(null, 'js-view-webinfo');
+            });
+        }
+
+        var vlist = $('.vjs-custom', $view).data('list');
+        customLoad(vlist);
+
+
+        $('.vjs-custom',$view).on('change',function () {
+            var data = [];
+            $('.layui-form-item', this).each(function () {
+                var item = {
+                    type: 'text',
+                    title: $('.layui-form-label', this).text().trim(),
+                    name: '',
+                };
+                if ($('.imgspace', this).length) {
+                    item.type = 'img';
+                } else if ($('[type="checkbox"]', this).length) {
+                    item.type = 'switch';
+                } else if ($('textarea', this).length) {
+                    item.type = 'textarea';
+                }
+                item.name = $('[name^="custom"]', this).attr('name').replace('custom[', '').replace('\]', '');
+                data.push(item);
+            });
+            $('textarea[name="webinfo[custom]"]').val(JSON.stringify(data));
+        });
+
+        $('.vjs-custom',$view).on('click','span.close-modal',function () {
+            $(this).closest('.layui-form-item').remove();
+            $('.vjs-custom',$view).trigger('change');
+        });
+
+    })();
+</script>

@@ -1,0 +1,21 @@
+{foreach $list as $item}
+{if $type=='images'}
+<div class="item vm" data-url="{$item.url}">
+    <img data-src="{$item.url}" class="tips-img"/>
+</div>
+{else}
+<div class="item flex ptb10 plr15 noselect" data-url="{$item.url}">
+    <div class="pr10">
+        {if $type=='audio'}
+        <img src="/static/css/img/fileicon/audio.png" height="24" width="24"/>
+        {elseif $type=='video'}
+        <img src="/static/css/img/fileicon/video.png" height="24" width="24"/>
+        {else}
+        <?php $icon=fileiconByType($item['url']); ?>
+        <div class="fileicon {$icon}" style="height:24px;padding-left: 24px;background-size:24px 24px;"></div>
+        {/if}
+    </div>
+    <div class="flex-c"><a class="hover-cl-38f" href="{$item.url}" target="_blank">{$item.title}</a></div>
+</div>
+{/if}
+{/foreach}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <title>{$rrz.seo_title}</title>
+    <meta name="description" content="{$rrz.seo_description}"/>
+    <meta name="keywords" content="{$rrz.seo_keywords}"/>
+    <meta name="author" content="order by rrzcms.com"/>
+    <link href="{rrz:env name='website.favicon' /}" rel="shortcut icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    {rrz:skin href="skin/css/cui.css,skin/css/style.css,skin/css/less.css"/}
+    {rrz:skin href="skin/js/jquery.js"/}
+</head>
+<body>
+    {include file="block/header" /}
+    <div id="bd">
+        <!--img(%IMAGES%/img4.jpg)-->
+        <div id="ban-in" style="background-image:url(%IMAGES%/img4.jpg)">
+            <div class="ban-bg"></div>
+        </div>
+        <!--img_end-->
+
+        <div class="wp">
+            {include file="block/top" /}
+
+            <ul class="ul-list">
+                {rrz:list limit='8'}
+                <li>
+                    <div class="pad">
+                        <div class="pic">
+                            <a href="{$item.url}"><img src="{$item.img|default='%IMAGES%/default.gif'}" alt="{$item.title}"></a>
+                        </div>
+                        <div class="bor">
+                            <div class="txt">
+                                <div class="title">
+                                    <span><em>{$item.pubtime|date='m/d'}</em>{$item.pubtime|date='Y'}</span>
+                                    <h3><a href="{$item.url}">{$item.title}</a></h3>
+                                </div>
+                                <a href="{$item.url}" style="color:#666;">
+                                    <p>{$item.brief|subtext=40}</p>
+                                </a>
+                            </div>
+                            <div class="more"><a href="{$item.url}" class="r">查看更多 ></a></div>
+                        </div>
+                    </div>
+                </li>
+                {/rrz:list}
+            </ul>
+            <div class="c"></div>
+            <div class="pagess">
+                <ul>
+                    {rrz:page item="index,end,pre,next,pageno" size="1" tag='li' style='thisclass' /}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    {include file="block/footer" /}
+    {rrz:skin href="skin/js/lib.js"/}
+
+</body>
+</html>

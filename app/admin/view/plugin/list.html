@@ -1,0 +1,64 @@
+{foreach $plugins as $v}
+<div class="pitem">
+    <div class="ptop">
+        <a target="_blank" href="http://www.rrzcms.com/Admin/Plugins/plugininfo/id/{$v.id}.html">
+            <div class="plogo">
+                <img class="plogo_img" src="{$v.logo}">
+                <div class="w100 h100 br5 center plogo_name" style="display: none;background-color: #009688;"><span class="mt30 cl-w lineblock plr5">{$v.name}</span></div>
+            </div>
+        </a>
+        <div class="pinfo">
+            <a target="_blank" href="http://www.rrzcms.com/Admin/Plugins/plugininfo/id/{$v.id}.html">
+                <p class="f16">{$v.name}</p>
+                {if($v.minversion > $version)}
+                <p class="cl-f44 f12" title="当前CMS版本太低，插件要求版本 >= {$v.minversion}，请升级系统！">当前CMS版本太低，插件要求版本 >= {$v.minversion}，请升级系统！</p>
+                {else /}
+                <p class="cl-999 f12" title="{$v.desc}">{$v.desc}</p>
+                {/if}
+            </a>
+            <p class="cl-999 f13">
+                域名授权后价格：
+                <span class="cl-f44 fb">
+                {if($v.price>0)}
+                ￥{$v.price}
+                {else /}
+                免费
+                {/if}
+                </span>
+            </p>
+            <p class="cl-999 f13">域名未授权价格：
+                <span class="cl-f44 fb">
+                {if($v.priceno>0)}
+                ￥{$v.priceno}
+                {else /}
+                免费
+                {/if}
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="pbot">
+        <ul class="flex">
+        {if(in_array($v.code,$uses))}
+        <li class="flex-1 cl-999">已安装</li>
+        {elseif($v.minversion > $version) /}
+        <li class="flex-1 cl-999">不支持安装</li>
+        {else /}
+            {if($isauth==0)}
+            <li class="flex-1"><a href="http://www.rrzcms.com/Index/package.html" target="_blank">域名授权</a></li>
+            {/if}
+            <li class="flex-1"><a class="goInstall" data-pcode="{$v.code}" data-pid="{$v.id}" href="javascript:void(0)">在线安装</a></li>
+        {/if}
+        </ul>
+    </div>
+</div>
+{/foreach}
+
+<script>
+    $(function(){
+        $(".plogo_img").one("error",function(){
+            $('.plogo_img').hide();
+            $('.plogo_name').show();
+        });
+    });
+</script>

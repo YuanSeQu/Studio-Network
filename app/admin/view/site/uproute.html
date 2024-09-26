@@ -1,0 +1,9 @@
+<script>
+    (function () {
+        $('.[view] form.layui-form').data('callback', function (rs) {
+            //更新路由
+            $.post('{:U("Site/updateRoute")}', {}, function () {
+            }, 'json');
+        });
+    })();
+</script>

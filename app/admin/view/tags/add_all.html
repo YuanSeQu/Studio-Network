@@ -1,0 +1,21 @@
+<form class="layui-form p15" method="post" action="{:U('Tags/addAll')}">
+    <table>
+        <tr>
+            <th width="100" valign="top"><em>*</em>Tag标签列表</th>
+            <td>
+                <textarea class="layui-textarea" vtype="required" name="title" cols="25" rows="13" placeholder="一行代表一个Tag标签"></textarea>
+                <p class="cl-999 mt5 f12">每行标签名称长度不能超过20个字，超过将会被忽略掉</p>
+            </td>
+        </tr>
+        <tr>
+            <th>标签类型</th>
+            <td>
+                <input type="radio" name="type" value="1" title="文章标签" checked  />
+                <input type="radio" name="type" value="2" title="产品标签" />
+            </td>
+        </tr>
+    </table>
+    <div class="mt30 tc">
+        <button type="submit" class="layui-btn layui-btn-normal w100" lay-submit>确认提交</button>
+    </div>
+</form>

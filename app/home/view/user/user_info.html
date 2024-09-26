@@ -1,0 +1,127 @@
+
+
+
+<div class="user-centre">
+
+    {include file="user/user_header" /}
+
+    <div class="rrz-user rrz-user-info">
+        <div class="container">
+            <div class="layui-row plr15 ptb20">
+
+                {include file="user/user_left" /}
+
+                <div class="layui-col-xs8 rrz-user-right">
+                    <div class="content">
+                        <div class="layui-tab layui-tab-brief">
+                            <ul class="layui-tab-title">
+                                <li class="layui-this f16 g-color g-br-color-after">个人信息</li>
+                            </ul>
+                            <div class="layui-tab-content">
+                                <form class="layui-form ptb20 auto-table-form" method="post" action="{:U('/user/info')}">
+                                    <table>
+                                        <tr class="user-name">
+                                            <th width="200">用户名</th>
+                                            <td>{$rrz.user.name}</td>
+                                        </tr>
+                                        <tr class="arrow">
+                                            <th>修改密码</th>
+                                            <td>
+                                                <input class="layui-input" type="text" name="password" autocomplete="off" placeholder="留空时默认不修改密码" size="50"/>
+                                            </td>
+                                        </tr>
+                                        <tr class="arrow">
+                                            <th>昵称</th>
+                                            <td>
+                                                <input class="layui-input" type="text" name="nickname" value="{$rrz.user.nickname}" maxlength="20" vtype="required" vtips="昵称不能为空！" autocomplete="off" placeholder="昵称"/>
+                                            </td>
+                                        </tr>
+                                        {foreach $rrz.attr_config as $item}
+                                        {if $item.dtype=='text'}
+                                        <tr class="arrow">
+                                            <th>{$item.title}</th>
+                                            <td>
+                                                <input type="text" name="attr[{$item.name}]" value="{$rrz.user[$item.name]|default=$item.dfvalue}" placeholder="请输入{$item.title}" class="layui-input" maxlength="200" />
+                                            </td>
+                                        </tr>
+                                        {elseif $item.dtype=='mobile'||$item.dtype=='email'}
+                                        <tr class="arrow">
+                                            <th>{$item.title}</th>
+                                            <td>
+                                                <input type="text" name="attr[{$item.name}]" vtype="{$item.dtype}" value="{$rrz.user[$item.name]|default=$item.dfvalue}" placeholder="请输入{$item.title}" class="layui-input" maxlength="50" />
+                                            </td>
+                                        </tr>
+                                        {elseif $item.dtype=='multitext' /}
+                                        <tr class="newline">
+                                            <th class="vt">{$item.title}</th>
+                                            <td>
+                                                <textarea name="{$item.name}" class="layui-textarea" style="max-width: 700px;" placeholder="{$item.title}">{$rrz.user[$item.name]|default=$item.dfvalue}</textarea>
+                                            </td>
+                                        </tr>
+                                        {elseif $item.dtype=='radio' /}
+                                        <tr class="newline">
+                                            <th>{$item.title}</th>
+                                            <td>
+                                                <?php $dfvalueArr = explode('|', $item['dfvalue']); ?>
+                                                {foreach $dfvalueArr as $k=>$option}
+                                                <input type="radio" name="attr[{$item.name}]" value="{$option}" title="{$option}" {if !$k||(isset($rrz.user[$item.name])&&$rrz.user[$item.name]==$option) } checked {/if}/>
+                                                {/foreach}
+                                            </td>
+                                        </tr>
+                                        {elseif $item.dtype=='checkbox' /}
+                                        <tr class="newline">
+                                            <th>{$item.title}</th>
+                                            <td>
+                                                <?php $dfvalueArr = explode('|', $item['dfvalue']); ?>
+                                                <?php $valueArr = array_filter(explode(',', $rrz['user'][$item['name']]??'')); ?>
+                                                {foreach $dfvalueArr as $option}
+                                                <div class="layui-inline mt5">
+                                                    <input type="checkbox" name="attr[{$item.name}][]" value="{$option}" title="{$option}" {if in_array($option,$valueArr) } checked {/if}/>
+                                                </div>
+                                                {/foreach}
+                                            </td>
+                                        </tr>
+                                        {elseif $item.dtype=='select' /}
+                                        <tr>
+                                            <th>{$item.title}</th>
+                                            <td>
+                                                <?php $dfvalueArr = explode('|', $item['dfvalue']); ?>
+                                                <select name="attr[{$item.name}]">
+                                                    {foreach $dfvalueArr as $option}
+                                                    <option value="{$option}" {if isset($rrz.user[$item.name])&&$rrz.user[$item.name]==$option } selected {/if}>{$option}</option>
+                                                    {/foreach}
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        {elseif $item.dtype=='img' /}
+                                        <tr>
+                                            <th>{$item.title}</th>
+                                            <td>
+                                                <div class="flex flex-al-c h">
+                                                    <input type="text" name="attr[{$item.name}]" value="{$rrz.user[$item.name]}" placeholder="请上传{$item.title}" class="layui-input pr10" maxlength="200" lay-upvalue/>
+                                                    <button type="button" class="layui-btn layui-btn-normal w70 p0 tc g-background"  lay-data="{ url: '{:U('/upload/index')}?type=images' }" lay-upload
+                                                            >{:__('上传')}</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {/if}
+                                        {/foreach}
+                                        <tr class="btn-submit">
+                                            <td colspan="2" class="tc">
+                                                <div class="h25"></div>
+                                                <button type="submit" class="layui-btn layui-btn-normal g-background">保存资料</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {include file="user/user_footer" /}
+</div>

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link rel="stylesheet" href="/plugins/layui-v2.5.6/css/layui.css" media="all">
+    <script type="text/javascript" src="../internal.js"></script>
+    <style type="text/css">
+        .warpper{margin: 15px auto 0;padding:0 7px 0 10px}
+    </style>
+</head>
+<body class="warpper">
+<form class="layui-form layui-form-pane">
+    <div class="layui-form-item">
+        <label class="layui-form-label"><var id="lang_input_text"></var></label>
+        <div class="layui-input-block">
+            <input type="text" id="text" disabled="true" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><var id="lang_input_url"></var></label>
+        <div class="layui-input-block">
+            <input type="text" id="href" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><var id="lang_input_title"></var></label>
+        <div class="layui-input-block">
+            <input type="text" id="title" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label"><var id="lang_input_target"></var></label>
+        <div class="layui-input-block">
+            <input type="checkbox" checked="" id="target" lay-skin="switch" lay-text="是|否">
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="/plugins/layui-v2.5.6/layui.all.js"></script>
+<script type="text/javascript">
+    var range = editor.selection.getRange(),
+        link = range.collapsed ? editor.queryCommandValue( "link" ) : editor.selection.getStart(),
+        url,
+        text = $G('text'),
+        rangeLink = domUtils.findParentByTagName(range.getCommonAncestor(),'a',true),
+        orgText;
+    link = domUtils.findParentByTagName( link, "a", true );
+    if(link){
+        url = utils.html(link.getAttribute( '_href' ) || link.getAttribute( 'href', 2 ));
+        if(rangeLink === link && !link.getElementsByTagName('img').length){
+            text.removeAttribute('disabled');
+            orgText = text.value = link[browser.ie ? 'innerText':'textContent'];
+        }else{
+            text.setAttribute('disabled','true');
+            text.value = lang.validLink;
+        }
+    }else{
+        if(range.collapsed){
+            text.removeAttribute('disabled');
+            text.value = '';
+        }else{
+            text.setAttribute('disabled','true');
+            text.value = lang.validLink;
+        }
+    }
+    $G("title").value = url ? link.title : "";
+    $G("href").value = url ? url: '';
+    $G("target").checked = url && link.target == "_self" ? false : true;
+    $focus($G("href"));
+    function handleDialogOk(){
+        var href =$G('href').value.replace(/^\s+|\s+$/g, '');
+        if(href){
+            if(!hrefStartWith(href,["http","/","ftp://",'#'])) {
+                href  = "http://" + href;
+            }
+            var obj = {
+                'href' : href,
+                'target' : $G("target").checked ? "_blank" : '_self',
+                'title' : $G("title").value.replace(/^\s+|\s+$/g, ''),
+                '_href':href
+            };
+            //修改链接内容的情况太特殊了，所以先做到这里了
+            //todo:情况多的时候，做到command里
+            if(orgText && text.value != orgText){
+                link[browser.ie ? 'innerText' : 'textContent'] =  obj.textValue = text.value;
+                range.selectNode(link).select()
+            }
+            if(range.collapsed){
+                obj.textValue = text.value;
+            }
+            editor.execCommand('link',utils.clearEmptyAttrs(obj) );
+            dialog.close();
+        }
+    }
+    dialog.onok = handleDialogOk;
+    $G('href').onkeydown = $G('title').onkeydown = function(evt){
+        evt = evt || window.event;
+        if (evt.keyCode == 13) {
+            handleDialogOk();
+            return false;
+        }
+    };
+    $G('href').onblur = function(){
+        if(!hrefStartWith(this.value,["http","/","ftp://",'#'])){
+            layer.tips(lang.httpPrompt, '#href',{tips:[1,'#FF5722']})
+        }
+    };
+    function hrefStartWith(href,arr){
+        href = href.replace(/^\s+|\s+$/g, '');
+        for(var i=0,ai;ai=arr[i++];){
+            if(href.indexOf(ai)==0){
+                return true;
+            }
+        }
+        return false;
+    }
+</script>
+</body>
+</html>

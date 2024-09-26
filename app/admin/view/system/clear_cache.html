@@ -1,0 +1,38 @@
+<div class="layui-card js-view-clearCache">
+    <div class="layui-card-header"> 清除缓存</div>
+    <div class="layui-card-body">
+        <form class="layui-form ptb15 pr25" method="post" action="{:U('System/clearCache')}" lay-filter="clearCache">
+            <table>
+                <tr>
+                    <th width="90">系统缓存</th>
+                    <td>
+                        <input type="checkbox" name="clearCache[]" value="cache" title="数据缓存(cache)" lay-skin="primary" checked>
+                        <!--<input type="checkbox" name="clearCache[]" value="data" title="项目数据(data)" lay-skin="primary" checked>-->
+                        <input type="checkbox" name="clearCache[]" value="log" title="访问日志(log)" lay-skin="primary" checked>
+                        <input type="checkbox" name="clearCache[]" value="temp" title="临时数据(temp)" lay-skin="primary" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <input type="checkbox" lay-filter="all-checked" title="全选" lay-skin="primary" checked>
+                    </td>
+                </tr>
+            </table>
+            <div class="mt30 pl100 pb30">
+                <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    (function () {
+        var $view = $('.js-view-clearCache');
+
+        layui.form.on('checkbox(all-checked)', function (data) {
+            $('[name="clearCache[]"]', $view).prop('checked', data.elem.checked);
+            layui.form.render('checkbox', 'clearCache');
+        });
+
+    })();
+</script>

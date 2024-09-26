@@ -1,0 +1,31 @@
+<div id="hd">
+    <div class="wp">
+        <div class="logo">
+            <a href="{rrz:env name='rrz.cmsurl' /}">
+                <img src="{rrz:env name='website.logo' /}" />
+            </a>
+        </div>
+        <div id="nav">
+            <ul>
+                {rrz:menus type='top'}
+                <li><a href="{$item.url}" target="{$item.target}" class="{$item.class?'mycur':''}">{$item.title}</a></li>
+                {/rrz:menus}
+            </ul>
+        </div>
+        <div class="tel">{rrz:env name='webinfo.telephone' /}</div>
+    </div>
+</div>
+
+<div class="c"></div>
+<div id="m-hd">
+    <a href="{rrz:env name='rrz.cmsurl' /}" class="m-logo"><img src="{rrz:env name='website.logo' /}" /></a>
+    <div class="m-trigger"></div>
+    <ul class="m-nav">
+        <li><a href="{rrz:env name='rrz.cmsurl' /}" class="v1">首页 </a></li>
+        {rrz:menus type='top'}
+        <li><a href="{$item.url}" class="v1">{$item.title}</a></li>
+        {/rrz:menus}
+    </ul>
+</div>
+
+<div class="c"></div>

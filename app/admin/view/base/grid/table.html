@@ -1,0 +1,23 @@
+<div class="layui-grid-table cell flex flex-column">
+    <div class="cell" style="overflow: auto;">
+        <div class="fixed-thead">
+            <table class="thead-fixed layui-table">
+                {include file="base/grid/thead" /}
+            </table>
+        </div>
+        <table class="layui-table">
+            {include file="base/grid/thead" /}
+            <tbody>
+            {include file="base/grid/tbody" /}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    (function () {
+        $('.layui-grid .layui-grid-table>div.cell').off('scroll').scroll(function (e) {
+            var stop = $(this).scrollTop();
+            $('.thead-fixed', this).css({ top: stop, })[stop ? 'show' : 'hide']();
+        });
+    })();
+</script>

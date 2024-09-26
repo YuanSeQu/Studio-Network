@@ -1,0 +1,177 @@
+<form class="layui-form w800 js-view-attachment-config" method="post" action="{:U('Site/saveConfig')}" lay-label-w100 lay-filter="attachment-config">
+    <blockquote class="layui-elem-quote">
+        当前PHP最大上传限制为 <span class="cl-r">{$filesize}</span>
+    </blockquote>
+    <fieldset class="layui-elem-field pr15">
+        <legend class="f14 fn">图片上传</legend>
+        <div class="pt10">
+            <div class="layui-form-item">
+                <label class="layui-form-label">图片类型</label>
+                <div class="layui-input-block">
+                    <div class="flex">
+                        <input type="text" name="upload[images_ext]" lay-verify="required" value="{$upload.images_ext|default='jpg,jpeg,png,bmp,gif,ico'}"
+                               placeholder="图片文件类型,多个之间以逗号隔开" class="layui-input cell vjs-ext"
+                               onkeyup="this.value=this.value.replace(/[\，]/g,',');" onpaste="this.value=this.value.replace(/[\，]/g,',')"/>
+                        <div class="ml5 flex">
+                            <label class="lh38 mlr5">大小</label>
+                            <input type="text" name="upload[images_size]" value="{$upload.images_size|default='2'}" vtype="unsignedint" placeholder="上传图片最大限制" class="layui-input w50"/>
+                            <label class="lh38 ml5">MB </label>
+                            <div class="flex-c ml5">
+                                <i class="layui-icon layui-icon-tips" lay-tips="附件上传大小限制，如果空间不支持，请与空间商联系修改php.ini部分参数"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">MIME类型</label>
+                <div class="layui-input-block ">
+                    <textarea name="upload[images_mime]" placeholder="MIME类型 可验证文件是否格式匹配 防止窜改文件类型" class="layui-textarea"
+                              onkeyup="this.value=this.value.replace(/[\，]/g,',');" onpaste="this.value=this.value.replace(/[\，]/g,',')">{$upload.images_mime|default=''}</textarea>
+                    <p class="cl-999 f12">MIME类型 可验证文件是否格式匹配 防止窜改文件类型 留空则不验证</p>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">默认图</label>
+                <div class="layui-input-block ">
+                    {imgspace name="website[def_img]" value="$website.def_img|default=''" title="默认图"  watermark='false' /}
+                    <p class="cl-999 f12 mt5">列表页文章或产品未上传图时显示该图</p>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="layui-elem-field pr15">
+        <legend class="f14 fn">视频上传</legend>
+        <div class="pt10">
+            <div class="layui-form-item">
+                <label class="layui-form-label">视频类型</label>
+                <div class="layui-input-block flex">
+                    <input type="text" name="upload[video_ext]" lay-verify="required" value="{$upload.video_ext|default='mp4,webm,ogg'}" placeholder="视频文件类型,多个之间以逗号隔开"
+                           class="layui-input cell vjs-ext"  onkeyup="this.value=this.value.replace(/[\，]/g,',');" onpaste="this.value=this.value.replace(/[\，]/g,',')"/>
+                    <div class="ml5 flex">
+                        <label class="lh38 mlr5">大小</label>
+                        <input type="text" name="upload[video_size]" value="{$upload.video_size|default='6'}" vtype="unsignedint" placeholder="上传视频最大限制" class="layui-input w50"/>
+                        <label class="lh38 ml5">MB </label>
+                        <div class="flex-c ml5">
+                            <i class="layui-icon layui-icon-tips" lay-tips="附件上传大小限制，如果空间不支持，请与空间商联系修改php.ini部分参数"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">MIME类型</label>
+                <div class="layui-input-block ">
+                    <textarea name="upload[video_mime]" placeholder="MIME类型 可验证文件是否格式匹配 防止窜改文件类型" class="layui-textarea"
+                              onkeyup="this.value=this.value.replace(/[\，]/g,',');" onpaste="this.value=this.value.replace(/[\，]/g,',')">{$upload.video_mime|default=''}</textarea>
+                    <p class="cl-999 f12">MIME类型 可验证文件是否格式匹配 防止窜改文件类型 留空则不验证</p>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="layui-elem-field pr15">
+        <legend class="f14 fn">音频上传</legend>
+        <div class="pt10">
+            <div class="layui-form-item">
+                <label class="layui-form-label">音频类型</label>
+                <div class="layui-input-block ">
+                    <div class="flex">
+                        <input type="text" name="upload[audio_ext]" lay-verify="required" value="{$upload.audio_ext|default='mp3,ogg,wav'}" placeholder="音频文件类型,多个之间以逗号隔开"
+                               class="layui-input cell vjs-ext"  onkeyup="this.value=this.value.replace(/[\，]/g,',');" onpaste="this.value=this.value.replace(/[\，]/g,',')"/>
+                        <div class="ml5 flex">
+                            <label class="lh38 mlr5">大小</label>
+                            <input type="text" name="upload[audio_size]" value="{$upload.audio_size|default='4'}" vtype="unsignedint" placeholder="上传音频最大限制" class="layui-input w50"/>
+                            <label class="lh38 ml5">MB </label>
+                            <div class="flex-c ml5">
+                                <i class="layui-icon layui-icon-tips" lay-tips="附件上传大小限制，如果空间不支持，请与空间商联系修改php.ini部分参数"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">MIME类型</label>
+                <div class="layui-input-block ">
+                    <textarea name="upload[audio_mime]" placeholder="MIME类型 可验证文件是否格式匹配 防止窜改文件类型" class="layui-textarea"
+                              onkeyup="this.value=this.value.replace(/[\，]/g,',');" onpaste="this.value=this.value.replace(/[\，]/g,',')">{$upload.audio_mime|default=''}</textarea>
+                    <p class="cl-999 f12">MIME类型 可验证文件是否格式匹配 防止窜改文件类型 留空则不验证</p>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="layui-elem-field pr15">
+        <legend class="f14 fn">其他附件</legend>
+        <div class="pt10">
+            <div class="layui-form-item">
+                <label class="layui-form-label">附件类型</label>
+                <div class="layui-input-block ">
+                    <div class="flex">
+                        <input type="text" name="upload[other_ext]" lay-verify="required" value="{$upload.other_ext|default='zip,gz,rar,iso,doc,xls,ppt,wps'}" placeholder="文件类型,多个之间以逗号隔开"
+                               class="layui-input cell vjs-ext"  onkeyup="this.value=this.value.replace(/[\，]/g,',');" onpaste="this.value=this.value.replace(/[\，]/g,',')"/>
+                        <div class="ml5 flex">
+                            <label class="lh38 mlr5">大小</label>
+                            <input type="text" name="upload[other_size]" value="{$upload.other_size|default='6'}" vtype="unsignedint" placeholder="上传最大限制" class="layui-input w50"/>
+                            <label class="lh38 ml5">MB </label>
+                            <div class="flex-c ml5">
+                                <i class="layui-icon layui-icon-tips" lay-tips="附件上传大小限制，如果空间不支持，请与空间商联系修改php.ini部分参数"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">MIME类型</label>
+                <div class="layui-input-block ">
+                    <textarea name="upload[other_mime]" placeholder="MIME类型 可验证文件是否格式匹配 防止窜改文件类型" class="layui-textarea"
+                              onkeyup="this.value=this.value.replace(/[\，]/g,',');" onpaste="this.value=this.value.replace(/[\，]/g,',')">{$upload.other_mime|default=''}</textarea>
+                    <p class="cl-999 f12">MIME类型 可验证文件是否格式匹配 防止窜改文件类型 留空则不验证</p>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="layui-form-item mt30">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+        </div>
+    </div>
+</form>
+<script>
+    (function () {
+        var $view = $('.js-view-attachment-config');
+
+        if (!window.mimeList) {
+            $.getScript('/static/mime.js?v=2');
+        }
+
+        $('.vjs-ext', $view).on('blur', function () {
+            var arry = $(this).val().trim().split(','), $this = $(this),
+                $p = $this.closest('.layui-elem-field'),
+                name = $this.attr('name');
+
+            var fileMime = [], fileExt = [];
+            $.each(arry, function (index, ext) {
+                ext = $.trim(ext).toLowerCase();
+                if (ext && fileExt.indexOf(ext) < 0) {
+                    fileExt.push(ext);
+                    if (window.mimeList[ext]) {
+                        fileMime.push(window.mimeList[ext]);
+                    }
+                }
+            });
+
+            $this.val(fileExt.join(','));
+            fileMime = fileMime.join(',').split(',');
+            fileMime = $.grep(fileMime, function (value, index) {
+
+                if (name == 'upload[video_ext]' && value == 'audio/ogg') {
+                    return false;
+                } else if (name == 'upload[audio_ext]' && value == 'video/ogg') {
+                    return false;
+                }
+                return fileMime.indexOf(value) === index;
+            });
+            $('textarea', $p).val(fileMime.join(','));
+
+        });
+    })();
+</script>

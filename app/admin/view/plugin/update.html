@@ -1,0 +1,37 @@
+<div class="layui-update-body p20">
+    <div>当前插件已有新版本是否立即在线更新？</div>
+    <div class="mt20 text-right">
+        <a class="layui-btn layui-btn-primary" target="_blank" href="http://www.rrzcms.com/Admin/Plugins/plugininfo/code/{$code}.html">查看详情</a>
+        <a class="layui-btn layui-btn-normal goInstall">立即更新</a>
+    </div>
+</div>
+<script>
+$(function(){
+    $('.layui-update-body .goInstall').on('click', function () {
+        let pcode = "{$code}";
+        layer.closeAll();
+        $.post('{:U("Plugin/store_install")}', {code: pcode,isup:1}, function (rs) {
+            if (rs.code == 0) {
+                if (rs.data['msgtype']=='confirm') {
+                    $.confirm(rs.msg, {
+                        title: "温馨提示",
+                        btn: ['前往购买', '前往绑定', '忽略'],
+                        yes: function (layero, index) {
+                            window.open("http://www.rrzcms.com/Plugins/plugininfo/code/" + pcode + ".html");
+                        },
+                        cancel: function (layero, index) {
+                            window.open("http://www.rrzcms.com/Main/index.html?menu=order&uri=%2FAdmin%2FOrder%2Fplugin");
+                        }
+                    });
+                } else {
+                    $.showMsg(false, rs.msg);
+                }
+            }
+            else {
+                $.showMsg(true,rs.msg);
+                $.openpage('{:U("Plugin/index")}');
+            }
+        }, 'json');
+    });
+});
+</script>

@@ -1,0 +1,96 @@
+<style>
+
+</style>
+<div class="user-centre">
+
+    {include file="user/user_header" /}
+
+    <div class="rrz-user">
+        <div class="container">
+            <div class="layui-row plr15 ptb20">
+
+                {include file="user/user_left" /}
+
+                <div class="layui-col-xs8 rrz-user-right rrz-user-index">
+
+                    <div class="user-header">
+                        <div class="user-info">
+                            <div class="user-info-top flex">
+                                <div class="avatar">
+                                    <a id="upAvatar" href="javascript:void(0);" lay-data="{ url: '{:U('/upload/index')}?type=images' }" lay-upload>
+                                        <img id="head_pic_a" style="width: 100%;" src="{$rrz.user.head_pic}" lay-upsrc>
+                                        <span title="编辑头像" class="el-icon-edit-outline layui-icon layui-icon-set-fill"></span>
+                                    </a>
+                                </div>
+                                <div class="user-info-m cell tl">
+                                    <h1 class="f18">{$rrz.user.name}</h1>
+                                    <h1 class="f14">{$rrz.user.nickname}</h1>
+                                </div>
+                            </div>
+
+                            <div class="user-info-bottom flex flex-al-c pt15">
+                                {if $rrz.isContribute}
+                                <a href="{:U('/user/articles')}" class="user-info-item">
+                                    <div>{$rrz.count_articles}</div>
+                                    <div>投稿</div>
+                                </a>
+                                {/if}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="layui-show-xs-block" style="display: none;">
+                        <div class="ptb15 plr10 rrz-row">
+
+                            <div class="item-list bg-w rrz-shadow">
+
+                                <a href="{:U('/user/info')}" class="item plr15 block">
+                                    <div class="flex ptb15">
+                                        <div>个人信息</div>
+                                        <div class="cell"></div>
+                                        <div class="item-r"><i class="layui-icon layui-icon-right"></i></div>
+                                    </div>
+                                    <hr class="m0">
+                                </a>
+                                {if $rrz.isContribute}
+                                <a href="{:U('/user/articles')}" class="item plr15 block">
+                                    <div class="flex ptb15">
+                                        <div>投稿中心</div>
+                                        <div class="cell"></div>
+                                        <div class="item-r"><i class="layui-icon layui-icon-right"></i></div>
+                                    </div>
+                                    <hr class="m0">
+                                </a>
+                                {/if}
+
+                            </div>
+
+                        </div>
+
+                        <div class="plr10 mb10">
+                            <a href="{:U('/user/logout')}" class="layui-btn layui-btn-normal layui-btn-fluid g-background">退出登录</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {include file="user/user_footer" /}
+
+</div>
+<script>
+    (function () {
+        $('#upAvatar').data('callback',function (res) {
+            if (res && res.url) {
+                $.post('{:U("/user/upAvatar")}', { url: res.url },function (rs) {
+                    rs && rs.msg && $.showMsg(rs.code, rs.msg);
+                },'json');
+            }
+        });
+    })();
+</script>

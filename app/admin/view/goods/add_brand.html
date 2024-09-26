@@ -1,0 +1,38 @@
+<form class="layui-form p15" method="post" action="{:U('Goods/addBrand')}?id={$row.id??''}">
+    <table lay-th-vtop>
+        <tr>
+            <th width="70">品牌名称<em>*</em></th>
+            <td>
+                <input name="title" value="{$row.title??''}" vtype="required" placeholder="请输入品牌名称" autocomplete="off" class="layui-input" maxlength="50"/>
+            </td>
+        </tr>
+        <tr>
+            <th>品牌logo</th>
+            <td>
+                {imgspace name="logo" value="$row.logo|default=''" title="品牌logo" /}
+            </td>
+        </tr>
+        <tr>
+            <th>品牌地址</th>
+            <td>
+                <input name="url" value="{$row.url??''}" placeholder="请输入品牌地址 http://" autocomplete="off" class="layui-input" maxlength="100" size="30"/>
+            </td>
+        </tr>
+        <tr>
+            <th>备注</th>
+            <td>
+                <textarea name="desc" placeholder="品牌备注" rows="5" class="layui-textarea">{$row.desc??''}</textarea>
+            </td>
+        </tr>
+        <tr>
+            <th>排序</th>
+            <td>
+                <input name="sort" value="{$row.sort??'100'}" vtype="required&&unsigned"  placeholder="排序" autocomplete="off" class="layui-input" maxlength="4" size="30"/>
+                <p class="cl-999 f12 mt10">值越小越靠前</p>
+            </td>
+        </tr>
+    </table>
+    <div class="ptb20 tc">
+        <button type="submit" class="layui-btn layui-btn-normal w100" lay-submit>确认提交</button>
+    </div>
+</form>

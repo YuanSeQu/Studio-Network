@@ -1,0 +1,88 @@
+<script>
+    (function () {
+        var $view = $('.' + '{$grid_class}');
+        $('input:checkbox', $view).prop('checked', true);
+        $('.layui-table tbody tr', $view).addClass('selected');
+
+        var $export = $('.js-backup', $view), tables;
+        $export.click(function () {
+            var $tr = $('tr.selected', $view);
+            if ($export.is('.disabled')) return false;
+            if (!$tr.length) {
+                $.showMsg(false, '请选中要备份的数据表');
+                return false;
+            }
+            var names = [];
+            $tr.each(function () {
+                names.push($(this).data('id'));
+            });
+
+            $export.addClass("disabled").html("正在发送备份请求...");
+
+            $.post('{:U("System/doBackup")}', { tables: names }, function (res) {
+                if (res.code) {
+                    tables = res.data.tables;
+                    layer.msg('正在备份表(<font id="upgrade_backup_table">' + res.data.tab.table + '</font>)……<font id="upgrade_backup_speed">0.01</font>%', {
+                        icon: 1,
+                        time: 3600000, //1小时后后自动关闭
+                        shade: [0.2] //0.1透明度的白色背景
+                    });
+                    $export.html(res.msg + "开始备份，请不要关闭本页面！");
+                    backup(res.data.tab);
+                    window.onbeforeunload = function () {
+                        return "正在备份数据库，请不要关闭！"
+                    }
+                } else {
+                    layer.alert(res.msg, { icon: 2, title: false });
+                    $export.removeClass("disabled");
+                    $export.html("数据备份");
+                }
+            }, 'json');
+            return false;
+        });
+
+        function backup(tab, status) {
+            status && showmsg(tab.id, '开始备份……(0%)');
+            $.post('{:U("System/doBackup")}', tab, function (res) {
+                var data = res.data || {};
+                if (res.code) {
+                    if (tab.table) {
+                        showmsg(tab.id, res.msg);
+                        $('#upgrade_backup_table').html(tab.table);
+                        $('#upgrade_backup_speed').html(tab.speed);
+                        $export.html('初始化成功！正在备份表(' + tab.table + ')……' + tab.speed + '%，请不要关闭本页面！');
+                    } else {
+                        $export.html('初始化成功！开始备份……，请不要关闭本页面！');
+                    }
+                    if (!$.isPlainObject(data.tab)) {
+                        layer.msg('备份完成……100%，请不要关闭本页面！', {
+                            icon: 1,
+                            time: 2000, //1小时后后自动关闭
+                            shade: [0.2] //0.1透明度的白色背景
+                        });
+                        $export.removeClass('disabled');
+                        $export.html('备份完成……100%，点击重新备份');
+                        setTimeout(function () {
+                            layer.closeAll();
+                            layer.alert('备份成功！', { icon: 6, title: false });
+                        }, 1000);
+                        window.onbeforeunload = function () {
+                            return null
+                        }
+                        return;
+                    }
+                    backup(data.tab, tab.id != data.tab.id);
+                } else {
+                    layer.closeAll();
+                    $export.removeClass('disabled');
+                    $export.html('数据备份');
+                }
+            }, 'json');
+        }
+
+        function showmsg(id, msg) {
+            var tr = $('tr[data-id="' + tables[id] + '"]', $view);
+            $('td[field="备份状态"]', tr).html('<div class="padding">' + msg + '</div>');
+        }
+    })();
+</script>

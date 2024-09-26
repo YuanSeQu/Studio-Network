@@ -1,0 +1,54 @@
+<style>
+    body { background: #f7f7f7; }
+</style>
+
+<div class="login">
+    <div class="box">
+        <a class="logo" href="{rrz:env name='rrz.cmsurl' /}">
+            <img src="{rrz:env name='website.logo' /}"/>
+        </a>
+        <h1 class="title">{:__('账号登录')}</h1>
+        <form class="layui-form" method="post" action="{:U('/user/login')}">
+            <div class="layui-form-item">
+                <input class="layui-input" type="text" name="user_name" vtype="required" vtips="{:__('用户名不能为空！')}" autocomplete="off" placeholder="{:__('用户名')}" autofocus/>
+            </div>
+            <div class="layui-form-item">
+                <input class="layui-input" type="password" name="password" vtype="required" vtips="{:__('密码不能为空！')}" autocomplete="off" placeholder="{:__('密码')}"/>
+            </div>
+            {if $rrz.is_verify}
+            <div class="layui-form-item pr">
+                <input class="layui-input" type="text" name="vertify" vtype="required" vtips="{:__('验证码不能为空！')}" autocomplete="off" value="" placeholder="{:__('验证码')}"/>
+                <img class="pa js-verify" src="{:U('/user/verify')}" style="right: 3px;top: 3px;height: 36px;">
+            </div>
+            {/if}
+            <div class="tc mt20">
+                <button type="submit" class="layui-btn layui-btn-normal layui-btn-lg layui-btn-fluid g-background">{:__('登录')}</button>
+            </div>
+            <div class="text-right mt10 cl-999">
+                {if $rrz.is_reg}
+                <a href="{:U('/user/reg')}" class="cl-999">{:__('注册')}</a> &nbsp;|&nbsp;
+                {/if}
+                <a href="javascript:;" class="cl-999 js-wjmima">{:__('忘记密码?')}</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var $verify = $('.js-verify');
+        function refshverify() {
+            $verify.attr('src', '{:U("/user/verify")}?v=' + Math.floor(Math.random() * 100));
+        }
+        $verify.on('click', refshverify);
+
+        $('.js-wjmima').click(function () {
+            layer.alert('{:__("请联系网站管理员！")}', { title: '{:__("提示")}' });
+        });
+
+        $('.layui-form').data('callback', function (rs) {
+            rs.code == 0 && refshverify();
+        });
+
+    });
+</script>

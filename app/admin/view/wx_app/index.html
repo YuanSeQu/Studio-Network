@@ -1,0 +1,182 @@
+<div class="layui-card vjs-view-wxAppH5">
+    <div class="layui-card-header">企业认证小程序</div>
+    <div class="layui-card-body">
+        <div class="layui-tab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">生成小程序</li>
+                <li><a href="http://www.rrzcms.com/Admin/News/info/id/18.html" target="_blank">使用指南</a></li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <blockquote class="layui-elem-quote cl-r">
+                        1、仅限商业授权域名使用，<a class="cl-38f" target="_blank" href="http://www.rrzcms.com/Admin/Index/package.html">购买授权</a>。<br/>
+                        2、小程序必须是企业认证。<br/>
+                        3、网站域名必须支持https访问。<br/>
+                        4、每次修改小程序配置信息，都要操作一遍小程序生成的全部流程。<br/>
+                        5、如需要可视化小程序，请点击“<a class="cl-38f" target="_blank" href="http://jdtong.kbstore.cn/">前往注册</a>”。<br/>
+                    </blockquote>
+                    <form class="layui-form" method="post" action="{:U('WxApp/index')}">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend class="f16">联系方式</legend>
+                        </fieldset>
+                        <table lay-th-vtop>
+                            <tr>
+                                <th width="160"><em>*</em> 姓名</th>
+                                <td width="450">
+                                    <input type="text" name="contact" value="{$wxAppH5.contact|default=''}" maxlength="18" placeholder="姓名" lay-verify="required" class="layui-input"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><em>*</em> E-mail邮箱</th>
+                                <td>
+                                    <input type="text" name="email" value="{$wxAppH5.email|default=''}" maxlength="45" placeholder="邮箱" lay-verify="required|email" class="layui-input"/>
+                                    <p class="cl-999 f12">第一时间收到小程序审核结果通知</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><em>*</em> 手机号码</th>
+                                <td>
+                                    <input type="text" name="mobile" value="{$wxAppH5.mobile|default=''}" maxlength="15" placeholder="手机号码" lay-verify="required|phone" class="layui-input"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <fieldset class="mt20 layui-elem-field layui-field-title">
+                            <legend class="f16">参数配置</legend>
+                        </fieldset>
+                        <table lay-th-vtop>
+                            <tr>
+                                <th width="160"><em>*</em> AppID(小程序ID)</th>
+                                <td width="450">
+                                    <input type="text" name="appid" value="{$wxAppH5.appid|default=''}" maxlength="50" placeholder="AppID(小程序ID)" lay-verify="required" class="layui-input"/>
+                                    <p class="cl-999 f12">在 微信公众平台->设置->开发设置中查看</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><em>*</em> AppSecret(小程序密钥)</th>
+                                <td>
+                                    <input type="text" name="appsecret" value="{$wxAppH5.appsecret|default=''}" maxlength="200" placeholder="AppSecret(小程序密钥)" lay-verify="required" class="layui-input"/>
+                                    <p class="cl-999 f12">在 微信公众平台->设置->开发设置中查看</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><em>*</em> 网站域名(业务域名)</th>
+                                <td>
+                                    <div class="flex">
+                                        <div class="layui-inline w120 mr5">
+                                            <select><option>https://</option></select>
+                                        </div>
+                                        <input type="text" name="domain" value="{$wxAppH5.domain|default=''}" maxlength="45" placeholder="网站域名（业务域名）" lay-verify="required" class="layui-input"/>
+                                    </div>
+                                    <p class="cl-999 f12">小程序业务域名必须与这里的网站域名保持一致！</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><em>*</em> 分享导航标题</th>
+                                <td>
+                                    <input type="text" name="sharetitle" value="{$wxAppH5.sharetitle|default=''}" maxlength="90" placeholder="分享导航标题" lay-verify="required" class="layui-input"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><em>*</em> 小程序描述</th>
+                                <td>
+                                    <textarea class="layui-textarea" rows="4" name="remark" maxlength="300" placeholder="描述该小程序的简单介绍，有利于快速通过审核">{$wxAppH5.remark|default=''}</textarea>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="pl50 mt20 pb20">
+                            <button class="layui-btn layui-btn-normal {$wxAppH5.state==3?'layui-btn-disabled':''}" lay-submit>1、生成小程序</button>&nbsp;&nbsp;→
+                            <a class="layui-btn layui-btn-normal vjs-btn {$wxAppH5.state==2?'':'layui-btn-disabled'}" href="{:U('WxApp/submitAudit')}">2、提交审核</a>&nbsp;&nbsp;→
+                            <a class="layui-btn layui-btn-normal vjs-btn {$wxAppH5.state==3||$wxAppH5.state==-3?'':'layui-btn-disabled'}" href="{:U('WxApp/getAuditStatus')}">3、查看进度</a>&nbsp;&nbsp;→
+                            <a class="layui-btn layui-btn-normal vjs-btn {$wxAppH5.state==4?'':'layui-btn-disabled'}" href="{:U('WxApp/release')}">4、发布小程序</a>&nbsp;&nbsp;→
+                            <a class="layui-btn layui-btn-normal vjs-btn-webViewDomain {$wxAppH5.state==5?'':'layui-btn-disabled'}" href="{:U('WxApp/webViewDomain')}">5、配置业务域名</a>&nbsp;&nbsp;→
+                            <a class="layui-btn layui-btn-normal vjs-btn {$wxAppH5.state==5?'':'layui-btn-disabled'}" href="{:U('WxApp/getQrcode')}">6、下载小程序码</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        var $view = $('.vjs-view-wxAppH5'),
+            layerIndex = 0;
+        $('form.layui-form', $view).data('callback', function (rs) {
+            if (rs.code && rs.url) {
+                layerIndex = layer.open({
+                    title: false,
+                    type: 2,
+                    content: rs.url, //这里content是一个普通的String
+                    area: ['80%', '90%'],
+                });
+                return false;
+            }
+        });
+
+        $('a.vjs-btn',$view).click(function () {
+            if ($(this).is('.layui-btn-disabled')) {
+                return false;
+            }
+            $(this).ajax(function (rs) {
+                if (rs.code == 'auth') {
+                    var callback = $('form.layui-form', $view).data('callback');
+                    layer.alert(rs.msg, {
+                        icon: 5,
+                        yes: function () {
+                            layer.closeAll();
+                            callback({
+                                code: 1,
+                                url: rs.data,
+                            });
+                        }
+                    });
+                    return false;
+                }
+                if (rs.msg) {
+                    layer.alert(rs.msg, {
+                        icon: rs.code ? 6 : 5,
+                        yes: function () {
+                            layer.closeAll();
+                            rs.url === true && $.openpage('{:U("WxApp/index")}');
+                        }
+                    });
+                }
+                if (rs.data && rs.data.url) {
+                    layer.open({
+                        title: '小程序二维码',
+                        type: 1,
+                        skin: 'layui-layer-demo', //样式类名
+                        closeBtn: 1, //不显示关闭按钮
+                        anim: 2,
+                        shadeClose: false, //开启遮罩关闭
+                        content: '<a title="点击下载二维码" href="' + rs.data.url + '" download><img src="' + rs.data.url + '" width="230" height="230"/></a>'
+                    });
+                }
+                return false;
+            });
+            return false;
+        });
+        $('a.vjs-btn-webViewDomain',$view).click(function () {
+            if ($(this).is('.layui-btn-disabled')) {
+                return false;
+            }
+            var url = $(this).attr('href');
+            layer.open({
+                type: 2,
+                title: '配置业务域名',
+                fixed: true, //不固定
+                shadeClose: false,
+                shade: 0.3,
+                maxmin: true, //开启最大化最小化按钮
+                area: ['80%', '90%'],
+                content: url
+            });
+            return false;
+        });
+
+        window.wxAppH5AuthCallback = function () {
+            layerIndex && layer.close(layerIndex);
+            $.openpage('{:U("WxApp/index")}');
+        };
+    })();
+</script>

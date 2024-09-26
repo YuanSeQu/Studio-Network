@@ -1,0 +1,41 @@
+<div class="js-view-webcache">
+    <form class="layui-form ptb15 pr20" method="post" action="{:U('Site/cache')}">
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户端缓存</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="browser" {$webcache.browser?'checked':''} lay-skin="switch" lay-text="开启|关闭" value="1" unvalue="0"/>
+                <p class="f12 mt5">同一用户访问同一页面30分钟内只会产生一次请求<br/>减少不必要的流量，提高站点性能。</p>
+                <!--<p class="f12 mt5">注：若客户端禁用浏览器缓存则该功能失效。</p>-->
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">静态页缓存</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="html" {$webcache.html?'checked':''} lay-skin="switch" lay-text="开启|关闭" value="1" unvalue="0"/>
+                <p class="f12 mt5">生成页面静态缓存，提高访问速率。</p>
+            </div>
+        </div>
+        <div class="layui-form-item hide">
+            <label class="layui-form-label">数据缓存</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="data" {$webcache.data?'checked':''} lay-skin="switch" lay-text="开启|关闭" value="1" unvalue="0"/>
+                <p class="f12 mt5">减少数据库查询次数，提高站点性能。</p>
+            </div>
+        </div>
+        <div class="layui-form-item text-center mt30">
+            <button type="submit" class="layui-btn layui-btn-normal w100" lay-submit>保存</button>
+        </div>
+    </form>
+</div>
+<script>
+    (function () {
+        var $view = $('.js-view-webcache');
+        $('.layui-form', $view).data('callback', function (res) {
+            if (res.data) {
+                var $switch = $('[lay-filter="js-view-switch-map"]');
+                $('[name="webcache.switch"]',$switch).prop('checked', res.data['switch'] ? true : false);
+                layui.form.render('checkbox', 'js-view-switch-map');
+            }
+        });
+    })();
+</script>

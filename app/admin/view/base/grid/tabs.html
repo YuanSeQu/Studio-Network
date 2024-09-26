@@ -1,0 +1,17 @@
+{if condition="$tabs"}
+<div class="layui-card-header {:count($tabs)>1?'layui-tab layui-tab-brief':''}">
+    {if count($tabs)>1 }
+    <ul class="layui-tab-title">
+        {foreach name="tabs" item="item" key="key" }
+        {if condition="is_numeric($key)&&is_array($item)" }
+        <li class="{:isset($item['class'])&&$item['class']=='current'?'layui-this':$item['class']??''}" target="{$item.target??'page'}" href="{$item.url|default='javascript:;'}">{$item.name|raw}</li>
+        {elseif is_string($item)}
+        {$item|raw}
+        {/if}
+        {/foreach}
+    </ul>
+    {else /}
+    {$tabs[0]['name']|raw}
+    {/if}
+</div>
+{/if}

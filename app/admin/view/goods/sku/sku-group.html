@@ -1,0 +1,425 @@
+<style>
+    .main-whiteBox { background-color: #fff; border: solid 1px #e7e7e7; }
+    .sku-group .group-title { position: relative; padding: 7px 10px; margin: 0; background-color: #f8f8f8; }
+    .sku-value, .sku-item { display: inline-block; background: #f8f8f8; border: 1px solid #bbb; border-radius: 2px; padding: 2px 10px; position: relative; cursor: pointer; }
+    .sku-item { background: #fff; }
+    .sku-value { padding: 0; margin: 8px 12px 0 0; line-height:0; }
+    .sku-list .sku-value:nth-child(4n) { margin-right: 0; }
+    .sku-value .text { display: inline-block; font-size: 12px; height: 24px; line-height: 24px; width: 80px; text-align: center; padding: 0px 5px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+    .sku-group .sku-add { margin: 10px 0 0 5px; color: #38f; text-decoration: none; display: inline-block; vertical-align: top; font-size: 12px; cursor: pointer; }
+    .sku-group .close-modal {display:none;}
+    .sku-group .group-title:hover .close-modal, .sku-group .sku-value:hover .close-modal { display: block; }
+
+    .select-popup { border: 1px solid #e7e7e7; position: relative; outline: none; overflow-y: auto; background-color: #fff; max-height: 224px; text-align: left; }
+    .select-popup .select-option, .select-popup .select-empty { background-color: #fff; display: block; outline: none; padding: 5px 10px; text-overflow: ellipsis; overflow: hidden; white-space: normal; font-size: 12px; line-height: 18px; -webkit-user-select: none; user-select: none; cursor: default; }
+    .select-popup .select-empty { color: #999; }
+    .select-popup .select-option:hover, .select-popup .select-option.current { background-color: #38f; border-color: #38f; color: #fff; }
+    .select-popup .select-option.active { color: #38f; }
+    .select-popup .select-option.active:hover, .select-popup .select-option.current.active { color: #fff; }
+</style>
+<div class="main-whiteBox p5">
+    {if isset($row['skus'])}
+    {foreach name="row['skus']" item="item"}
+    <div class="sku-group p5">
+        <div class="group-title flex">
+            <i class="close-modal">×</i>
+            <div>规格名：
+                <div class="sku-item" data-id="{$item.id}" data-name="{$item.name}">
+                    <span class="text">{$item.name}</span>
+                </div>
+            </div>
+            <div class="flex-1"></div>
+        </div>
+        <div class="group-container flex p10">
+            <div class="pt10">规格值：</div>
+            <div class="sku-list flex-1">
+                {foreach name="item['values']" item="sku"}
+                <div class="sku-value" data-id="{$sku.id}" data-name="{$sku.value}">
+                    <span class="text">{$sku.value}</span>
+                    <i class="close-modal">×</i>
+                </div>
+                {/foreach}
+                <span class="sku-add">添加规格值</span>
+            </div>
+        </div>
+    </div>
+    {/foreach}
+    {/if}
+    <div class="sku-group p5">
+        <div class="group-title">
+            <button class="layui-btn layui-btn-primary layui-btn-sm js-add-sku {:count($row['skus']??[])>=3?'disabled':''}" type="button">添加规格项目</button>
+            <span class="f12">最多支持 3 组规格</span>
+        </div>
+    </div>
+</div>
+<script type="text/template" class="jstpl-sku-group">
+    <div class="group-title flex">
+        <i class="close-modal">×</i>
+        <div>规格名：<div class="sku-item"><span class="text">&nbsp;</span></div></div>
+        <div class="flex-1"></div>
+    </div>
+    <div class="group-container flex p10">
+        <div class="pt10">规格值：</div>
+        <div class="sku-list flex-1">
+            <!--<div class="sku-value"><span class="text"></span><i class="close-modal">×</i></div>-->
+            <span class="sku-add">添加规格值</span>
+        </div>
+    </div>
+</script>
+<script type="text/template" class="jstpl-sku-select">
+    <div class="tc p20 w300">
+        <div class="pt5 pb5"><input type="text" class="layui-input layui-input-sm" maxlength="16" /></div>
+        <div class="h230">
+            <div class="select-popup"><span class="select-empty">没有找到匹配项</span></div>
+        </div>
+    </div>
+</script>
+<script type="text/template" class="jstpl-sku-stock">
+    <table class="table-sku-stock">
+        <thead>
+            <tr>{thead}<th class="th-price"><em>*</em>价格（元）</th><th></th></tr>
+        </thead>
+        <tbody>{tbody}</tbody>
+        <tfoot>
+            <tr>
+                <td class="batch-opts" colspan="{colspan}">
+                    <span>批量设置：</span>
+                    <span>
+                        <a class="cl-38f" href="javascript:;">价格</a>
+                        <input type="text" maxlength="8" vtype="unsigned" class="layui-input layui-input-sm pl-sku-price w80 ml10"/>
+                    </span>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</script>
+<script>
+    (function () {
+
+        var $view = $('.js-view-addGoods'),
+            $pform = $('.js-pform', $view),
+            sku_desc = JSON.parse('{:$row.sku_desc??""}' || '{}') || {};
+
+        var combine = function (skustr) {
+            var skus = JSON.parse(skustr).reverse(), r = [];
+            (function f(list, len) {
+                if (len == 0) return r.push(list);
+                var item = skus[len - 1];
+                for (var i = 0, v; v = item['values'][i++];) {
+                    v.name = item.name;
+                    v.pid = item.id;
+                    f(list.concat(v), len - 1);
+                }
+            })([], skus.length);
+            return r;
+        }
+        var createTable = function (skustr) {
+            var skus = JSON.parse(skustr) || [], list = combine(skustr);
+            //合并单元格  
+            var row = [], thead = '', rowspan = list.length;
+            for (var n = 0, sku; sku = skus[n]; n++) {
+                row[n] = parseInt(rowspan / sku.values.length);
+                rowspan = row[n];
+                thead += '<th>' + sku.name + '</th>';
+            }
+            //table tr td  
+            var tbody = '', len = list[0].length;
+            for (var i = 0, item; item = list[i]; i++) {
+                var td = tr = '', item = list[i], sku_name = [], uid = [];
+                //JSON.stringify(item);
+                for (var j = 0; j < len; j++) {
+                    if (i % row[j] == 0 && row[j] > 1) {
+                        td += '<td name="' + item[j].name + '" rowspan="' + row[j] + '">' + item[j].value + '</td>';
+                    } else if (row[j] == 1) {
+                        td += '<td name="' + item[j].name + '">' + item[j].value + '</td>';
+                    }
+                    sku_name.push(item[j].value);
+                    uid.push(item[j].id);
+                }
+                sku_name = sku_name.join(',');
+                uid = uid.join('_');
+                //console.log(sku_name);
+                //console.log(JSON.stringify(list[i]));
+                tr = '<tr>' + td +
+                    '<td>\
+                        <input type="hidden" name="skus['+ uid + '][sku_id]" value="{sku_id}"/>\
+                        <input type="hidden" name="skus['+ uid + '][sku_name]" value="' + sku_name + '"/>\
+                        <input type="hidden" name="skus['+ uid + '][sku_desc]" value=\'' + JSON.stringify(list[i]) + '\' />\
+                        <input type="text" class="w80 sku-price layui-input layui-input-sm" maxlength="8" vtype="unsigned" name="skus['+ uid + '][price]" value="{price}">\
+                    </td><td></td>\
+                    </tr>';
+                tbody += tr.substitute($.extend({ sku_id: 'newId', price: '' }, sku_desc[sku_name] || {}));
+            }
+            return $('.jstpl-sku-stock', $pform).html().substitute({ thead: thead, tbody: tbody, colspan: skus.length + 2 });
+        }
+        var resets = function () {
+            var skus = [], sku_name = [];
+            $('.sku-group', $pform).each(function () {
+                var $group = $(this), $item = $('.sku-item', $group);
+                if ($('.sku-value', $group).length <= 0) return true;
+                var sku = {
+                    id: $item.data('id'),
+                    name: $item.data('name'),
+                    img: $group.data('showimg') || false,
+                    values: []
+                };
+                sku_name.push(sku.name);
+                $('.sku-value', $group).each(function () {
+                    sku['values'].push({
+                        id: $(this).data('id'),
+                        value: $(this).data('name'),
+                        img: sku['img'] ? $(this).data('img') : ''
+                    });
+                });
+                skus.push(sku);
+            });
+            if (!skus.length) {
+                $('.js-sku-stock', $pform).addClass('hide');
+                $('.js-sku-stock .main-whiteBox', $pform).html('');
+                //$('.js-pprice', $pform).prop('disabled', false);
+                return;
+            }
+            skus = JSON.stringify(skus);
+            var table = createTable(skus),
+                inputs = [
+                    $('<input>', { type: 'hidden', name: 'sku_desc', value: skus, }),
+                    $('<input>', { type: 'hidden', name: 'sku_name', value: sku_name.join(','), }),
+                ];
+            $('.js-sku-stock .main-whiteBox', $pform).html(table).append(inputs);
+            $('.js-sku-stock', $pform).removeClass('hide');
+            //$('.js-pprice', $pform).prop('disabled', true);
+        }
+        window.skusReset = resets;
+        $($pform).on('input', '.pl-sku-price', function () {
+            // if (!validatorFunc(this)) return;
+            var v = $(this).val().trim();
+            $('.js-sku-stock .sku-price', $pform).val(v);
+        }).on('blur', '.pl-sku-price,.js-sku-stock .sku-price', function () {
+            var minPrice = Math.min.apply(null, $('.js-sku-stock .sku-price', $pform).map(function () {
+                return parseFloat($(this).val().trim() || 0) || 0;
+            }));
+            $('.js-pprice', $pform).val(minPrice > 0 ? minPrice : 0);
+            $pform.trigger('change');
+        });
+        skusReset();
+    })();
+</script>
+<script>
+    (function () {
+        var $view = $('.js-view-addGoods'),
+            $pform = $('.js-pform', $view),
+            specification = JSON.parse('{:json_encode($specification)}') || [], _spec = {},
+            filter = function (list, value, nots, $input) {
+                var arry = [], isEqual = false, nots = nots || [], vlen = $('.select-option', this).length,
+                    calss = $input ? 'current' : (vlen ? '' : 'active');
+                $.each(list, function (index, item) {
+                    if ($.inArray(item['name'], nots) > -1) return;
+                    if (!vlen || !value || item['name'].indexOf(value) > -1) {
+                        if (item['name'] == value) {
+                            isEqual = true;
+                            arry.unshift('<span class="select-option ' + calss + '" value="' + item.id + '">' + item.name + '</span>');
+                            return;
+                        }
+                        var _c = $input && $input.data('val') == item['name'] ? 'active' : '';
+                        arry.push('<span class="select-option ' + _c + '" value="' + item.id + '">' + item.name + '</span>');
+                    }
+                });
+                if (!isEqual && value) {
+                    if ($.inArray(value, nots) > -1) calss += ' s-exist';
+                    arry.unshift('<span class="select-option ' + calss + '" value="newId">' + value + '</span>');
+                }
+                if (arry.length == 0) arry.push('<span class="select-empty">没有找到匹配项</span>');
+                $(this).html(arry.join(''));
+            },
+            getSkuItem = function (pid, callBack) {
+                if (!pid) return false;
+                if (pid in _spec) {
+                    callBack && callBack(_spec[pid]);
+                    return _spec[pid];
+                }
+                for (var i = 0, item; item = specification[i]; i++) {
+                    if (item['id'] == pid) {
+                        _spec[pid] = item;
+                        callBack && callBack(item);
+                        return item;
+                    }
+                }
+                return false;
+            },
+            setSku = function (data, callBack) {
+                if (!data) return;
+                $.post('{:U("Goods/setSku")}', data, function (rs) {
+                    if (!rs || !rs.data) return;
+                    data = rs.data;
+                    data.pid ? getSkuItem(data.pid, function (item) {
+                        item['values'] = $.merge([{ id: data.id, name: data.name }], item['values'] || []);
+                    }) : specification.unshift(data);
+                    callBack && callBack(data);
+                }, 'json');
+            },
+            getSku = function (pid, callBack) {
+                var skuItem = getSkuItem(pid);
+                if (skuItem && pid && skuItem['values']) {
+                    callBack && callBack(pid, skuItem['values']);
+                    return;
+                }
+                $.post('{:U("Goods/getSku")}', 'pid=' + pid, function (rs) {
+                    if (!rs || !rs.data) return;
+                    var data = rs.data;
+                    pid ? skuItem['values'] = data['values'] || [] : specification = data;
+                    callBack && callBack(pid, data);
+                }, 'json');
+            },
+            skuSelect = function (vthis, type, list, nots) {
+                var $this = $(vthis), $skuGroup = $this.closest('.sku-group'), list = list || [], nots = nots || [],
+                    $text = $('.text', $this), callBack = $this.data('callBack'),
+                    cancel = function (index, layero) {
+                        if ($text.text().trim().length == 0) {
+                            type == 'item' ? $this.closest('.sku-group').remove() : $this.remove();
+                        }
+                        layer.close(index);
+                    },
+                    onInput = function ($el, $select, value) {
+                        return $el.val(value).data('val', value).on('input', function () {
+                            var v = $(this).val().trim();
+                            //$(this).val(v);//注释掉，在谷歌版本 55.0.2883.87 (64-bit)，中会导致输入法输入不了汉字。
+                            filter.call($select, list, v, nots, $el);
+                        }).on('keydown', function (e) {
+                            if (e.keyCode == 13) {
+                                $('.select-option.current', $select).trigger('click').length && $(this).off('keydown');
+                                return false;
+                            }
+                            //上：keyCode=38，下：keyCode=40，回车：keyCode=13
+                            if (e.keyCode == 38 || e.keyCode == 40) {
+                                var $current = $('.select-option.current', $select);
+                                $current = $current.length ? $current : $('.select-option:first', $select);
+                                if ($current.length && !$current.is('.current')) {
+                                    $current.addClass('current');
+                                    return false;
+                                }
+                                $current = e.keyCode == 38 ? $current.prev() : $current.next();
+                                if ($current.length) {
+                                    $current.addClass('current').siblings('.current').removeClass('current');
+                                    var offset = $current.getPosition($select), sH = $select.height(),
+                                        _stop = $select.scrollTop(), cH = $current.outerHeight();
+                                    offset.top > (sH - cH) ? $select.scrollTop(_stop + offset.top - sH + cH) : '';
+                                    offset.top < 0 ? $select.scrollTop(_stop + offset.top) : '';
+                                    $(this).val($current.text().trim());
+                                }
+                                return false;
+                            }
+                        }).focus();
+                    },
+                    onSelect = function ($el, change) {
+                        return $el.on('click', '.select-option', function (e) {
+                            e.stopPropagation();
+                            var _t = $(this).text().trim(), _v = $(this).attr('value'),
+                                _data = { id: _v, name: _t };
+                            if ($(this).is('.s-exist')) {
+                                if (!$(this).is('.active') && _t != $text.text().trim()) {
+                                    $.showMsg(false, type == 'item' ? '已经添加了相同的规格名' : '已经添加了相同的规格值');
+                                }
+                                $el.trigger('cancel');
+                                return;
+                            }
+                            change.call($el, _data);//关闭窗口
+                        });
+                    };
+                layer.open({
+                    type: 1,
+                    title: false,
+                    content: $('.jstpl-sku-select', $pform).html(),
+                    success: function (layero, index) {
+                        var $input = $('input', layero), $select = $('.select-popup', layero),
+                            value = $text.text().trim();
+                        filter.call($select, list, value, nots);
+                        onInput($input, $select, value);
+                        $select.on('cancel', function () { cancel(index, layero); });
+                        onSelect($select, function (data) {
+                            $text.text(data.name);
+                            type == 'value' && (data['pid'] = $('.sku-item', $skuGroup).data('id'));
+                            callBack && callBack.call($this, data);
+                            $this.data(data);
+                            if (data.id == 'newId') setSku(data, function (_data) {
+                                $this.data(_data);
+                                type == 'value' && window.skusReset();
+                            });
+                            else {
+                                type == 'item' ? getSku(data.id) : window.skusReset();
+                            }
+                            layer.close(index);
+                        });
+                    },
+                    cancel: cancel
+                });
+            },
+            setSkuItemCallBack = function ($el) {
+                return $('.sku-item', $el || $pform).data('callBack', function (data) {
+                    var name = $(this).data('name');
+                    if (name && name != data['name']) {
+                        var $skuGroup = $(this).closest('.sku-group');
+                        $('.sku-value', $skuGroup).remove();
+                    }
+                    if ($('.sku-group .sku-item', $pform).length == 3) {
+                        $('.js-add-sku', $pform).addClass('layui-disabled');
+                    } else {
+                        $('.js-add-sku', $pform).removeClass('layui-disabled');
+                    }
+                });
+            };
+
+        $('.js-add-sku', $pform).click(function () {
+            if ($(this).is('.disabled')) return false;
+            var $this = $(this), $p = $(this).closest('.sku-group');
+            if ($p.siblings().length >= 3) {
+                $(this).addClass('layui-disabled');
+                return false;
+            }
+            var $div = $('<div>', {
+                class: 'sku-group p5',
+                html: $('.jstpl-sku-group', $pform).html(),
+            }).insertBefore($p);
+            setSkuItemCallBack($div).trigger('click');
+            return false;
+        });
+        setSkuItemCallBack();
+
+        $pform.on('click', '.sku-group .close-modal', function () {
+            var $p = $(this).parent();
+            if ($p.is('.sku-value')) {
+                $p.remove()
+            } else {
+                var $skuGroup = $p.closest('.sku-group'), callBack = $('.sku-item', $skuGroup).data('callBack');
+                $skuGroup.remove();
+                callBack && callBack();
+            }
+            window.skusReset();
+            return false;
+        }).on('click', '.sku-group .sku-add', function () {
+            $('<div>', {
+                class: 'sku-value',
+                html: '<span class="text"></span><i class="close-modal">×</i>'
+            }).insertBefore(this).trigger('click');
+        }).on('click', '.sku-item,.sku-value', function () {
+            var $this = $(this), $skuGroup = $this.closest('.sku-group'),
+                type = $this.is('.sku-item') ? 'item' : 'value',
+                list = [], nots = [];
+            if (type == 'item') {
+                $('.sku-group .sku-item', $pform).each(function () {
+                    if (this == $this.get(0)) return;
+                    nots.push($(this).data('name'));
+                });
+                list = specification;
+            } else {
+                $this.siblings().each(function () {
+                    nots.push($(this).data('name'));
+                });
+                getSkuItem($('.sku-item', $skuGroup).data('id'), function (item) {
+                    item['values'] && (list = item['values']);
+                });
+            }
+            skuSelect(this, type, list, nots);
+        });
+
+    })();
+</script>

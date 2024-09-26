@@ -1,0 +1,74 @@
+<style>
+    .td_radio .layui-form-radio{ width: 100px; }
+</style>
+<form class="layui-form js-view-addField plr15" method="post" action="{:U('Channeltype/addField')}?id={$row.id??''}" lay-filter="addField">
+    <table width="100%" lay-th-vtop>
+        <tr>
+            <th width="80"><em>*</em>字段标题</th>
+            <td>
+                <input name="title" value="{$row.title??''}" placeholder="请输入字段标题" lay-verify="required"  class="layui-input w350"/>
+                <input type="hidden" name="channel_id" value="{$typeId}" />
+            </td>
+        </tr>
+        <tr>
+            <th><em>*</em>字段名称</th>
+            <td>
+                <input name="name" value="{$row.name??''}" placeholder="只允许字母、数字和下划线的任意组合" lay-verify="required"  class="layui-input w350" onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'');" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^0-9a-zA-Z_]/g,''));"/>
+                <span class="f12 cl-999 ml5">保持唯一性，不可与主表重复</span>
+            </td>
+        </tr>
+        <tr>
+            <th><em>*</em>数据类型</th>
+            <td class="td_radio">
+                {foreach $fieldType as $key=>$item}
+                <input type="radio" name="dtype" value="{$item.name}" title="{$item.title}" {if !$key||($row&&$row.dtype==$item.name)}checked{/if} data-isfilter="{$item.is_filter}"  data-isoption="{$item.is_option}" data-isdfvalue="{$item.is_dfvalue}" lay-filter="addField-dtype" />
+                {/foreach}
+            </td>
+        </tr>
+        <tr class="js-tr-dfvalue">
+            <th class="js-th-dfvalue">默认值</th>
+            <td>
+                <textarea name="dfvalue" class="layui-textarea"  style="min-height: 80px;"
+                          placeholder="如果定义字段类型为下拉框、单选项、多选项时，此处填写被选择的项目(用“|”分开，如“男|女|人妖”)。" maxlength="500">{$row.dfvalue??''}</textarea>
+                <p class="f12 cl-999">1、如果定义字段类型为下拉框、单选项、多选项时，此处填写被选择的项目(用“|”分开，如“男|女|人妖”)。<br>2、特殊符号会被过滤掉，比如：&amp;、=、?等</p>
+            </td>
+        </tr>
+        <tr class="js-tr-isfilter" style="display: none;">
+            <th style="padding-top: 10px;">应用于筛选</th>
+            <td>
+                <input type="checkbox" name="is_filter" lay-skin="switch" lay-text="开启|关闭" value="1" {$row['is_filter']?'checked':''} unvalue="0"/>
+                <span class="f12 cl-999 ml10">是否应用于列表的条件筛选中</span>
+            </td>
+        </tr>
+    </table>
+    <div class="mt15 tc">
+        <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+    </div>
+</form>
+<script>
+    (function () {
+        var $view = $('.js-view-addField');
+
+        function dtypeChange(elem) {
+            var item = $(elem).data();
+            if (elem.checked) {
+                $('.js-tr-dfvalue', $view)[item.isdfvalue == 1 ? 'show' : 'hide']();
+                $('.js-th-dfvalue', $view).html(item.isoption == 1 ? '<em>*</em>默认值' : '默认值');
+                $('.js-tr-dfvalue textarea[name="dfvalue"]', $view).attr('vtype', item.isoption == 1 ? 'required' : '').removeClass('layui-form-danger');
+                $('.js-tr-isfilter', $view)[item.isfilter == 1 ? 'show' : 'hide']();
+                if (item.isdfvalue != 1) {
+                    $('.js-tr-dfvalue textarea[name="dfvalue"]', $view).val('');
+                }
+            }
+        }
+
+        var $dtype = $('[name="dtype"]:checked', $view);
+        $dtype.length && dtypeChange($dtype.get(0));
+
+        layui.form.on('radio(addField-dtype)', function (data) {
+            var elem = data.elem,
+                item = $(elem).data();
+            dtypeChange(data.elem);
+        });
+    })();
+</script>

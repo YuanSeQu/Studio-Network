@@ -1,0 +1,120 @@
+<div class="user-centre">
+    {include file="user/user_header" /}
+
+    <div class="rrz-user">
+        <div class="container">
+            <div class="layui-row plr15 ptb20">
+
+                {include file="user/user_left" /}
+
+                <div class="layui-col-xs8 rrz-user-right rrz-user-articles">
+
+                    <div class="content">
+
+                        <div class="layui-tab layui-tab-brief">
+                            <ul class="layui-tab-title">
+                                <li class="layui-this f16 g-color g-br-color-after">投稿列表</li>
+                            </ul>
+                            <div class="layui-tab-content">
+                                <div class="articles-list">
+                                    {rrz:each list='$__DATA__.list'}
+                                    <div class="item p10 flex bg-w">
+                                        <div class="flex-c pr10">
+                                            <input type="checkbox" value="{$item.id}"/>
+                                        </div>
+                                        <div class="cell flex">
+                                            <div class="img w80 h80 flex-c">
+                                                <img src="{$item.img|default='/static/images/default.jpg'}" class="mxw mxh"/>
+                                            </div>
+                                            <div class="cell plr10 pl15">
+                                                <h4 class="f16 lc-2 title"><a href="{$item.url}" target="_blank">{$item.title}</a></h4>
+                                                <p class="mt5 cl-999 f12">
+                                                    <span class="mr10">{$item.type_name}</span>
+                                                    {$item.pubtime|date='Y-m-d H:i:s'}
+                                                </p>
+                                                <p class="cl-f44 f12 mt5">{$item.ifpub=='true'?'已发布':'未审核'}</p>
+                                            </div>
+                                        </div>
+                                        <div class="f14 flex-c">
+                                            <div>
+                                                <a href="{:U('/user/addArticle')}?id={$item.id}" class="cl-38f">编辑</a>
+                                                <br><br>
+                                                <a href="{:U('/user/delArticle')}?id={$item.id}" class="js-del cl-38f">删除</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/rrz:each}
+                                    {if $__DATA__ && $__DATA__["count"] > 0}
+                                    <div class="item p10 flex" style="border-bottom: none;">
+                                        <div class="flex-c pr10">
+                                            <input type="checkbox" class="js-all"/>
+                                        </div>
+                                        <div class="cell flex pl10">
+                                            <button class="layui-btn layui-btn-danger layui-btn-sm g-background js-delAll" type="button">批量删除</button>
+                                        </div>
+                                    </div>
+                                    {/if}
+                                </div>
+                                {if $__DATA__ && $__DATA__["max"]>1}
+                                <div class="pagination">
+                                    {rrz:page item="index,end,pre,next,pageno" size="2" style='hover' /}
+                                </div>
+                                {/if}
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {include file="user/user_footer" /}
+</div>
+<script>
+    $(function () {
+        $('.articles-list input:checkbox').change(function () {
+            if (this.checked) {
+                $(this).is('.js-all') && $('.articles-list input:checkbox').prop('checked', true);
+            } else {
+                $(this).is('.js-all') && $('.articles-list input:checkbox').prop('checked', false);
+            }
+        });
+        $('.articles-list a.js-del').click(function () {
+            var $this = $(this);
+            layer.confirm('是否删除该投稿？', {
+                title: '提示'
+            }, function (index) {
+                layer.close(index);
+                $this.ajax();
+            });
+            return false;
+        });
+        $('.articles-list button.js-delAll').click(function () {
+            var ids = [];
+            $('.articles-list input:checked').each(function () {
+                var id = $(this).val();
+                if (id && id > 0) {
+                    ids.push(id);
+                }
+            });
+            if (!ids.length) {
+                $.showMsg(false, '请选择要删除的内容！');
+                return false;
+            }
+            var vthis = this;
+            layer.confirm('确认批量彻底删除？', {
+                title: '提示'
+            }, function (index) {
+                layer.close(index);
+                $.loading.show();
+                $.get('{:U("/user/delArticle")}', { id: ids.join(',') }, function (rs) {
+                    $.loading.hide();
+                    $.callbackSuccess.call(vthis, rs);
+                }, 'json');
+            });
+            return false;
+        });
+    });
+</script>

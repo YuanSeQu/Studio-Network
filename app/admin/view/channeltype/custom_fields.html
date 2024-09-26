@@ -1,0 +1,121 @@
+<?php $isTypeImgs=false; ?>
+<table lay-th-vtop class="js-view-custom-fields w">
+    {foreach $fields as $key=>$item}
+    <tr>
+        <th width="{$thWidth}">{$item.title}</th>
+        <td>
+            {if $item.dtype=='text'}
+            <input type="text" name="{$item.name}" value="{$data[$item.name]|default=$item.dfvalue}" placeholder="请输入{$item.title}" class="layui-input w450" maxlength="200" />
+            {elseif $item.dtype=='multitext' /}
+            <textarea name="{$item.name}" class="layui-textarea" style="max-width: 700px;" placeholder="{$item.title}">{$data[$item.name]|default=$item.dfvalue}</textarea>
+            {elseif $item.dtype=='radio' /}
+            <?php $dfvalueArr = explode('|', $item['dfvalue']); ?>
+            {foreach $dfvalueArr as $k=>$option}
+            <input type="radio" name="{$item.name}" value="{$option}" title="{$option}" {if !$k||(isset($data[$item.name])&&$data[$item.name]==$option) } checked {/if}/>
+            {/foreach}
+            {elseif $item.dtype=='checkbox' /}
+            <?php $dfvalueArr = explode('|', $item['dfvalue']); ?>
+            <?php $valueArr = array_filter(explode(',', $data[$item['name']]??'')); ?>
+            {foreach $dfvalueArr as $option}
+            <div class="layui-inline mt5">
+                <input type="checkbox" name="{$item.name}[]" value="{$option}" title="{$option}" {if in_array($option,$valueArr) } checked {/if}/>
+            </div>
+            {/foreach}
+            {elseif $item.dtype=='select' /}
+            <?php $dfvalueArr = explode('|', $item['dfvalue']); ?>
+            <select name="{$item.name}">
+                {foreach $dfvalueArr as $option}
+                <option value="{$option}" {if isset($data[$item.name])&&$data[$item.name]==$option } selected {/if}>{$option}</option>
+                {/foreach}
+            </select>
+            {elseif $item.dtype=='int' /}
+            <input type="text" name="{$item.name}" value="{$data[$item.name]|default=$item.dfvalue}" vtype="digits" class="layui-input w150" maxlength="10"/>
+            {elseif $item.dtype=='float' /}
+            <input type="text" name="{$item.name}" value="{$data[$item.name]|default=$item.dfvalue}" vtype="number" class="layui-input w150" maxlength="9"/>
+            {elseif $item.dtype=='decimal' /}
+            <input type="text" name="{$item.name}" value="{$data[$item.name]|default=$item.dfvalue}" vtype="number" class="layui-input w150" maxlength="10"/>
+            {elseif $item.dtype=='html' /}
+            <div style="width: 770px;">
+            {editor id="$key?'dom_el_'.$key:'dom_el_'.$key" name="$item.name" type="ueditor" } {$data[$item.name]|default=$item.dfvalue} {/editor}
+            </div>
+            {elseif $item.dtype=='img' /}
+            <div class="w450">
+                {imgspace name="$item.name" value="$data[$item.name]??''" title="$item.title" /}
+            </div>
+            {elseif $item.dtype=='imgs' /}
+            <?php $isTypeImgs=true; $imgArr = array_filter(explode(',', $data[$item['name']]??'')); ?>
+            <div class="js-dtype-imgs" style="min-width: 700px;">
+                <div>
+                    <button class="layui-btn layui-btn-normal js-upimg" data-name="{$item.name}[]" type="button"><i class="layui-icon">&#xe67c;</i>上传图片</button>
+                    <span class="cl-888 f12">图片不得大于2M</span>
+                </div>
+                <div class="all-pics pt15 layui-border-box clearfix js-img-list">
+                    {if isset($imgArr) && $imgArr }
+                    {foreach $imgArr as $img}
+                    <div class="fl mr10 mb10 pr w100 h100 bd-ddd bd-cl-e7">
+                        <div class="flex-c w h">
+                            <img src="{$img}" class="tips-img mxh mxw">
+                        </div>
+                        <input name="{$item.name}[]" value="{$img}" type="hidden"/>
+                        <i class="close-modal">×</i>
+                    </div>
+                    {/foreach}
+                    {/if}
+                </div>
+            </div>
+            {elseif $item.dtype=='datetime' /}
+            <?php $value=$data[$item['name']]??'';$value=$value?date('Y-m-d H:i:s',$value):''; ?>
+            <input type="text" name="{$item.name}" value="{$value}" placeholder="yyyy-MM-dd HH:mm:ss" class="layui-input layui-date w350" autocomplete="off" readonly/>
+            {elseif $item.dtype=='switch' /}
+            <div style="padding-top: 6px;">
+                <input type="checkbox" name="{$item.name}" lay-skin="switch" lay-text="开启|关闭" value="1" {if $data[$item.name]??''}checked{/if} unvalue="0"/>
+            </div>
+            {elseif $item.dtype=='video' /}
+            <div class="fileStorage flex w450" data-type="video">
+                <input type="text" name="{$item.name}" value="{$data[$item.name]??''}" placeholder="{$item.title}" autocomplete="off" class="layui-input" lay-upvalue="">
+                <button class="layui-btn layui-btn-normal" type="button" lay-up=""><i class="layui-icon"></i>上传视频</button>
+            </div>
+            {elseif $item.dtype=='audio' /}
+            <div class="fileStorage flex w450" data-type="audio">
+                <input type="text" name="{$item.name}" value="{$data[$item.name]??''}" placeholder="{$item.title}" autocomplete="off" class="layui-input" lay-upvalue="">
+                <button class="layui-btn layui-btn-normal" type="button" lay-up=""><i class="layui-icon"></i>上传音频</button>
+            </div>
+            {elseif $item.dtype=='attachment' /}
+            <div class="fileStorage flex w450" data-type="other">
+                <input type="text" name="{$item.name}" value="{$data[$item.name]??''}" placeholder="{$item.title}" autocomplete="off" class="layui-input" lay-upvalue="">
+                <button class="layui-btn layui-btn-normal" type="button" lay-up=""><i class="layui-icon"></i>上传附件</button>
+            </div>
+            {/if}
+        </td>
+    </tr>
+    {/foreach}
+</table>
+{if $isTypeImgs}
+<script>
+    (function () {
+        var $view = $('.js-view-custom-fields');
+        $('.js-dtype-imgs .js-upimg', $view).click(function () {
+            var $imgs = $(this).closest('.js-dtype-imgs').find('.js-img-list'),
+                name = $(this).data('name');
+            window.ImgSpace(function (url, data) {
+                var list = data || [];
+                $.each(list, function (index, value) {
+                    $('<div>', {
+                        class: 'fl mr10 mb10 pr w100 h100 bd-ddd bd-cl-e7',
+                        html: '<div class="flex-c w h">\n' +
+                            '   <img src="' + value + '" class="tips-img mxh mxw">\n' +
+                            '  </div>\n' +
+                            '  <input name="' + name + '" value="' + value + '" type="hidden"/>\n' +
+                            '  <i class="close-modal">×</i>',
+                    }).appendTo($imgs);
+                });
+            }, true);
+            return false;
+        });
+        $('.js-dtype-imgs .js-img-list', $view).on('click','i.close-modal',function () {
+            $(this).parent().remove();
+        });
+        $('.js-dtype-imgs .js-img-list', $view).dad({ draggable: 'img' });
+    })();
+</script>
+{/if}

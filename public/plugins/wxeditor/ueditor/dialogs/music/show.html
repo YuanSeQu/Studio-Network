@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>音乐播放</title>
+    <link rel="stylesheet" href="wx.css?20220303" media="all">
+    <script type="text/javascript" src="h5Audio.js?20220303"></script>
+    <style>
+        html, body { height: 100%; }
+    </style>
+</head>
+<body>
+
+    <mpvoice id="musicId"></mpvoice>
+
+    <script>
+        (function () {
+            function getParam(name) {
+                return location.href.match(new RegExp('[?#&]' + name + '=([^?#&]+)', 'i')) ? RegExp.$1 : '';
+            }
+
+            // var widthParam = getParam('width');
+            var titleParam = decodeURIComponent(getParam('title'));
+            var srcParam = decodeURIComponent(getParam('src'));
+            var discParam = decodeURIComponent(getParam('disc'));
+            var autoParam = getParam('auto');
+            var loopParam = getParam('loop');
+
+            new h5Audio({
+                ele: document.getElementById('musicId'),
+                title: titleParam,
+                disc: discParam,
+                src: srcParam,
+                width: "100%",
+                autoplay: autoParam > 0,
+                loop: loopParam > 0,
+            });
+
+
+
+        })();
+    </script>
+
+</body>
+</html>

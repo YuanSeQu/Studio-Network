@@ -1,0 +1,92 @@
+
+<script src="/plugins/wxeditor/ueditor/ueditor.all.min.js?v=25"></script>
+<script src="/static/js/user/wxeditor.js?v={:C('config.version')}"></script>
+
+
+<div class="user-centre">
+    {include file="user/user_header" /}
+
+    <div class="rrz-user">
+        <div class="container">
+            <div class="layui-row plr15 ptb20">
+
+                {include file="user/user_left" /}
+
+                <div class="layui-col-xs8 rrz-user-right rrz-user-articles">
+
+                    <div class="content">
+
+                        <div class="layui-tab layui-tab-brief">
+                            <ul class="layui-tab-title">
+                                <li class="layui-this f16 g-color g-br-color-after">发布投稿</li>
+                            </ul>
+                            <div class="layui-tab-content">
+
+                                <form class="layui-form ptb20 auto-table-form" method="post" action="{:U('/user/saveArticle')}?id={$rrz.data.id??''}">
+
+                                    <table>
+                                        <tr class="arrow">
+                                            <th width="200"><em class="cl-r">*</em> 文章标题</th>
+                                            <td>
+                                                <input class="layui-input" type="text" name="title" value="{$rrz.data.title|default=''}" maxlength="200" vtype="required" vtips="文章标题不能为空！"
+                                                       autocomplete="off" placeholder="文章标题" size="90"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><em class="cl-r">*</em> 所属栏目</th>
+                                            <td>
+                                                <select name="node_id" vtype="required" vtips="请选择栏目！" lay-ignore>
+                                                    <option value="">请选择栏目</option>
+                                                    {foreach $rrz.nodeList as $item}
+                                                    <option value="{$item.id}" {if $item.disabled} disabled {/if}
+                                                    {if $rrz.data&&$item.id==$rrz.data.node_id} selected {/if}
+                                                    >{$item.title|raw}</option>
+                                                    {/foreach}
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr class="arrow">
+                                            <th> TAG标签 </th>
+                                            <td>
+                                                <input class="layui-input" type="text" name="tags" value="{$rrz.data.tags|default=''}" autocomplete="off" placeholder="多个标签之间以逗号隔开"
+                                                       onkeyup="this.value=this.value.replace(/[\，]/g,',');" onpaste="this.value=this.value.replace(/[\，]/g,',')"/>
+                                            </td>
+                                        </tr>
+                                        <tr class="newline">
+                                            <th class="vt"> 缩略图 </th>
+                                            <td>
+                                                <input type="hidden" name="img" lay-upvalue/>
+                                                <img class="pointer w80 h80" src="{$rrz.data.img|default='/static/images/not_upload_pic.png'}" lay-upsrc lay-data="{ url: '{:U('/upload/index')}?type=images' }" lay-upload>
+                                            </td>
+                                        </tr>
+                                        <tr class="newline">
+                                            <th class="vt"> 内容详情 </th>
+                                            <td>
+                                                <textarea id="dom_el_a0429c1" name="content" data-config='{"initialFrameHeight":"320","initialFrameWidth":"100%","imagePopup":false}'>{$rrz.data.content|default=''}</textarea>
+                                                <script type="text/javascript">(function(){ $.getEditor("dom_el_a0429c1"); })();</script>
+                                            </td>
+                                        </tr>
+                                        <tr class="btn-submit">
+                                            <td colspan="2" class="tc">
+                                                <div class="h25"></div>
+                                                <button type="submit" class="layui-btn layui-btn-normal g-background">确认提交</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    {include file="user/user_footer" /}
+</div>

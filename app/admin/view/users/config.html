@@ -1,0 +1,105 @@
+<div class="layui-card js-view-users-config">
+    <div class="layui-card-header layui-tab layui-tab-brief p0 bd-w0">
+        <ul class="layui-tab-title">
+            <li target="page" href="{:U('Users/index')}">会员列表</li>
+            <li target="page" href="{:U('Users/attribute')}">会员属性</li>
+            <li class="layui-this">功能配置</li>
+        </ul>
+    </div>
+    <div class="layui-card-body">
+        <form class="layui-form" method="post" action="{:U('Users/config')}" lay-label-w100 lay-filter="users-config">
+            <div class="layui-tab">
+                <!--<ul class="layui-tab-title">-->
+                    <!--<li class="layui-this">注册设置</li>-->
+                <!--</ul>-->
+                <blockquote class="layui-elem-quote">注册设置</blockquote>
+
+                <div class="layui-tab-content">
+
+                    <div class="layui-tab-item layui-show">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">会员中心</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" name="users[open]" lay-skin="switch" lay-text="开启|关闭" value="1" {$data.open?'checked':''} unvalue="0"/>
+                                <span class="cl-888 f12 pl10 pr t5">关闭则自动隐藏账户注册/登录的入口</span>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">开启注册</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" name="users[open_reg]" lay-skin="switch" lay-text="开启|关闭" value="1" {$data['open_reg']?'checked':''} unvalue="0"/>
+                                <span class="cl-888 f12 pl10 pr t5">关闭则自动隐藏账户注册的入口</span>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">注册验证</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <input type="radio" name="users[reg_verify]" value="0" title="不验证" {$data.reg_verify?'':'checked'}/>
+                                    <span class="cl-888 f12 pl10 pr t3">&nbsp;注册会员后，可直接登录，无需验证</span>
+                                </div>
+                                <div>
+                                    <input type="radio" name="users[reg_verify]" value="1" title="后台激活" {if ($data['reg_verify']??false)&&$data['reg_verify']==1 }checked{/if}/>
+                                    <span class="cl-888 f12 pt5 pr t3">注册会员后，需后台审核激活后才能登录</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">禁止注册用户名</label>
+                            <div class="layui-input-block">
+                                <textarea name="users[reg_notallow]" placeholder="请输入内容" class="layui-textarea w450">{$data.reg_notallow?:'www|bbs|ftp|mail|user|users|admin|administrator|rrzcms'}</textarea>
+                                <p class="mt10 cl-888 f12">前台注册时禁止注册的用户名列表，以竖线“|”分隔开</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="layui-tab">
+                <!--<ul class="layui-tab-title">-->
+                    <!--<li class="layui-this">投稿设置</li>-->
+                <!--</ul>-->
+                <blockquote class="layui-elem-quote">投稿设置</blockquote>
+                <div class="layui-tab-content">
+
+                    <div class="layui-tab-item layui-show">
+                        <div class="layui-form-item hide">
+                            <label class="layui-form-label">会员投稿</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" name="users[is_contribute]" lay-skin="switch" lay-text="开启|关闭" value="1" {$data['is_contribute']?'checked':''} unvalue="0"/>
+                                <span class="cl-888 f12 pl10 pr t5">开启后会员可以进行文章投稿</span>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">投稿自动审核</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" name="users[contribute_auto]" lay-skin="switch" lay-text="开启|关闭" value="1" {$data['contribute_auto']?'checked':''} unvalue="0"/>
+                                <span class="cl-888 f12 pl10 pr t5">开启后会员投稿将直接展示到前台文档列表</span>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">投稿栏目选择</label>
+                            <div class="layui-input-block">
+                                <select name="users[contribute_nodeids][]" class="w300 bd-e7 p10" size="15" multiple="true" lay-ignore style="height: 350px;">
+                                    {foreach $nodes as $item}
+                                    <option value="{$item.id}" {if in_array($item.id,$data.contribute_nodeids)} selected{/if}>{$item.name|raw}</option>
+                                    {/foreach}
+                                </select>
+                                <p class="mt10 cl-r f12">(按 Ctrl 可以进行多选)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="layui-form-item mt30">
+                <div class="layui-input-block">
+                    <button type="submit" class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+

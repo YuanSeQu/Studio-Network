@@ -1,0 +1,11 @@
+{
+    "name": "响应式网络工作室公司人人站模板",
+    "fileList": {
+        "article_case.html": "文章详情页 - 客户案例",
+        "node_about.html": "单页 - 关于我们",
+        "node_case.html": "文章列表页 - 客户案例",
+        "node_server.html": "单页 - 服务项目"
+    },
+    "lang": "cn",
+    "sql_version": "v1.2.7"
+}

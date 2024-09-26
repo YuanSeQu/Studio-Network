@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link rel="stylesheet" href="../../../../layui-v2.5.6/css/layui.css" media="all">
+    <script type="text/javascript" src="../internal.js"></script>
+    <style>
+        .wrapper{margin:15px auto;zoom:1;padding:0 10px;position:relative}
+        #preview{position:relative;min-width:480px;padding:0;overflow:hidden;min-height:294px;background-color:#ddd;float:left;width: 100%;}
+        #preview .previewMsg{position:absolute;top:0;margin:0;padding:0;height:294px;width:100%;background-color:#666}
+        #preview .previewMsg span{display:block;margin:133px auto 0 auto;text-align:center;font-size:18px;color:#fff}
+        #preview .video-swf{position:absolute;top:0;margin:0;padding:0;height:294px;width:100%}
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <form class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <label class="layui-form-label"><var id="lang_video_url"></var></label>
+            <div class="layui-input-block">
+                <div class="layui-col-xs9">
+                    <input type="text" id="videoUrl" autocomplete="off" class="layui-input" placeholder="mp4、webm、ogg">
+                </div>
+                <div class="layui-col-xs3">
+                    <button type="button" id="J_UpFile" class="layui-btn layui-btn-normal"><i class="layui-icon"></i>上传视频</button>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item" style="width:49%;float:left;clear:none">
+            <label class="layui-form-label"><var id="lang_videoW"></var></label>
+            <div class="layui-input-block">
+                <input type="text" id="videoWidth" autocomplete="off" value="100%" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="width:49%;float:right;clear:none">
+            <label class="layui-form-label"><var id="lang_videoH"></var></label>
+            <div class="layui-input-block">
+                <input type="text" id="videoHeight" autocomplete="off" value="294px" class="layui-input">
+            </div>
+        </div>
+        <div id="preview"></div>
+    </form>
+</div>
+<script type="text/javascript" src="../../../../layui-v2.5.6/layui.all.js"></script>
+<script src="../../../../jquery/jquery-3.2.1/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="video.js?20220309"></script>
+</body>
+</html>

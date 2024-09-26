@@ -1,0 +1,26 @@
+<script>
+    $(function(){
+       var emsg="{$errormsg}";
+        if(emsg!="")
+        {
+            $.showMsg(false,emsg);
+        }
+        $('.plugin-installbtn').data('callback',function(res){
+            if(res.code==0&&res.data)
+            {
+                $.confirm(res.msg, {
+                    title: "温馨提示",
+                    btn: ['前往购买', '前往绑定', '忽略'],
+                    yes: function (layero, index) {
+                        window.open("http://www.rrzcms.com/Plugins/plugininfo/code/" + res.data.pcode + ".html");
+                    },
+                    cancel: function (layero, index) {
+                        window.open("http://www.rrzcms.com/Main/index.html?menu=order&uri=%2FAdmin%2FOrder%2Fplugin");
+                    }
+                });
+                return false;
+            }
+            return true;
+        });
+    });
+</script>

@@ -1,0 +1,130 @@
+<style>
+    .sysinfo { width: 100%; max-width: 100%; }
+    .sysinfo tr:nth-of-type(odd) { background-color: #f9f9f9; }
+    .sysinfo tr > td {padding: 8px; border-top: 1px solid #f4f4f4; }
+    .sysinfo th { width: 15%; }
+    .sysinfo td { width: 35%; }
+</style>
+<div class="layui-row layui-col-space15">
+    <!--<div class="layui-col-sm12">-->
+        <!--<div class="layui-card p15 cl-r">-->
+            <!--安全提示：检测到您尚未安装-->
+            <!--<a class="cl-38f" href="http://www.rrzcms.com/Admin/Plugins/plugininfo/id/27/preview/1.html" target="_blank">【安全助手】</a>插件，-->
+            <!--请安装并检测系统安全情况！-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card cl-w" style="background: #0073b7;">
+            <div class="layui-card-header bd-w0 cl-w">文章统计<span class="mt10 fr layui-badge layui-bg-blue layuiadmin-badge">实时</span></div>
+            <div class="layui-card-body p15">
+                <p class="f36">{$statistic.articles_count}</p>
+                <div class="f14 mt10">文章总数</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card cl-w" style="background:#3498db;">
+            <div class="layui-card-header bd-w0 cl-w">产品统计<span class="mt10 fr layui-badge layui-bg-green layuiadmin-badge">实时</span></div>
+            <div class="layui-card-body p15">
+                <p class="f36">{$statistic.goods_count}</p>
+                <div class="f14 mt10">产品总数</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card cl-w" style="background:#605ca8;">
+            <div class="layui-card-header bd-w0 cl-w">友情链接<span class="mt10 fr layui-badge layui-bg-orange layuiadmin-badge">实时</span></div>
+            <div class="layui-card-body p15">
+                <p class="f36">{$statistic.links_count}</p>
+                <div class="f14 mt10">链接总数</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card cl-w" style="background:#18bc9c;">
+            <div class="layui-card-header bd-w0 cl-w">管理员<span class="mt10 fr layui-badge layui-bg-cyan layuiadmin-badge">实时</span></div>
+            <div class="layui-card-body p15">
+                <p class="f36">{$statistic.admin_count}</p>
+                <div class="f14 mt10">管理员总数</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-sm12">
+        <div class="layui-card">
+            <div class="layui-card-header">程序信息</div>
+            <div class="layui-card-body p15">
+                <table class="sysinfo">
+                    <tr>
+                        <th>系统更新：</th>
+                        <td id="td_upgrade_msg">
+                            <a href="javascript:void(0);" class="cl-38f" id="a_upgrade">正在版本检测中……</a>
+                        </td>
+                        <th>当前版本：</th>
+                        <td>{$sys_info.sys_version}</td>
+                    </tr>
+                    <tr>
+                        <th>程序名称：</th>
+                        <td>{$sys_info.web_name}</td>
+                        <th>版权所有：</th>
+                        <td>{notempty name="$is_rrz_authorization"}盗版必究{else /}正版软件（已购买商业授权）{/notempty}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-sm12">
+        <div class="layui-card">
+            <div class="layui-card-header">服务器信息</div>
+            <div class="layui-card-body p15">
+                <table class="sysinfo">
+                    <tr>
+                        <th>服务器操作系统：</th>
+                        <td>{$sys_info.os}</td>
+                        <th>服务器域名/IP：</th>
+                        <td>{$sys_info.domain} [ {$sys_info.ip} ]</td>
+                    </tr>
+                    <tr>
+                        <th>服务器环境：</th>
+                        <td>{$sys_info.web_server}</td>
+                        <th>PHP 版本：</th>
+                        <td>{$sys_info.phpv}</td>
+                    </tr>
+                    <tr>
+                        <th>Mysql 版本：</th>
+                        <td>{$sys_info.mysql_version}</td>
+                        <th>GD 版本：</th>
+                        <td>{$sys_info.gdinfo}</td>
+                    </tr>
+                    <tr>
+                        <th>文件上传限制：</th>
+                        <td>{$sys_info.fileupload}</td>
+                        <th>最大占用内存：</th>
+                        <td>{$sys_info.memory_limit}</td>
+                    </tr>
+                    <tr>
+                        <th>POST限制：</th>
+                        <td>{$sys_info.postsize|default='unknown'}</td>
+                        <th>最大执行时间：</th>
+                        <td>{$sys_info.max_ex_time}</td>
+                    </tr>
+                    <tr>
+                        <th>Zip支持：</th>
+                        <td>{$sys_info.zip|raw}</td>
+                        <th>Zlib支持：</th>
+                        <td>{$sys_info.zlib}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        var global = {$global|json_encode|raw};
+        window.upGlobal = $.extend({
+            backupUrl: '{:U("System/backup")}',
+            doBackupUrl: '{:U("System/doBackup")}',
+        }, global);
+    })();
+</script>
+<script src="/static/js/admin/upgrade.min.js?v={:C('config.version')}" async></script>

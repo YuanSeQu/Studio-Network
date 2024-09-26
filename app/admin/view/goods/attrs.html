@@ -1,0 +1,37 @@
+{if $attrs }
+    <table width="100%" lay-th-vtop>
+        {foreach $attrs as $attr}
+        <tr>
+            <th width="120">{$attr.name}</th>
+            <td>
+                <div class="lineblock">
+                {php} $value=$attrValue[$attr['id']]??''; {/php}
+                {if $attr.type=='0' }
+                <input type="text"  placeholder="{$attr.name}" class="layui-input" name="attrs[{$attr.id}]" value="{$value}"/>
+                {elseif $attr.type=='1' /}
+                {php} $ops=explode(chr(13),$attr['values']); {/php}
+                <select name="attrs[{$attr.id}]">
+                    {foreach $ops as $op}
+                    {php} $op=trim($op); {/php}
+                    <option value="{$op}" {if $value==$op }selected{/if}>{$op}</option>
+                    {/foreach}
+                </select>
+                {elseif $attr.type=='2' /}
+                <textarea class="layui-textarea" cols="50" placeholder="{$attr.name}" name="attrs[{$attr.id}]">{$value}</textarea>
+                {/if}
+                </div>
+                <!--<span style="position:relative;">-->
+                    <!--<a class="close-modal" href="javascript:;" onclick="$(this).closest('tr').remove();">x</a>-->
+               <!--</span>-->
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+    <div class="cl-999 mt10 pl100">
+        操作提示：如果想对产品参数进行新增、修改、删除等操作，请进入产品分类编辑分类 对参数列表进行操作。
+    </div>
+{else/}
+    <div class="cl-999 mt10">
+        提示：该产品分类还没有参数值，若有需要请进入产品分类 编辑分类 添加参数。
+    </div>
+{/if}

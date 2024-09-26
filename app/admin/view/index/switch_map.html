@@ -1,0 +1,79 @@
+<p class="layui-elem-quote f16 p0 bg-f0 pl10 fb mb15">功能开关</p>
+<div class="flex mb30 layui-form f16" lay-filter="js-view-switch-map">
+    <div class="bg-w p20 mr15 mb15">
+        会员中心：<input type="checkbox" name="admin.web_user" {$admin.web_user?'checked':''} lay-skin="switch" lay-filter="switchMapCheckbox" lay-text="开启|关闭" value="1" />
+    </div>
+    <div class="bg-w p20 mr15 mb15">
+        会员投稿：<input type="checkbox" name="users.is_contribute" {$users.is_contribute?'checked':''} lay-skin="switch" lay-filter="switchMapCheckbox" lay-text="开启|关闭" value="1"/>
+    </div>
+    <div class="bg-w p20 mr15 mb15">
+        插件应用：<input type="checkbox" name="admin.hide_plugin" {$admin.hide_plugin?'':'checked'} lay-skin="switch" lay-filter="switchMapCheckbox" lay-text="开启|关闭" value="1" />
+    </div>
+    <div class="bg-w p20 mr15 mb15 pr layui-border-box flex flex-al-c">
+        <div class="pr25">
+            站点缓存：<input type="checkbox" name="webcache.switch" {$webcache.switch?'checked':''} lay-skin="switch" lay-filter="switchMapCheckbox" lay-text="开启|关闭" value="1" />
+        </div>
+        <a href="{:U('Site/cache')}" target="dialog" options="{title:'站点缓存设置',area:['500px','400px'],closeBtn:2}" class="f12 cl-38f pl5 pa r10">设置</a>
+    </div>
+</div>
+<p class="layui-elem-quote f16 p0 bg-f0 pl10 fb mb15">模块功能</p>
+<div class="flex mb30 f16">
+    <div class="bg-w p15 mr15 mb15 w200 pointer" view-href="{:U('Index/watermark')}">
+        <img src="/static/images/icon_shuiyin.png"> 水印配置
+    </div>
+    <div class="bg-w p15 mr15 mb15 w200 pointer" view-href="{:U('Tags/index')}">
+        <img src="/static/images/icon_tags.png"> TAG管理
+    </div>
+</div>
+<p class="layui-elem-quote f16 p0 bg-f0 pl10 fb mb15">高级选项</p>
+<div class="flex mb30 f16">
+    <div class="bg-w p15 mr15 mb15 w200 pointer" view-href="{:U('System/index')}">
+        <img src="/static/images/icon_guanliyuan.png"> 管理员
+    </div>
+    <div class="bg-w p15 mr15 mb15 w200 pointer" view-href="{:U('Template/fileList')}">
+        <img src="/static/images/icon_moban.png"> 模版管理(可视化)
+    </div>
+    <div class="bg-w p15 mr15 mb15 w200 pointer" view-href="{:U('System/backup')}">
+        <img src="/static/images/icon_beifenhuanyuan.png"> 备份还原
+    </div>
+</div>
+
+<script>
+    (function () {
+        var $view = $('[lay-filter="js-view-switch-map"]');
+        layui.form.on('switch(switchMapCheckbox)', function (data) {
+            var name = $(data.elem).attr('name'),
+                value = data.elem.checked ? 1 : 0;
+            $.loading.show();
+            $.post('{:U("Index/switch_map")}', { name: name, value: value }, function (rs) {
+                $.loading.hide();
+                rs && rs.msg && $.showMsg(rs.code, rs.msg);
+                if (rs.code != 1) return;
+                if (rs.data && $.isPlainObject(rs.data)) {
+                    $('[name="admin.web_user"]', $view).prop('checked', rs.data['admin.web_user'] ? true : false);
+                    $('[name="users.is_contribute"]', $view).prop('checked', rs.data['users.is_contribute'] ? true : false);
+                    layui.form.render('checkbox', 'js-view-switch-map');
+                }
+                $('[type="checkbox"]', $view).each(function () {
+                    menuShowHide($(this).attr('name'), this.checked);
+                });
+            }, 'json');
+
+            function menuShowHide(name, value) {
+                var selector = '';
+                switch (name) {
+                    case 'admin.web_user':
+                        selector = '[view-action="Users/index"]';
+                        break;
+                    case 'users.is_contribute':
+                        selector='[view-action="Article/contribute"]';
+                        break;
+                    case 'admin.hide_plugin':
+                        selector = '[view-action="Plugin/index"]';
+                        break;
+                }
+                selector && $(selector, '.layui-side')[value ? 'removeClass' : 'addClass']('hide');
+            }
+        });
+    })();
+</script>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <title>{$rrz.seo_title}</title>
+    <meta name="description" content="{$rrz.seo_description}"/>
+    <meta name="keywords" content="{$rrz.seo_keywords}"/>
+    <meta name="author" content="order by rrzcms.com"/>
+    <link href="{rrz:env name='website.favicon' /}" rel="shortcut icon"/>
+
+    <link rel="stylesheet" href="/plugins/layui-v2.5.6/css/layui.css">
+    <script src="/plugins/layui-v2.5.6/layui.all.js"></script>
+    <style>
+        .red{ color: red;margin-left: 3px; }
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    {rrz:skin href="skin/css/cui.css,skin/css/style.css,skin/css/less.css"/}
+    {rrz:skin href="skin/js/jquery.js"/}
+</head>
+<body>
+
+    {include file="block/header" /}
+    <div id="bd">
+        <!--img(%IMAGES%/img5.jpg)-->
+        <div id="ban-in" style="background-image:url(%IMAGES%/img5.jpg)">
+            <div class="ban-bg"></div>
+        </div>
+        <!--img_end-->
+
+        <div class="row4 fix">
+            <div class="wp">
+                <div class="tit-i">
+                    <h3>联系我们</h3>
+                    <h5><span>contact</span> rrzcms.com</h5>
+                </div>
+                <div class="contact-l">
+                    <ul class="ul-contact">
+                        <li class="li1">{rrz:env name='webinfo.addr' /}</li>
+                        <li class="li2">
+                            <a href="tel:{rrz:env name='webinfo.telephone' /}">{rrz:env name='webinfo.telephone' /} (咨询)</a><br />
+                            <a href="tel:{rrz:env name='webinfo.mobile' /}">{rrz:env name='webinfo.mobile' /} (咨询)</a>
+                        </li>
+                        <li class="li3"><a href="mailto:{rrz:env name='webinfo.email' /}">{rrz:env name='webinfo.email' /}</a></li>
+                    </ul>
+                </div>
+                <div class="contact-r">
+                    {form id='1'}
+                    <form class="layui-form layui-form-pane" action="{$form.action}" method="post" style="max-width:600px">
+                        {foreach $form.config as $key=>$item }
+                        {if $item.type=='text'}
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">{$item.name} {if $item.required}<span class="red">*</span>{/if}</label>
+                            <div class="layui-input-block">
+                                <input class="layui-input" name="{$item.name}" lay-verify="{$item.required?'required':''}" {if $item.required}lay-reqText="{$item.name}不能为空"{/if}/>
+                            </div>
+                        </div>
+                        {elseif $item.type=='textarea'/}
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">{$item.name} {if $item.required}<span class="red">*</span>{/if}</label>
+                            <div class="layui-input-block">
+                                <textarea class="layui-textarea" name="{$item.name}" maxlength="300" lay-verify="{$item.required?'required':''}" {if $item.required}lay-reqText="{$item.name}不能为空"{/if}></textarea>
+                            </div>
+                        </div>
+                        {elseif $item.type=='radio'/}
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">{$item.name} {if $item.required}<span class="red">*</span>{/if}</label>
+                            <div class="layui-input-block">
+                                <select name="{$item.name}">
+                                    {foreach $item.option as $k=>$option}
+                                    <option value="{$option}">{$option}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        {elseif $item.type=='checkbox'/}
+                        <div class="layui-form-item" pane>
+                            <label class="layui-form-label">{$item.name} {if $item.required}<span class="red">*</span>{/if}</label>
+                            <div class="layui-input-block">
+                                {foreach name="item['option']" item="option" key="k"}
+                                <input type="checkbox" name="{$item.name}[]" data-name="{$item.name}" lay-verify="{$item.required?'requiredcheckbox':''}" value="{$option}" title="{$option}"/>
+                                {/foreach}
+                            </div>
+                        </div>
+                        {/if}
+                        {/foreach}
+                        <div class="contact-form">
+                            <input type="submit" value="提交您的需求" class="sub" lay-submit=""/>
+                        </div>
+                        <!--<div class="layui-form-item" style="text-align: center;">-->
+                        <!--<button class="layui-btn layui-btn-normal" lay-submit="" type="submit">提交</button>-->
+                        <!--</div>-->
+                    </form>
+                    <script>
+                        (function () {
+                            layui.form.verify({
+                                requiredcheckbox: function (value, item) {
+                                    var vform = $(item).closest('form');
+                                    if (!vform) return true;
+                                    var name = $(item).data('name');
+                                    return $('input[type=checkbox]' + (name ? '[name="' + name + '"]' : ''), vform).is(function (index) {
+                                        return this.checked == true;
+                                    }) ? '' : '请至少选择一项' + name;
+                                }
+                            });
+                            layui.form.render();
+                        })();
+                    </script>
+                    {/form}
+                </div>
+            </div>
+        </div>
+
+        <div class="map">
+            <div class="map-s"> <a href="javascript:void(0);" class="btn"><em></em>点击展开地图</a> </div>
+            <div class="map-pop"> <a href="javascript:void(0);" class="btn-down"></a>
+                <div class="map-bg1"></div>
+                <div class="map-bg2"></div>
+                <div id="map" class="map-i" style="width:100%; height: 100%;"> </div>
+            </div>
+        </div>
+
+    </div>
+    {include file="block/footer" /}
+    {rrz:skin href="skin/js/lib.js"/}
+
+    <script>
+        $('.map .btn').click(function(){
+            $('.map-pop').show();
+            $(this).parents('.map').addClass('map-big');
+            var winW = $(window).width();
+            var winH = $(window).height();
+            if(winW < 768){
+                $('.map-pop').height($(window).height()-50-80);
+                $('.map-big').height($(window).height()-50-80);
+                $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+            }else{
+
+                $('.map-pop').height($(window).height()-344-101);
+                $('.map-big').height($(window).height()-344-101);
+                $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+            }
+            //initMap();
+        })
+        $('.map .btn-down').click(function(){
+            $('.map-pop').hide();
+            $(this).parents('.map').removeClass('map-big');
+            $('.map').height('107');
+        })
+    </script>
+
+</body>
+</html>

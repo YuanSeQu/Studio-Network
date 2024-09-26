@@ -1,0 +1,180 @@
+<style>
+    .locate-select { text-align: center; }
+    .locate-select .layui-form-radio { margin: 0; padding: 0; margin-top: -3.5px; }
+    .locate-select .clearfix { overflow: visible; }
+    .locate-select div.layui-col-xs4 { border: 1px solid #d8d8d8; height: 45px; margin-left: -1px; margin-top: -1px; line-height: 45px; }
+</style>
+<div class="layui-card js-view-watermark">
+    <div class="layui-card-header">水印设置</div>
+    <div class="layui-card-body">
+        <form class="layui-form w700" method="post" action="{:U('Index/watermark')}" lay-label-w100>
+            <div class="layui-form-item">
+                <label class="layui-form-label">水印功能</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="is_enable" lay-skin="switch" lay-text="开启|关闭" value="1" {$data.is_enable?'checked':''} unvalue="0"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">水印类型</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="type" value="text" title="文字" lay-filter="watermark_type" {if !isset($data.type)||$data.type!='img'}checked{/if} unvalue="0"/>
+                    <input type="radio" name="type" value="img" title="图片" lay-filter="watermark_type" {if isset($data.type) && $data.type=='img'}checked{/if} unvalue="0">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">水印条件</label>
+                <div class="layui-input-block">
+                    <div class="block clearfix">
+                        <div class="layui-input-inline">
+                            <input type="text" name="min_width" value="{$data.min_width??'200'}" vtype="unsignedint" placeholder="请输入图片宽度" autocomplete="off" class="layui-input" maxlength="4"/>
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">图片宽度 单位像素(px)</div>
+                    </div>
+                    <div class="block clearfix mt5">
+                        <div class="layui-input-inline">
+                            <input type="text" name="min_height" value="{$data.min_height??'50'}" vtype="unsignedint" placeholder="请输入图片高度" autocomplete="off" class="layui-input" maxlength="4"/>
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">图片高度 单位像素(px)</div>
+                    </div>
+                    <p class="cl-999 f12 mt5">提示：图片宽度和高度至少要达到以上像素才能添加水印</p>
+                </div>
+            </div>
+            <div class="js-type-img {if !isset($data.type) || $data.type!='img'}hide{/if}">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">水印图片</label>
+                    <div class="layui-input-block">
+                        {imgspace name="img" value="$data.img|default='/static/images/rrzcms.png'" title="水印图片" watermark='false' /}
+                        <p class="cl-999 f12 mt5">最佳显示尺寸为240*60像素，水印尺寸大于图片尺寸将无法添加水印</p>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">JPEG 水印质量</label>
+                    <div class="layui-input-block">
+                        <div class="js-quality" style="top: 18px;"></div>
+                        <p class="cl-999 f12 mt25">水印质量请设置为 0-100 之间的数字,决定 jpg 格式图片的质量</p>
+                    </div>
+                </div>
+            </div>
+            <div class="js-type-text {if isset($data.type) && $data.type=='img'}hide{/if}">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">水印文字</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="text" value="{$data.text??'人人站CMS'}" vtype="required" placeholder="水印文字" autocomplete="off" class="layui-input" maxlength="20"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">字体大小</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="text_size" value="{$data.text_size??'30'}" vtype="unsignedint" placeholder="字体大小" autocomplete="off" class="layui-input" maxlength="3"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">文字颜色</label>
+                    <div class="layui-input-block">
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input type="text" name="text_color" value="{$data.text_color??'#000000'}" placeholder="文字颜色" autocomplete="off" class="layui-input" maxlength="10" readonly/>
+                        </div>
+                        <div class="layui-inline" style="left: -11px;">
+                            <div class="js-text-color"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">水印透明度</label>
+                <div class="layui-input-block">
+                    <div class="js-opacity" style="top: 18px;"></div>
+                    <p class="cl-999 f12 mt25">0代表完全透明，100代表不透明</p>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">水印位置</label>
+                <div class="layui-input-block pt5">
+                    <div class="w400 locate-select">
+                        <div class="clearfix">
+                            <div class="layui-col-xs4">
+                                <input type="radio" name="locate" value="1" title="顶部居左" {if isset($data.locate)&&$data.locate=='1'}checked{/if}/>
+                            </div>
+                            <div class="layui-col-xs4">
+                                <input type="radio" name="locate" value="2" title="顶部居中" {if isset($data.locate)&&$data.locate=='2'}checked{/if}/>
+                            </div>
+                            <div class="layui-col-xs4">
+                                <input type="radio" name="locate" value="3" title="顶部居右" {if isset($data.locate)&&$data.locate=='3'}checked{/if}/>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="layui-col-xs4">
+                                <input type="radio" name="locate" value="4" title="中部居左" {if isset($data.locate)&&$data.locate=='4'}checked{/if}/>
+                            </div>
+                            <div class="layui-col-xs4">
+                                <input type="radio" name="locate" value="5" title="中部居中" {if isset($data.locate)&&$data.locate=='5'}checked{/if}/>
+                            </div>
+                            <div class="layui-col-xs4">
+                                <input type="radio" name="locate" value="6" title="中部居右" {if isset($data.locate)&&$data.locate=='6'}checked{/if}/>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="layui-col-xs4">
+                                <input type="radio" name="locate" value="7" title="底部居左" {if isset($data.locate)&&$data.locate=='7'}checked{/if}/>
+                            </div>
+                            <div class="layui-col-xs4">
+                                <input type="radio" name="locate" value="8" title="底部居中" {if isset($data.locate)&&$data.locate=='8'}checked{/if}/>
+                            </div>
+                            <div class="layui-col-xs4">
+                                <input type="radio" name="locate" value="9" title="底部居右" {if !isset($data.locate)||$data.locate=='9'}checked{/if}/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item mt30">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    (function () {
+        var $view = $('.js-view-watermark');
+        layui.colorpicker.render({
+            elem: $('.js-text-color', $view),
+            color: "{$data.text_color??'#000000'}",
+            done: function (color) {
+                $('input[name="text_color"]', $view).val(color);
+            }
+        });
+        var $opacity = $('.js-opacity', $view);
+        layui.slider.render({
+            elem: $opacity,
+            input: true,
+            value: '{$data.opacity??60}',
+        });
+        $('input', $opacity).attr({ name: 'opacity', });
+
+        var $quality = $('.js-quality', $view);
+        layui.slider.render({
+            elem: $quality,
+            input: true,
+            value: '{$data.img_quality??80}',
+        });
+        $('input', $quality).attr({ name: 'img_quality', });
+
+
+        layui.form.on('radio(watermark_type)', function (data) {
+            var type = data.value;
+            if (type == 'text') {
+                $('.js-type-text', $view).removeClass('hide');
+                $('.js-type-img', $view).addClass('hide');
+            } else {
+                $('.js-type-text', $view).addClass('hide');
+                $('.js-type-img', $view).removeClass('hide');
+            }
+        });
+
+
+
+    })();
+</script>

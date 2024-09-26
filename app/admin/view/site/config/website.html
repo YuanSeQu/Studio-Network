@@ -1,0 +1,112 @@
+<form class="layui-form w800" method="post" action="{:U('Site/saveConfig')}" lay-label-w100>
+    <div class="layui-form-item">
+        <label class="layui-form-label">网站状态</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="website[status]" lay-skin="switch" lay-text="开启|关闭" value="1" {$website['status']?'checked':''} unvalue="0"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">网站名称</label>
+        <div class="layui-input-block">
+            <div class="flex">
+                <input type="text" name="website[name]" value="{$website.name|default=''}" lay-verify="required" placeholder="请输网站名称" autocomplete="off" class="layui-input cell"/>
+                <div class="layui-word-aux ml20 tc layui-form-mid">
+                    <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='website.name' &#47;&#125;">复制标签</a>
+                </div>
+            </div>
+            <p class="cl-999 f12">一般不超过10个字符</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">网站LOGO</label>
+        <div class="layui-input-block">
+            <div class="flex">
+                <div class="cell">
+                    {imgspace name="website[logo]" value="$website.logo|default=''" title="网站LOGO"  watermark='false' /}
+                </div>
+                <div class="layui-word-aux ml20 tc layui-form-mid">
+                    <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='website.logo' &#47;&#125;">复制标签</a>
+                </div>
+            </div>
+            <p class="cl-999 f12">默认网站LOGO，通用头部显示，显示尺寸以模板设计为主</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机端LOGO</label>
+        <div class="layui-input-block">
+            <div class="flex">
+                <div class="cell">
+                    {imgspace name="website[wap_logo]" value="$website.wap_logo|default=''" title="手机端LOGO"  watermark='false' /}
+                </div>
+                <div class="layui-word-aux ml20 tc layui-form-mid">
+                    <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='website.wap_logo' &#47;&#125;">复制标签</a>
+                </div>
+            </div>
+            <p class="cl-999 f12">手机端LOGO，显示尺寸以模板设计为主</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">地址栏图标</label>
+        <div class="layui-input-block">
+            <div class="flex">
+                <div class="cell">
+                    {imgspace name="website[favicon]" value="$website.favicon|default=''" title="地址栏图标" watermark='false' /}
+                </div>
+                <div class="layui-word-aux ml20 tc layui-form-mid">
+                    <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='website.favicon' &#47;&#125;">复制标签</a>
+                </div>
+            </div>
+            <p class="cl-999 f12">建议尺寸 32 * 32 (像素) 的.ico文件</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">首页标题</label>
+        <div class="layui-input-block flex">
+            <input type="text" name="website[title]" value="{$website.title|default=''}" placeholder="首页标题" autocomplete="off" class="layui-input cell"/>
+            <div class="layui-word-aux ml20 tc layui-form-mid">
+                <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='website.title' &#47;&#125;">复制标签</a>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">首页关键词</label>
+        <div class="layui-input-block flex">
+            <input type="text" name="website[keywords]" value="{$website.keywords|default=''}" placeholder="首页关键词" autocomplete="off" class="layui-input cell"/>
+            <div class="layui-word-aux ml20 tc layui-form-mid">
+                <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='website.keywords' &#47;&#125;">复制标签</a>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">首页描述</label>
+        <div class="layui-input-block flex">
+            <textarea name="website[description]" placeholder="首页描述" class="layui-textarea cell">{$website.description|default=''}</textarea>
+            <div class="layui-word-aux ml20 tc layui-form-mid flex-c">
+                <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='website.description' &#47;&#125;">复制标签</a>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">版权信息</label>
+        <div class="layui-input-block flex">
+            <textarea name="website[copyright]" placeholder="请输入内容" class="layui-textarea cell">{$website.copyright|default=''}</textarea>
+            <div class="layui-word-aux ml20 tc layui-form-mid flex-c">
+                <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='website.copyright' &#47;&#125;">复制标签</a>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">备案号</label>
+        <div class="layui-input-block flex">
+            <input type="text" name="website[recordnum]" value="{$website.recordnum|default=''}" placeholder="请输备案号" autocomplete="off" class="layui-input cell"/>
+            <div class="layui-word-aux ml20 tc layui-form-mid">
+                <a class="ptb5 plr10 bg-f5 br5 " data-clipboard-text="&#123;rrz:env name='website.recordnum' &#47;&#125;">复制标签</a>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item mt30">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+        </div>
+    </div>
+</form>

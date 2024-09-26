@@ -1,0 +1,14 @@
+<script>
+    (function () {
+        $('.[view] form.layui-form').data('callback', function (rs) {
+            //更新sitemap.xml地图
+            $.post('{:U("Seo/update_sitemap")}', {}, function () {
+            }, 'json');
+            if (rs && rs.data && rs.data.url && rs.data.type) {
+                //百度自动推送
+                $.post('{:U("Seo/push_zzbaidu")}', { url: rs.data.url, type: rs.data.type }, function () {
+                }, 'json');
+            }
+        });
+    })();
+</script>

@@ -1,0 +1,41 @@
+<div class="rrz-head">
+    <div class="container">
+        <div class="layui-row">
+            <div class="layui-col-xs6 flex logo">
+                <a href="{rrz:env name='rrz.cmsurl' /}">
+                    <img src="{rrz:env name='website.logo' /}"/>
+                </a>
+                <div class="title layui-hide-xs">会员中心</div>
+            </div>
+            <div class="layui-col-xs6 info">
+                <div class="layui-hide-xs">
+                    <a class="g-color" href="{:U('/user/index')}">{$account.name}</a>
+                    <a class="g-color logout" href="{:U('/user/logout')}">退出登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layui-show-xs-block" style="display: none;">
+    <button type="button" class="btn-menu is-closed">
+        <span class="c-top g-background"></span>
+        <span class="c-middle g-background"></span>
+        <span class="c-bottom g-background"></span>
+    </button>
+</div>
+<script>
+    $(function () {
+        $('.btn-menu').click(function () {
+            var isClosed = $(this).is('.is-closed');
+            if (isClosed) {
+                $(this).removeClass('is-closed').addClass('is-open')
+                $('.rrz-user .sidebar').show();
+                $('.rrz-user .overlay').show();
+            }else {
+                $(this).removeClass('is-open').addClass('is-closed')
+                $('.rrz-user .sidebar').hide();
+                $('.rrz-user .overlay').hide();
+            }
+        });
+    });
+</script>

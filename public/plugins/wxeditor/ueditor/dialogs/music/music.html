@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="referrer" content="never">
+    <link rel="stylesheet" href="../../../../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="music.css?20180601" media="all"/>
+    <script type="text/javascript" src="../internal.js"></script>
+    <style type="text/css">
+        .layui-form .layui-form-item{ margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="layui-tab" lay-filter="music">
+        <ul class="layui-tab-title">
+            <li lay-id="qqmusic" style="display:none">QQ音乐</li>
+            <li lay-id="kugou" style="display:none">酷狗音乐</li>
+            <li lay-id="audio"  class="layui-this">Audio音乐</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item">
+                <div class="layui-form">
+                    <div class="layui-form-item" style="margin-bottom:10px">
+                        <div class="layui-input-inline" style="width:373px">
+                            <input type="text" id="J_searchName" autocomplete="off" class="layui-input" placeholder="输入歌手/歌曲/专辑，搜索您感兴趣的音乐">
+                        </div>
+                        <div class="layui-input-inline" style="width:64px;margin-right:0">
+                            <input type="button" class="layui-btn layui-btn-normal" id="J_searchBtn">
+                        </div>
+                    </div>
+                    <div class="resultBar" id="J_resultBar">
+                        <div class="loading" style="display:none"></div>
+                        <div class="empty"></div>
+                    </div>
+                    <div id="J_preview"></div>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-form">
+                    <div class="layui-form-item" style="margin-bottom:10px">
+                        <div class="layui-input-inline" style="width:373px">
+                            <input type="text" id="K_searchName" autocomplete="off" class="layui-input" placeholder="输入歌手/歌曲/专辑，搜索您感兴趣的音乐">
+                        </div>
+                        <div class="layui-input-inline" style="width:64px;margin-right:0">
+                            <button type="button" class="layui-btn layui-btn-normal" id="K_searchBtn">搜索歌曲</button>
+                        </div>
+                    </div>
+                    <div class="resultBar" id="K_resultBar">
+                        <div class="loading" style="display:none"></div>
+                        <div class="empty"></div>
+                    </div>
+                    <div id="K_preview"></div>
+                </div>
+            </div>
+            <div class="layui-tab-item layui-show">
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">音乐地址</label>
+                        <div class="layui-input-block">
+                            <div class="layui-col-xs9">
+                                <input type="text" id="J_AudioUrl" autocomplete="off" class="layui-input" placeholder="输入音频地址">
+                            </div>
+                            <div class="layui-col-xs3">
+                                <button type="button" id="J_UpFile" class="layui-btn layui-btn-normal"><i class="layui-icon"></i>上传音乐</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">音乐标题</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="J_AudioTitle" placeholder="音乐标题" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">音乐介绍</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="J_AudioDesc" placeholder="音乐介绍" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">显示宽度</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="J_AudioW" placeholder="显示宽度" value="400px" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline" pane>
+                            <label class="layui-form-label">自动播放</label>
+                            <div class="layui-inline">
+                                <input type="checkbox" id="autoplay" lay-skin="switch" lay-text="是|否">
+                            </div>
+                            <div class="layui-inline layui-word-aux" style="line-height: 30px;margin: 0;">部分浏览器不支持</div>
+                        </div>
+                        <div class="layui-inline" pane>
+                            <label class="layui-form-label">循环播放</label>
+                            <div class="layui-inline">
+                                <input type="checkbox" checked id="loop" lay-skin="switch" lay-text="是|否">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="A_preview"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script src="../../../../jquery/jquery-3.2.1/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="music.js?20220314"></script>
+
+<script type="text/javascript">
+    (function () {
+        $('#J_UpFile').click(function () {
+            parent.window.FileStorage({
+                type: 'audio',
+                callback: function (url, data) {
+                    $('#J_AudioUrl').val(url);
+                    createPreviewAudio(url, true);
+                }
+            });
+        });
+    })();
+</script>
+
+</body>
+</html>

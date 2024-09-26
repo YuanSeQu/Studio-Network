@@ -1,0 +1,84 @@
+<script>
+    (function () {
+        var $view = $('.' + '{$grid_class}');
+
+        layui.form.on('switch(tag-iscommon)', function (data) {
+            var checked = data.elem.checked,
+                $tr = $(data.elem).closest('tr'),
+                id = $tr.data('id');
+            $.post('{:U("Tags/setTagIsCommon")}?id=' + id, { status: checked ? 1 : 0 }, function () {
+            }, 'json');
+        });
+        $view.on('blur', '.js-view_count', function () {
+            var $tr = $(this).closest('tr'), id = $tr.data('id'), vthis = this,
+                val = parseInt($(this).data('val') || 0) || 0,
+                count = parseInt($(this).val().trim() || 0) || 0;
+            if (val == count) return;
+            $.post('{:U("Tags/setTagViewCount")}?id=' + id, { count: count }, function (rs) {
+                rs.code && $(vthis).data('val', count);
+            }, 'json');
+        });
+
+        $view.on('click', '.js-tag-relation', function () {
+            var $this = $(this), url = $(this).attr('href');
+            $.get(url, function (rs) {
+                if (!rs.code || !rs.data) return;
+                var data = rs.data,
+                    relIds = data.relIds || [];
+
+                $.dialog({
+                    url: data.type == '1' ? "{:U('Article/index')}" : "{:U('Goods/index')}",
+                    data: { checkType: 'checkbox', },
+                    area: ['1024px', '550px'],
+                    success: function (layero, index) {
+                        var $tip = $('<span>', {
+                            class: 'f12 cl-999 mr15 mt10 inline-block pa',
+                            style:'right:180px;bottom:21px;',
+                            html: '已勾选共 <i class="cl-r">' + relIds.length + '</i> 篇',
+                        }).on('change', function () {
+                            $('i', this).html(relIds.length);
+                        });
+                        $('.layui-layer-btn', layero).after($tip);
+
+                        var $gid = $('.layui-grid', layero);
+                        $gid.on('reloaded', function () {
+                            $('input[lay-filter="layui-grid-checkbox"]', this).each(function () {
+                                if ($.inArray(parseInt($(this).attr('value')), relIds) > -1) {
+                                    $(this).prop('checked', true);
+                                }
+                            });
+                        });
+                        relIds.length && $gid.trigger('reloaded');
+
+                        $gid.on('change', 'input.checkbox', function () {
+                            if (this.checked) {
+                                if ($.inArray(parseInt(this.value), relIds) < 0) {
+                                    relIds.push(this.value);
+                                }
+                            } else {
+                                relIds.splice($.inArray(parseInt(this.value), relIds), 1);
+                            }
+                            $tip.trigger('change');
+                        });
+
+                    },
+                    yes: function (layero, index) {
+                        $.loading.show()
+                        $.post(url, { relIds: relIds.join(',') }, function (rs) {
+                            $.loading.hide();
+                            $.callbackSuccess.call($this, rs);
+                            if (!rs.code) {
+                                return false;
+                            }
+                        }, 'json');
+
+                    }
+                });
+
+
+            }, 'json');
+            return false;
+        });
+
+    })();
+</script>

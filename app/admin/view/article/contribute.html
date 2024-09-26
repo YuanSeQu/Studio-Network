@@ -1,0 +1,34 @@
+<script>
+    (function () {
+        var $view = $('.' + '{$grid_class}');
+        $('.js-find-node', $view).on('click', function () {
+            var $this = $(this);
+            $.dialog({
+                title: false,
+                url: '{:U("Article/nodes")}',
+                data: { checkType: 'radio', },
+                area: ['1024px', '550px'],
+                yes: function (layero, index) {
+                    var $tr = $('tr.selected', layero),
+                        id = '', name = '';
+                    if ($tr.length) {
+                        id = $tr.data('id');
+                        name = $('td[field="栏目名称"]', $tr).text().trim();
+                    }
+                    $this.siblings('input[name="search[node_id]"]').val(id);
+                    $this.val(name);
+                }
+            });
+        });
+        $view.on('blur', '.js-sort', function () {
+            var $tr = $(this).closest('tr'), id = $tr.data('id'), vthis = this,
+                val = parseInt($(this).data('val') || 0) || 0,
+                sort = parseInt($(this).val().trim() || 0) || 0;
+            if (val == sort) return;
+            $.post('{:U("Article/sortArticle")}?id=' + id, { sort: sort }, function (rs) {
+                rs.code && $(vthis).data('val', sort);
+            }, 'json');
+        });
+
+    })();
+</script>

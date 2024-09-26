@@ -1,0 +1,60 @@
+<style>
+    .CodeMirror-vscrollbar::-webkit-scrollbar { width: 8px!important; }
+</style>
+
+<div class="layui-card js-view-addFile">
+    <div class="layui-card-header">
+        <a class="cl-38f" target="page" href="{:U('Template/fileList')}?path={$dir|urlencode}">文件列表</a> /
+        {$info.isNew?'新建':'编辑'}文件
+    </div>
+    <div class="layui-card-body">
+        <form class="layui-form" method="post" action="{:U('Template/addFile')}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">文件名称</label>
+                <div class="layui-input-block">
+                    <input name="path" value="{$info.path}" type="hidden"/>
+                    <input name="name" value="{$info.name|default=''}" lay-verify="required" autocomplete="off" class="layui-input w200" maxlength="200"/>
+                    <p class="cl-999 f12">不允许用 “..” 形式的路径</p>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">文件内容</label>
+                <div class="layui-input-block">
+                    <textarea name="content" id="file_content" class="layui-textarea" style="width:90%;height:450px;background:#ffffff;">{$info.content|default=''}</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item mt30">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{if $info.mode??'' }
+
+<script type="text/javascript" src="/plugins/codemirror/mode/javascript/javascript.js"></script>
+<script type="text/javascript" src="/plugins/codemirror/mode/css/css.js"></script>
+<script type="text/javascript" src="/plugins/codemirror/mode/php/php.js"></script>
+<script type="text/javascript" src="/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+
+<script>
+    $(function () {
+        var $view = $('.js-view-addFile');
+        var editor = CodeMirror.fromTextArea(document.getElementById('file_content'), {
+            lineNumbers: true,
+            lineWrapping: false,
+            autofocus: true,  //自动聚焦
+            mode: '{$info.mode}',
+            indentUnit: 4,
+        });
+        editor.on('blur', function () {
+            editor.save();
+        });
+        var dom = editor.getWrapperElement();
+        dom.style.cssText = 'font-family:consolas,"Courier new",monospace;font-size:13px;';
+        editor.setSize('100%', '500px');
+    });
+</script>
+{/if}

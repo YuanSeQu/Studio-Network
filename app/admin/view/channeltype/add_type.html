@@ -1,0 +1,12 @@
+<form class="layui-form ptb20" method="post" action="{:U('Channeltype/addType')}?id={$row.id??''}">
+    <div class="layui-form-item mt5">
+        <label class="layui-form-label">模型名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" value="{$row.title|default=''}" placeholder="模型名称" lay-verify="required" autocomplete="off" class="layui-input w250"/>
+            <input type="hidden" name="type" value="{$type}" />
+        </div>
+    </div>
+    <div class="layui-form-item tc mt30">
+        <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+    </div>
+</form>

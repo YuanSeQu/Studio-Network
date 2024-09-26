@@ -1,0 +1,491 @@
+.edui-combox-body, .edui-default .edui-button-body, .edui-menubutton-body, .edui-splitbutton-body, div.edui-box {position: relative;}
+.edui-default .edui-box {overflow: hidden;margin: 0;padding: 0;border: none;}
+.edui-default a.edui-box {display: block;color: #000;text-decoration: none;}
+.edui-default a.edui-box:active, .edui-default a.edui-box:hover {text-decoration: none;}
+.edui-default table.edui-box {border-collapse: collapse;}
+.edui-default ul.edui-box {list-style-type: none;}
+div.edui-box {display: -moz-inline-box !important;display: inline-block !important;vertical-align: top;}
+.edui-default .edui-clearfix {zoom: 1;}
+.edui-default .edui-clearfix:after {clear: both;display: block;content: '\20';}
+* html div.edui-box {display: inline !important;}
+.edui-default .edui-list .edui-bordereraser, .edui-default .edui-toolbar .edui-combox-body .edui-splitborder {display: none;}
+.edui-default .edui-popup {position: absolute;-webkit-user-select: none;-moz-user-select: none;}
+.edui-default .edui-popup .edui-shadow {position: absolute;z-index: -1;}
+.edui-default .edui-popup .edui-bordereraser {position: absolute;overflow: hidden;}
+.edui-default .edui-tablepicker .edui-canvas {position: relative;}
+.edui-default .edui-tablepicker .edui-canvas .edui-overlay {position: absolute;}
+.edui-default .edui-dialog-modalmask, .edui-dialog-dragmask {position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
+.edui-default .edui-label {cursor: default;}
+.edui-default span.edui-clickable {color: #00f;text-decoration: underline;cursor: pointer;}
+.edui-default span.edui-unclickable {color: gray;cursor: default;}
+.edui-default .edui-toolbar {position: relative;overflow: hidden;padding: 7px 1px;width: auto;height: auto;cursor: default;zoom: 1;-webkit-user-select: none;-moz-user-select: none;}
+.edui-default .edui-toolbar .edui-button, .edui-default .edui-toolbar .edui-combox, .edui-default .edui-toolbar .edui-menubutton, .edui-default .edui-toolbar .edui-splitbutton {margin: 1px;}
+.edui-default .edui-editor {position: relative;overflow: visible;background-color: #fff;border: 1px solid #e9e9e9;}
+.edui-editor div {width: auto;height: auto;line-height: 1.5;}
+.edui-default .edui-editor-toolbarbox {position: relative;border-bottom: 1px solid #e9e9e9;background-color: #fff;}
+.edui-default .edui-editor-toolbarboxinner {padding: 2px;}
+.edui-default .edui-editor-iframeholder {position: relative;}
+.edui-default .edui-editor-bottomContainer {display: none;overflow: hidden;}
+.edui-default .edui-toolbar .edui-for-fullscreen {float: right;}
+.edui-default .edui-bubble .edui-popup-content { color: #fff; padding: 0; border: 0;background: rgba(0, 0, 0, 0.8);font-size: 9pt;position: relative;box-shadow: 1px 1px 6px rgba(0, 0, 0, .3);}
+.edui-default .edui-bubble .edui-popup-content nobr { display: block; padding: 10px; }
+.edui-default span.edui-clickable, .edui-default a.edui-clickable { color: #fff; cursor: pointer; text-decoration: none; }
+.edui-default .edui-bubble .edui-popup-content { font-family: -apple-system, BlinkMacSystemFont, PingFangSC-Regular, Roboto, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif; }
+.edui-default .edui-bubble .edui-popup-content a{ color: #47c68c; }
+.wxb-editor-popup-tool span {padding: 0 5px;cursor: pointer;}
+.edui-default .edui-editor-toolbarmsg {position: absolute;bottom: -25px;left: 0;z-index: 1009;width: 99.9%;border-bottom: 1px solid #ccc;background-color: #fff6d9;}
+.edui-default .edui-editor-toolbarmsg-upload {position: absolute;top: 5px;left: 350px;width: 75pt;height: 1pc;color: #00f;font-size: 14px;line-height: 1pc;cursor: pointer;}
+.edui-default .edui-editor-toolbarmsg-label {padding: 4px;font-size: 9pt;line-height: 1pc;}
+.edui-default .edui-editor-toolbarmsg-close {float: right;width: 20px;height: 1pc;color: red;line-height: 1pc;cursor: pointer;}
+.edui-default .edui-listitem {padding: 1px;white-space: nowrap;}
+.edui-default .edui-list .edui-state-hover {position: relative;padding: 0;border: 1px solid #dcac6c;background-color: #fff5d4;}
+.edui-default .edui-for-fontfamily .edui-listitem-label {padding-left: 5px;height: 22px;min-width: 130px;font-size: 9pt;line-height: 22px;}
+.edui-default .edui-for-insertcode .edui-listitem-label {padding-left: 5px;height: 22px;min-width: 90pt;font-size: 9pt;line-height: 22px;}
+.edui-default .edui-for-underline .edui-listitem-label {padding: 3px 5px;min-width: 90pt;font-size: 9pt;}
+.edui-default .edui-for-fontsize .edui-listitem-label {padding: 3px 5px;min-width: 90pt;}
+.edui-default .edui-for-paragraph .edui-listitem-label {padding: 2px 5px;min-width: 200px;}
+.edui-default .edui-for-lineheight .edui-listitem-label, .edui-default .edui-for-rowspacingbottom .edui-listitem-label, .edui-default .edui-for-rowspacingtop .edui-listitem-label {padding: 2px 5px;min-width: 53px;}
+.edui-default .edui-for-customstyle .edui-listitem-label {padding: 2px 5px;width: 200px !important;min-width: 200px;}
+.edui-default .edui-menu {z-index: 3000;}
+.edui-default .edui-menu .edui-popup-content {padding: 3px;}
+.edui-default .edui-menu-body {min-width: 170px;background: url(../images/sparator_v.png) 25px repeat-y;}
+.edui-default .edui-menuitem {height: 20px;vertical-align: top;cursor: default;}
+.edui-default .edui-menuitem .edui-icon {width: 20px !important;height: 20px !important;background: url(../images/icons.png) 0 -250pc;}
+.edui-default .edui-menuitem .edui-label {padding-left: 10px;height: 20px;font-size: 9pt;line-height: 20px;}
+.edui-default .edui-state-checked .edui-menuitem-body {background: url(../images/icons-all.gif) 6px -205px no-repeat;}
+.edui-default .edui-state-disabled .edui-menuitem-label {color: gray;}
+.edui-default .edui-toolbar .edui-combox-body .edui-button-body {margin: 0 3px 0 0;padding: 0 5px;width: 35px;height: 20px;white-space: nowrap;font-size: 9pt;line-height: 20px;}
+.edui-default .edui-toolbar .edui-combox-body .edui-arrow {width: 9px;height: 20px;border-left: 1px solid #ccc;background: url(../images/icons.png) -742px 0;}
+.edui-default .edui-toolbar .edui-combox .edui-combox-body {border: 1px solid #ccc;background-color: #fff;}
+.edui-default .edui-toolbar .edui-state-hover .edui-combox-body {border: 1px solid #dcac6c;background-color: #fff5d4;}
+.edui-default .edui-toolbar .edui-state-hover .edui-combox-body .edui-arrow {border-left: 1px solid #dcac6c;}
+.edui-default .edui-toolbar .edui-state-checked .edui-combox-body {border: 1px solid #dcac6c;background-color: #ffe69f;}
+.edui-toolbar .edui-state-checked .edui-combox-body .edui-arrow {border-left: 1px solid #dcac6c;}
+.edui-toolbar .edui-state-disabled .edui-combox-body {background-color: #f0f0ee;opacity: .3;}
+.edui-toolbar .edui-state-opened .edui-combox-body {border: 1px solid gray;background-color: #fff;}
+.edui-default .edui-toolbar .edui-button .edui-icon, .edui-default .edui-toolbar .edui-menubutton .edui-icon, .edui-default .edui-toolbar .edui-splitbutton .edui-icon {width: 20px;height: 20px;background-image: url(../images/icons.png);}
+.edui-default .edui-toolbar .edui-button .edui-button-wrap {position: relative;padding: 1px;}
+.edui-default .edui-toolbar .edui-button .edui-state-hover .edui-button-wrap {padding: 0;border: 1px solid #dcac6c;background-color: #fff5d4;}
+.edui-default .edui-toolbar .edui-button .edui-state-checked .edui-button-wrap {padding: 0;border: 1px solid #dcac6c;background-color: #ffe69f;}
+.edui-default .edui-toolbar .edui-button .edui-state-active .edui-button-wrap {padding: 0;border: 1px solid gray;background-color: #fff;}
+.edui-default .edui-toolbar .edui-state-disabled .edui-label {color: #ccc;}
+.edui-default .edui-toolbar .edui-state-disabled .edui-icon {opacity: .3;}
+.edui-default .edui-for-undo .edui-icon {background-position: -10pc 0;}
+.edui-default .edui-for-redo .edui-icon {background-position: -75pt 0;}
+.edui-default .edui-for-bold .edui-icon {background-position: 0 0;}
+.edui-default .edui-for-italic .edui-icon {background-position: -60px 0;}
+.edui-default .edui-for-fontborder .edui-icon {background-position: -10pc -40px;}
+.edui-default .edui-for-underline .edui-icon {background-position: -140px 0;}
+.edui-default .edui-for-strikethrough .edui-icon {background-position: -90pt 0;}
+.edui-default .edui-for-subscript .edui-icon {background-position: -600px 0;}
+.edui-default .edui-for-superscript .edui-icon {background-position: -620px 0;}
+.edui-default .edui-for-blockquote .edui-icon {background-position: -220px 0;}
+.edui-default .edui-for-forecolor .edui-icon {background-position: -45pc 0;}
+.edui-default .edui-for-backcolor .edui-icon {background-position: -760px 0;}
+.edui-default .edui-for-inserttable .edui-icon {background-position: -580px -20px;}
+.edui-default .edui-for-autotypeset .edui-icon {background-position: -40pc -40px;}
+.edui-default .edui-for-justifyleft .edui-icon {background-position: -460px 0;}
+.edui-default .edui-for-justifycenter .edui-icon {background-position: -420px 0;}
+.edui-default .edui-for-justifyright .edui-icon {background-position: -5in 0;}
+.edui-default .edui-for-justifyjustify .edui-icon {background-position: -440px 0;}
+.edui-default .edui-for-insertorderedlist .edui-icon {background-position: -5pc 0;}
+.edui-default .edui-for-insertunorderedlist .edui-icon {background-position: -20px 0;}
+.edui-default .edui-for-lineheight .edui-icon {background-position: -725px -40px;}
+.edui-default .edui-for-rowspacingbottom .edui-icon {background-position: -745px -40px;}
+.edui-default .edui-for-rowspacingtop .edui-icon {background-position: -765px -40px;}
+.edui-default .edui-for-horizontal .edui-icon {background-position: -360px 0;}
+.edui-default .edui-for-link .edui-icon {background-position: -500px 0;}
+.edui-default .edui-for-code .edui-icon {background-position: -440px -40px;}
+.edui-default .edui-for-insertimage .edui-icon {background-position: -726px -77px;}
+.edui-default .edui-for-insertframe .edui-icon {background-position: -15pc -40px;}
+.edui-default .edui-for-emoticon .edui-icon {background-position: -60px -20px;}
+.edui-default .edui-for-spechars .edui-icon {background-position: -15pc 0;}
+.edui-default .edui-for-help .edui-icon {background-position: -340px 0;}
+.edui-default .edui-for-print .edui-icon {background-position: -440px -20px;}
+.edui-default .edui-for-preview .edui-icon {background-position: -420px -20px;}
+.edui-default .edui-for-selectall .edui-icon {background-position: -25pc -20px;}
+.edui-default .edui-for-searchreplace .edui-icon {background-position: -520px -20px;}
+.edui-default .edui-for-map .edui-icon {background-position: -40px -40px;}
+.edui-default .edui-for-gmap .edui-icon {background-position: -260px -40px;}
+.edui-default .edui-for-insertvideo .edui-icon {background-position: -20pc -20px;}
+.edui-default .edui-for-time .edui-icon {background-position: -10pc -20px;}
+.edui-default .edui-for-date .edui-icon {background-position: -140px -20px;}
+.edui-default .edui-for-cut .edui-icon {background-position: -680px 0;}
+.edui-default .edui-for-copy .edui-icon {background-position: -700px 0;}
+.edui-default .edui-for-paste .edui-icon {background-position: -35pc 0;}
+.edui-default .edui-for-formatmatch .edui-icon {background-position: -40px 0;}
+.edui-default .edui-for-pasteplain .edui-icon {background-position: -360px -20px;}
+.edui-default .edui-for-directionalityltr .edui-icon {background-position: -20px -20px;}
+.edui-default .edui-for-directionalityrtl .edui-icon {background-position: -40px -20px;}
+.edui-default .edui-for-source .edui-icon {background-position: -261px 0;}
+.edui-default .edui-for-removeformat .edui-icon {background-position: -580px 0;}
+.edui-default .edui-for-unlink .edui-icon {background-position: -40pc 0;}
+.edui-default .edui-for-touppercase .edui-icon {background-position: -786px 0;}
+.edui-default .edui-for-tolowercase .edui-icon {background-position: -806px 0;}
+.edui-default .edui-for-insertrow .edui-icon {background-position: -478px -76px;}
+.edui-default .edui-for-insertrownext .edui-icon {background-position: -498px -76px;}
+.edui-default .edui-for-insertcol .edui-icon {background-position: -455px -76px;}
+.edui-default .edui-for-insertcolnext .edui-icon {background-position: -429px -76px;}
+.edui-default .edui-for-mergeright .edui-icon {background-position: -60px -40px;}
+.edui-default .edui-for-mergedown .edui-icon {background-position: -5pc -40px;}
+.edui-default .edui-for-splittorows .edui-icon {background-position: -75pt -40px;}
+.edui-default .edui-for-splittocols .edui-icon {background-position: -90pt -40px;}
+.edui-default .edui-for-insertparagraphbeforetable .edui-icon {background-position: -140px -40px;}
+.edui-default .edui-for-deleterow .edui-icon {background-position: -660px -20px;}
+.edui-default .edui-for-deletecol .edui-icon {background-position: -40pc -20px;}
+.edui-default .edui-for-splittocells .edui-icon {background-position: -50pc -20px;}
+.edui-default .edui-for-mergecells .edui-icon {background-position: -760px -20px;}
+.edui-default .edui-for-deletetable .edui-icon {background-position: -620px -20px;}
+.edui-default .edui-for-cleardoc .edui-icon {background-position: -520px 0;}
+.edui-default .edui-for-fullscreen .edui-icon {background-position: -75pt -20px;}
+.edui-default .edui-for-anchor .edui-icon {background-position: -200px 0;}
+.edui-default .edui-for-pagebreak .edui-icon {background-position: -460px -40px;}
+.edui-default .edui-for-imagenone .edui-icon {background-position: -5in -40px;}
+.edui-default .edui-for-imageleft .edui-icon {background-position: -500px -40px;}
+.edui-default .edui-for-wordimage .edui-icon {background-position: -660px -40px;}
+.edui-default .edui-for-imageright .edui-icon {background-position: -520px -40px;}
+.edui-default .edui-for-imagecenter .edui-icon {background-position: -540px -40px;}
+.edui-default .edui-for-indent .edui-icon {background-position: -25pc 0;}
+.edui-default .edui-for-outdent .edui-icon {background-position: -540px 0;}
+.edui-default .edui-for-webapp .edui-icon {background-position: -601px -40px;}
+.edui-default .edui-for-table .edui-icon {background-position: -580px -20px;}
+.edui-default .edui-for-edittable .edui-icon {background-position: -420px -40px;}
+.edui-default .edui-for-template .edui-icon {background-position: -339px -40px;}
+.edui-default .edui-for-delete .edui-icon {background-position: -360px -40px;}
+.edui-default .edui-for-attachment .edui-icon {background-position: -620px -40px;}
+.edui-default .edui-for-edittd .edui-icon {background-position: -700px -40px;}
+.edui-default .edui-for-snapscreen .edui-icon {background-position: -581px -40px;}
+.edui-default .edui-for-scrawl .edui-icon {background-position: -801px -41px;}
+.edui-default .edui-for-background .edui-icon {background-position: -680px -40px;}
+.edui-default .edui-for-music .edui-icon {background-position: -18px -40px;}
+.edui-default .edui-for-formula .edui-icon {background-position: -200px -40px;}
+.edui-default .edui-for-aligntd .edui-icon {background-position: -236px -76px;}
+.edui-default .edui-for-insertparagraphtrue .edui-icon {background-position: -625px -76px;}
+.edui-default .edui-for-insertparagraph .edui-icon {background-position: -602px -76px;}
+.edui-default .edui-for-insertcaption .edui-icon {background-position: -21pc -76px;}
+.edui-default .edui-for-deletecaption .edui-icon {background-position: -362px -76px;}
+.edui-default .edui-for-inserttitle .edui-icon {background-position: -286px -76px;}
+.edui-default .edui-for-deletetitle .edui-icon {background-position: -311px -76px;}
+.edui-default .edui-for-aligntable .edui-icon {background-position: -440px 0;}
+.edui-default .edui-for-tablealignment-left .edui-icon {background-position: -460px 0;}
+.edui-default .edui-for-tablealignment-center .edui-icon {background-position: -420px 0;}
+.edui-default .edui-for-tablealignment-right .edui-icon {background-position: -5in 0;}
+.edui-default .edui-for-drafts .edui-icon {background-position: -35pc 0;}
+.edui-default .edui-for-charts .edui-icon {background: url(../images/charts.png) 2px 3px no-repeat !important;}
+.edui-default .edui-for-inserttitlecol .edui-icon {background-position: -673px -76px;}
+.edui-default .edui-for-deletetitlecol .edui-icon {background-position: -698px -76px;}
+.edui-default .edui-for-simpleupload .edui-icon {background-position: -380px 0;}
+.edui-default .edui-toolbar .edui-menubutton-body .edui-arrow, .edui-default .edui-toolbar .edui-splitbutton-body .edui-arrow {width: 10px;height: 20px;background: url(../images/icons.png) -742px 0;}
+.edui-default .edui-toolbar .edui-menubutton .edui-menubutton-body, .edui-default .edui-toolbar .edui-splitbutton .edui-splitbutton-body {padding: 1px;}
+.edui-default .edui-toolbar .edui-splitborder {width: 1px;height: 20px;}
+.edui-default .edui-toolbar .edui-state-hover .edui-splitborder {width: 1px;border-left: 0 solid #dcac6c;}
+.edui-default .edui-toolbar .edui-state-active .edui-splitborder {width: 0;border-left: 1px solid gray;}
+.edui-default .edui-toolbar .edui-state-opened .edui-splitborder {width: 1px;border: 0;}
+.edui-default .edui-toolbar .edui-menubutton .edui-state-hover .edui-menubutton-body, .edui-default .edui-toolbar .edui-splitbutton .edui-state-hover .edui-splitbutton-body {padding: 0;border: 1px solid #dcac6c;background-color: #fff5d4;}
+.edui-default .edui-toolbar .edui-menubutton .edui-state-checked .edui-menubutton-body, .edui-default .edui-toolbar .edui-splitbutton .edui-state-checked .edui-splitbutton-body {padding: 0;border: 1px solid #dcac6c;background-color: #ffe69f;}
+.edui-default .edui-toolbar .edui-menubutton .edui-state-active .edui-menubutton-body, .edui-default .edui-toolbar .edui-menubutton .edui-state-opened .edui-menubutton-body, .edui-default .edui-toolbar .edui-splitbutton .edui-state-active .edui-splitbutton-body, .edui-default .edui-toolbar .edui-splitbutton .edui-state-opened .edui-splitbutton-body {padding: 0;border: 1px solid gray;background-color: #fff;}
+.edui-default .edui-state-disabled .edui-arrow {opacity: .3;}
+.edui-default .edui-for-insertorderedlist .edui-bordereraser, .edui-default .edui-for-insertunorderedlist .edui-bordereraser, .edui-default .edui-for-lineheight .edui-bordereraser, .edui-default .edui-for-rowspacingbottom .edui-bordereraser, .edui-default .edui-for-rowspacingtop .edui-bordereraser {background-color: #fff;}
+.edui-default .edui-for-insertorderedlist .edui-popup-body .edui-icon, .edui-default .edui-for-insertunorderedlist .edui-popup-body .edui-icon, .edui-default .edui-for-lineheight .edui-popup-body .edui-icon, .edui-default .edui-for-rowspacingbottom .edui-popup-body .edui-icon, .edui-default .edui-for-rowspacingtop .edui-popup-body .edui-icon {background-image: none;}
+.edui-default .edui-popup {z-index: 3000;width: auto;height: auto;background-color: #fff;}
+.edui-default .edui-popup .edui-shadow {top: 0;left: 0;width: 100%;height: 100%;}
+.edui-default .edui-popup-content {padding: 5px;border: 1px solid #ccc;border: 1px solid rgba(0, 0, 0, .2);background: #fff;box-shadow: 0 3px 4px rgba(0, 0, 0, .2);-webkit-background-clip: padding-box;-moz-background-clip: padding;}
+.edui-default .edui-popup .edui-bordereraser {height: 3px;background-color: #fff;}
+.edui-default .edui-menu .edui-bordereraser {height: 3px;}
+.edui-default .edui-anchor-topleft .edui-bordereraser {top: -2px;left: 1px;}
+.edui-default .edui-anchor-topright .edui-bordereraser {top: -2px;right: 1px;}
+.edui-default .edui-anchor-bottomleft .edui-bordereraser {bottom: -6px;left: 0;height: 7px;border-right: 1px solid gray;border-left: 1px solid gray;}
+.edui-default .edui-anchor-bottomright .edui-bordereraser {right: 0;bottom: -6px;height: 7px;border-right: 1px solid gray;border-left: 1px solid gray;}
+.edui-default .edui-editor-messageholder {position: absolute;top: 28px;right: 3px;display: block;margin: 0;padding: 0;width: 150px;height: auto;border: 0;}
+.edui-default .edui-message {position: relative;margin-bottom: 3px;padding: 0;min-height: 10px;text-shadow: 0 1px 0 hsla(0, 0%, 100%, .5);}
+.edui-default .edui-message-body {padding: 8px 15px 8px 8px;border: 1px solid #fbeed5;border-radius: 1px;background-color: #fcf8e3;color: #c09853;}
+.edui-default .edui-message-type-info {border-color: #bce8f1;background-color: #d9edf7;color: #3a87ad;}
+.edui-default .edui-message-type-success {border-color: #d6e9c6;background-color: #dff0d8;color: #468847;}
+.edui-default .edui-message-type-danger, .edui-default .edui-message-type-error {border-color: #eed3d7;background-color: #f2dede;color: #b94a48;}
+.edui-default .edui-message .edui-message-closer {position: absolute;top: 0;right: 0;float: right;display: block;padding: 0;width: 1pc;height: 1pc;border: 0;background: 0 0;color: #999;text-shadow: 0 1px 0 #fff;font-weight: 700;font-size: 20px;font-family: Helvetica Neue, Helvetica, Arial, sans-serif;line-height: 1pc;cursor: pointer;}
+.edui-default .edui-message .edui-message-content {word-wrap: break-word;font-size: 10pt;word-break: normal;}
+.edui-default .edui-dialog {position: absolute;z-index: 2000;}
+.edui-dialog div {width: auto;}
+.edui-default .edui-dialog-wrap {margin-right: 6px;margin-bottom: 6px;}
+.edui-default .edui-dialog-fullscreen-flag {margin-right: 0;margin-bottom: 0;}
+.edui-default .edui-dialog-body {position: relative; border-radius: 3px; overflow: hidden;}
+.edui-default .edui-dialog-fullscreen-flag .edui-dialog-body {padding: 0;}
+.edui-default .edui-dialog-shadow {position: absolute;top: 0;left: 0;z-index: -1;width: 100%;height: 100%;border: 5px solid #fff;background-color: #fff;background-clip: padding-box;}
+.edui-default .edui-dialog-titlebar {padding: 14px 16px;border-bottom: 1px solid #e9e9e9;background: #fff;color: #666;font-size: 1pc;cursor: move;}
+.edui-default .edui-dialog-caption {font-size: 14px;line-height: 21px;font-weight: 700;margin: 0;}
+.edui-default .edui-dialog-draghandle { /* height:26px;*/}
+.edui-default .edui-dialog-closebutton {position: absolute !important;top: 18px;right: 15px;}
+.edui-default .edui-dialog-closebutton .edui-button-body {width: 20px;height: 20px;background: url(../images/icons-all.gif) 0 -59px no-repeat;cursor: pointer;}
+.edui-default .edui-dialog-closebutton .edui-state-hover .edui-button-body {background: url(../images/icons-all.gif) 0 -89px no-repeat;}
+.edui-default .edui-dialog-foot {padding: 10px;border-top: 1px solid #e9e9e9;text-align: right;}
+.edui-default .edui-dialog-buttons {position: static;right: 0;}
+.edui-default .edui-dialog-buttons .edui-button {display: inline-block;margin-right: 10px;padding: 2px 17px;outline: 0 !important;border: 1px solid transparent;border-radius: 4px !important;background-image: none;box-shadow: none !important;vertical-align: middle;text-align: center;text-shadow: none;white-space: nowrap;font-weight: 400;font-size: 14px;line-height: 1.428571429;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;-o-user-select: none;user-select: none;}
+.edui-default .edui-dialog-buttons .edui-okbutton {border-color: #1E9FFF;border-width: 1px;border-radius: 2px !important;background-color: #1E9FFF;color: #fff;}
+.edui-default .edui-dialog-buttons .edui-okbutton:hover {border-color: #4caff9;background-color: #4caff9;}
+.edui-default .edui-dialog-buttons .edui-cancelbutton {border-color: #e9e9eb;border-width: 1px;border-radius: 2px !important;background-color: #fff;color: #333;}
+.edui-default .edui-dialog-buttons .edui-cancelbutton:hover {border-color: #f2f2f2;background-color: #ebebeb;}
+.edui-default .edui-dialog-buttons .edui-button .edui-button-body {text-align: center;cursor: pointer;}
+.edui-default .edui-dialog-buttons .edui-label {cursor: pointer;}
+.edui-default .edui-dialog-buttons .edui-button:last-child { margin: 0; }
+.edui-default .edui-dialog iframe {margin: 0;padding: 0;border: 0;vertical-align: top;}
+.edui-default .edui-cellalignpicker-body td, .edui-default .edui-menu-body .edui-menuitem {padding: 1px;}
+.edui-default .edui-dialog-modalmask {position: absolute;background-color: #000;opacity: .3;}
+.edui-default .edui-dialog-dragmask {position: absolute;background-color: transparent;cursor: move;}
+.edui-default .edui-dialog-content {position: relative;}
+.edui-default .dialogcontmask {position: absolute;display: block;visibility: hidden;width: 100%;height: 100%;opacity: 0;cursor: move;}
+.edui-default .edui-for-link .edui-dialog-content {overflow: hidden;width: 500px;height: 280px;}
+.edui-default .edui-for-background .edui-dialog-content {overflow: hidden;width: 440px;height: 280px;}
+.edui-default .edui-for-template .edui-dialog-content {overflow: hidden;width: 630px;height: 390px;}
+.edui-default .edui-for-scrawl .edui-dialog-content {width: 515px;height: 360px;}
+.edui-default .edui-for-spechars .edui-dialog-content {width: 620px;height: 500px;}
+.edui-default .edui-for-insertimage .edui-dialog-content {overflow: hidden;width: 650px;height: 25pc;}
+.edui-default .edui-for-webapp .edui-dialog-content {overflow: hidden;width: 35pc;height: 450px;}
+.edui-default .edui-for-insertframe .edui-dialog-content {overflow: hidden;width: 350px;height: 200px;}
+.edui-default .edui-for-wordimage .edui-dialog-content {overflow: hidden;width: 620px;height: 380px;}
+.edui-default .edui-for-attachment .edui-dialog-content {overflow: hidden;width: 650px;height: 25pc;}
+.edui-default .edui-for-gmap .edui-dialog-content, .edui-default .edui-for-map .edui-dialog-content {width: 550px;height: 25pc;}
+.edui-default .edui-for-insertvideo .edui-dialog-content {width: 600px;height: 420px;}
+.edui-default .edui-for-anchor .edui-dialog-content {overflow: hidden;width: 20pc;height: 60px;}
+.edui-default .edui-for-searchreplace .edui-dialog-content {width: 450px;height: 300px;}
+.edui-default .edui-for-help .edui-dialog-content {width: 25pc;height: 420px;}
+.edui-default .edui-for-edittable .edui-dialog-content {width: 540px;height: 335px;}
+.edui-default .edui-for-edittip .edui-dialog-content {width: 225px;height: 60px;}
+.edui-default .edui-for-edittd .edui-dialog-content {width: 15pc;height: 50px;}
+.edui-default .edui-for-snapscreen .edui-dialog-content {width: 25pc;height: 220px;}
+.edui-default .edui-for-music .edui-dialog-content {width: 600px;height: 400px;}
+.edui-default .edui-for-paragraph .edui-listitem-label {font-family: Tahoma, Verdana, Arial, Helvetica;}
+.edui-default .edui-for-paragraph .edui-listitem-label .edui-for-p {font-size: 22px;line-height: 27px;}
+.edui-default .edui-for-paragraph .edui-listitem-label .edui-for-h1 {font-weight: bolder;font-size: 2pc;line-height: 36px;}
+.edui-default .edui-for-paragraph .edui-listitem-label .edui-for-h2 {font-weight: bolder;font-size: 27px;line-height: 29px;}
+.edui-default .edui-for-paragraph .edui-listitem-label .edui-for-h3 {font-weight: bolder;font-size: 19px;line-height: 23px;}
+.edui-default .edui-for-paragraph .edui-listitem-label .edui-for-h4 {font-weight: bolder;font-size: 1pc;line-height: 19px;}
+.edui-default .edui-for-paragraph .edui-listitem-label .edui-for-h5 {font-weight: bolder;font-size: 13px;line-height: 1pc;}
+.edui-default .edui-for-paragraph .edui-listitem-label .edui-for-h6 {font-weight: bolder;font-size: 9pt;line-height: 14px;}
+.edui-default .edui-for-inserttable .edui-splitborder {display: none;}
+.edui-default .edui-for-inserttable .edui-splitbutton-body .edui-arrow {width: 0;}
+.edui-default .edui-toolbar .edui-for-inserttable .edui-state-active .edui-splitborder {border-left: 1px solid transparent;}
+.edui-default .edui-tablepicker .edui-infoarea {clear: both;margin-bottom: 3px;width: 220px;height: 14px;font-size: 9pt;line-height: 14px;}
+.edui-default .edui-tablepicker .edui-infoarea .edui-label {float: left;}
+.edui-default .edui-dialog-buttons .edui-label {line-height: 24px;}
+.edui-default .edui-tablepicker .edui-infoarea .edui-clickable {float: right;}
+.edui-default .edui-tablepicker .edui-pickarea {width: 220px;height: 220px;background: url(../images/unhighlighted.gif);}
+.edui-default .edui-tablepicker .edui-pickarea .edui-overlay {background: url(../images/highlighted.gif);}
+.edui-default .edui-colorpicker-topbar {width: 200px;height: 27px;}
+.edui-default .edui-colorpicker-tablefirstrow {height: 30px;}
+.edui-default .edui-colorpicker-colorcell {display: block;margin: 0;width: 14px;height: 14px;cursor: pointer;}
+.edui-default .edui-colorpicker-colorcell:hover {margin: 0;width: 14px;height: 14px;}
+.edui-default .edui-colorpicker-advbtn {display: block;height: 20px;text-align: center;cursor: pointer;}
+.arrow_down {background: url(../images/arrow_down.png) center no-repeat #fff;}
+.arrow_up {background: url(../images/arrow_up.png) center no-repeat #fff;}
+.edui-colorpicker-adv {position: relative;display: none;overflow: hidden;height: 180px;}
+.edui-colorpicker-hue, .edui-colorpicker-plant {border: 1px solid #666;}
+.edui-colorpicker-pad {position: absolute;top: 13px;left: 14px;overflow: hidden;width: 150px;height: 150px;background: red;cursor: crosshair;}
+.edui-colorpicker-cover {position: absolute;top: 0;left: 0;width: 150px;height: 150px;background: url(../images/tangram-colorpicker.png) -10pc -200px;}
+.edui-colorpicker-padDot {position: absolute;top: 0;left: 0;z-index: 1000;overflow: hidden;width: 11px;height: 11px;background: url(../images/tangram-colorpicker.png) 0 -200px repeat-x;}
+.edui-colorpicker-sliderMain {position: absolute;top: 13px;left: 171px;width: 19px;height: 152px;background: url(../images/tangram-colorpicker.png) -179px -9pt no-repeat;}
+.edui-colorpicker-slider {width: 100%;height: 100%;cursor: pointer;}
+.edui-colorpicker-thumb {position: absolute;top: 0;right: -1px;left: -1px;height: 3px;border: 1px solid #000;background: #fff;opacity: .8;cursor: pointer;}
+.edui-default .edui-autotypesetpicker .edui-autotypesetpicker-body {clear: both;margin-bottom: 3px;font-size: 9pt;}
+.edui-default .edui-autotypesetpicker-body table {border-collapse: separate;border-spacing: 2px;}
+.edui-default .edui-autotypesetpicker-body td {word-wrap: break-word;font-size: 9pt;}
+.edui-default .edui-autotypesetpicker-body td input {margin: 3px 3px 3px 4px;}
+.edui-default .edui-cellalignpicker .edui-cellalignpicker-body {width: 70px;font-size: 9pt;cursor: default;}
+.edui-default .edui-cellalignpicker-body table {border-collapse: separate;border-spacing: 0;}
+.edui-default .edui-cellalignpicker-body .edui-icon {padding: 1px;width: 20px;height: 20px;background-image: url(../images/table-cell-align.png);}
+.edui-default .edui-cellalignpicker-body .edui-left {background-position: 0 0;}
+.edui-default .edui-cellalignpicker-body .edui-center {background-position: -25px 0;}
+.edui-default .edui-cellalignpicker-body .edui-right {background-position: -51px 0;}
+.edui-default .edui-cellalignpicker-body td.edui-state-hover .edui-left {background-position: -73px 0;}
+.edui-default .edui-cellalignpicker-body td.edui-state-hover .edui-center {background-position: -98px 0;}
+.edui-default .edui-cellalignpicker-body td.edui-state-hover .edui-right {background-position: -93pt 0;}
+.edui-default .edui-cellalignpicker-body td.edui-cellalign-selected .edui-left {background-color: #f1f4f5;background-position: -146px 0;}
+.edui-default .edui-cellalignpicker-body td.edui-cellalign-selected .edui-center {background-position: -245px 0;}
+.edui-default .edui-cellalignpicker-body td.edui-cellalign-selected .edui-right {background-position: -271px 0;}
+.edui-default .edui-toolbar .edui-separator {margin: 2px 4px 2px 3px;width: 2px;height: 20px;background: url(../images/icons.png) -181px 0;}
+.edui-default .edui-toolbar .edui-colorbutton .edui-colorlump {position: absolute;bottom: 0;left: 2px;overflow: hidden;width: 15px;height: 3px;}
+.edui-default .edui-for-emotion .edui-icon {background-position: -60px -20px;}
+.edui-default .edui-for-emotion .edui-popup-content iframe {overflow: hidden;width: 514px;height: 380px;}
+.edui-default .edui-for-emotion .edui-popup-content {position: relative;z-index: 555;}
+.edui-default .edui-for-emotion .edui-splitborder {display: none;}
+.edui-default .edui-for-emotion .edui-splitbutton-body .edui-arrow {width: 0;}
+.edui-default .edui-toolbar .edui-for-emotion .edui-state-active .edui-splitborder {border-left: 1px solid transparent;}
+.edui-default .edui-hassubmenu .edui-arrow {float: right;width: 20px;height: 20px;background: url(../images/icons-all.gif) 10px -233px no-repeat;}
+.edui-default .edui-menuseparator {overflow: hidden;margin: 2px 0;height: 1px;}
+.edui-default .edui-menuseparator-inner {margin-right: 1px;margin-left: 29px;border-bottom: 1px solid #e2e3e3;}
+.edui-default .edui-shortcutmenu {padding: 2px;width: 190px;height: 50px;border: 1px solid #ccc;border-radius: 5px;background-color: #fff;}
+.edui-default .edui-wordpastepop .edui-popup-content {padding: 0;width: 54px;height: 21px;border: none;}
+.edui-default .edui-pasteicon {width: 100%;height: 100%;background-image: url(../images/wordpaste.png);background-position: 0 0;}
+.edui-default .edui-pasteicon.edui-state-opened {background-position: 0 -34px;}
+.edui-default .edui-pastecontainer {position: relative;visibility: hidden;width: 97px;border: 1px solid #ccc;background: #fff;}
+.edui-default .edui-pastecontainer .edui-title {padding-left: 5px;height: 25px;background: #f8f8ff;font-weight: 700;font-size: 9pt;line-height: 25px;}
+.edui-default .edui-pastecontainer .edui-button {overflow: hidden;margin: 3px 0;}
+.edui-default .edui-pastecontainer .edui-button .edui-plaintxticon, .edui-default .edui-pastecontainer .edui-button .edui-richtxticon, .edui-default .edui-pastecontainer .edui-button .edui-tagicon {float: left;margin-left: 5px;width: 29px;height: 29px;background-image: url(../images/wordpaste.png);background-repeat: no-repeat;cursor: pointer;}
+.edui-default .edui-pastecontainer .edui-button .edui-richtxticon {margin-left: 0;background-position: -109px 0;}
+.edui-default .edui-pastecontainer .edui-button .edui-tagicon {background-position: -148px 1px;}
+.edui-default .edui-pastecontainer .edui-button .edui-plaintxticon {background-position: -72px 0;}
+.edui-default .edui-pastecontainer .edui-button .edui-state-hover .edui-richtxticon {background-position: -109px -34px;}
+.edui-default .edui-pastecontainer .edui-button .edui-state-hover .edui-tagicon {background-position: -148px -34px;}
+.edui-default .edui-pastecontainer .edui-button .edui-state-hover .edui-plaintxticon {background-position: -72px -34px;}
+.edui-default .edui-menu-body .edui-state-hover {padding: 0 !important;border: 1px solid #e7e7eb;background-color: #f4f5f9;}
+.edui-default .edui-colorpicker-preview {float: left;margin-left: 1px;width: 8pc;height: 20px;border: 1px solid #e7e7eb;}
+.edui-default .edui-colorpicker-nocolor {float: right;margin-right: 1px;padding: 3px 5px;border: 1px solid #e7e7eb;font-size: 9pt;line-height: 14px;cursor: pointer;}
+.edui-default .edui-wx-input {width: 100%;}
+.edui-default .ue_colorpicker_box {padding: 15px;width: 220px;}
+.ue_colorpicker_group {padding-bottom: 9pt;}
+.ue_colorpicker_hd {margin-bottom: 5px;color: #8d8d8d;}
+.ue_colorpicker_hd_tab {padding: 0 .5em;border-left: 1px solid #e7e7eb;color: #d2d2d2;cursor: pointer;}
+.ue_colorpicker_hd_tab:first-child {padding-left: 0;border-left-width: 0;}
+.ue_colorpicker_hd_tab.selected {color: #8d8d8d;}
+.ue_colorpicker_bd {overflow: hidden;}
+.ue_colorpicker_square {float: left;margin: 0 4px 4px 0;width: 18px;height: 18px;border: 1px solid #e7e7eb;cursor: pointer;}
+.ue_colorpicker_toolbar {overflow: hidden;padding-top: 15px;border-top: 1px dotted #e7e7eb;}
+.ue_colorpicker_toolbar .ue_colorpicker_square {margin-right: 6px;width: 24px;height: 24px;background-color: red;}
+.ue_colorpicker_toolbar .btn_ue_colorpicker {float: right;margin-left: 6px;padding: 0 22px;height: 24px;border: 1px solid #e7e7eb;border-radius: 3px;background-color: #fff;color: #222;text-decoration: none;font-size: 14px;line-height: 24px;cursor: pointer;}
+.ue_colorpicker_toolbar .btn_ue_colorpicker:hover {border-color: #dadbe0;color: #222;text-decoration: none;}
+.ue_colorpicker_toolbar .ue_colorpicker_input_box {display: block;overflow: hidden;padding: 0 5px;border: 1px solid #e7e7eb;}
+.ue_colorpicker_toolbar .ue_colorpicker_input_append {float: left;margin-right: 4px;}
+.ue_colorpicker_toolbar .ue_colorpicker_input_inner {display: block;overflow: hidden;}
+.ue_colorpicker_toolbar input {width: 100%;height: 24px;outline: 0;border: 0;background-color: transparent;line-height: 24px;}
+.ue_colorpicker_nocolor {display: inline-block;width: 20px;height: 20px;border-width: 0;background: url(../images/icons.png) 0 -20px no-repeat;vertical-align: middle;}
+.picker-wrapper, .slide-wrapper {position: relative;float: left;}
+.picker-indicator, .slide-indicator {position: absolute;top: 0;left: 0;pointer-events: none;}
+.picker, .slide {float: left;cursor: crosshair;}
+.cp-default .picker {width: 150px;height: 150px;}
+.cp-default .slide {width: 20px;height: 150px;cursor: default;}
+.color-bread, .edui-for-ad .edui-button-wrap .edui-default, .edui-for-headline1 .edui-button-wrap .edui-default, .edui-for-headline2 .edui-button-wrap .edui-default, .edui-for-import-page .edui-button-wrap .edui-default, .edui-for-only-show-video .edui-button-wrap .edui-default, .edui-for-save-img .edui-button-wrap .edui-default, .edui-for-show-style .edui-button-wrap .edui-default {cursor: pointer;}
+.cp-default .slide-wrapper {margin-left: 10px;}
+.cp-default .picker-indicator {width: 5px;height: 5px;border: 1px solid #fff;border-radius: 4px;background-color: transparent;-o-border-radius: 4px;}
+.cp-default .slide-indicator {right: 1px;left: 1px;height: 4px;border: 1px solid #919191;border-radius: 3px;background-color: #f8f8f8;}
+.edui-for-ad, .edui-for-headline1, .edui-for-headline2, .edui-for-import-page, .edui-for-only-show-video, .edui-for-save-img, .edui-for-show-style {margin-left: 5px !important;color: #666;line-height: 20px;}
+.edui-for-ad .edui-button-wrap, .edui-for-headline1 .edui-button-wrap, .edui-for-headline2 .edui-button-wrap, .edui-for-import-page .edui-button-wrap, .edui-for-only-show-video .edui-button-wrap, .edui-for-save-img .edui-button-wrap, .edui-for-show-style .edui-button-wrap {padding: 0 10px !important;border: 1px solid #eee !important;border-radius: 2px;font-size: 9pt;cursor: pointer;}
+.edui-for-ad .edui-icon, .edui-for-headline1 .edui-icon, .edui-for-headline2 .edui-icon, .edui-for-import-page .edui-icon, .edui-for-only-show-video .edui-icon, .edui-for-save-img .edui-icon, .edui-for-show-style .edui-icon {display: none !important;}
+.edui-for-ad .edui-label, .edui-for-headline1 .edui-label, .edui-for-headline2 .edui-label, .edui-for-import-page .edui-label, .edui-for-only-show-video .edui-label, .edui-for-save-img .edui-label, .edui-for-show-style .edui-label {display: block !important;}
+.edui-for-import-page .edui-button-wrap {border-color: #fa0 !important;background-color: #fa0 !important;color: #fff;}
+.edui-for-show-style {position: absolute !important;top: 2px;right: 2px;margin: 0;}
+.edui-for-show-style .edui-button-wrap {padding: 1px 10px !important;font-size: 13px;}
+.color-select-list {position: relative;display: flex;padding: 10px 10px 0;justify-content: flex-start;flex-wrap: wrap;}
+.color-select-list:before {position: absolute;top: 0;left: 10px;display: block;width: calc(100% - 20px);height: 1px;background-color: #eee;content: "";}
+.color-select-list > .head {padding: 0 5px;}
+.color-select-list > span {margin: 0 9px 10px 0;}
+.color-bread {display: block;width: 20px;height: 20px;border: 1px solid #eee;}
+.color-bread:hover {border: 1px solid #ddd;}
+.edui-popup .number {position: relative;display: inline-block;padding: 0 20px;height: 15px;}
+.edui-popup .number input {position: absolute;top: 0;left: 0;display: block;padding: 3px 15px 3px 5px;width: 40px;outline: 0;border: 1px solid #fff;border-radius: 2px;background-color: transparent;color: #fff;line-height: 14px;-moz-appearance: textfield;}
+.edui-popup .number input::-webkit-inner-spin-button, .edui-popup .number input::-webkit-outer-spin-button {-webkit-appearance: none;}
+.edui-popup .number .next, .edui-popup .number .prev {position: absolute;right: 0;display: block;width: 15px;height: 11px;border: 0 solid #fff;}
+.edui-popup .number .next:after, .edui-popup .number .prev:after {position: absolute;left: 4px;display: block;width: 5px;height: 5px;content: "";}
+.edui-popup .number .prev {top: 0;border-width: 0 0 1px 1px;}
+.edui-popup .number .prev:after {top: 4px;border: 0 solid #fff;border-width: 1px 1px 0 0;transform: rotate(315deg);}
+.edui-popup .number .next {bottom: -6px;border-width: 0 0 0 1px;}
+.edui-popup .number .next:after {top: 2px;border: 0 solid #fff;border-width: 1px 1px 0 0;transform: rotate(135deg);}
+.range-slider {width: 100%;}
+.range-slider__max, .range-slider__min {position: absolute;top: 25px;padding: 0 !important;width: 25px;height: 25px;text-align: center;}
+.range-slider__min {left: 0;}
+.range-slider__max {right: 0;}
+.range-slider__minus, .range-slider__plus {position: absolute;top: 10px;padding: 0 !important;width: 9pt;height: 9pt;border: 1px solid #aaa;font-size: 15px;line-height: 11px;}
+.range-slider__minus {left: 6px;}
+.range-slider__plus {right: 6px;}
+.range-slider__value {margin-top: 3px;line-height: 1;}
+.range-slider__range {margin: 0;padding: 0;width: calc(100% - 10px);height: 6px;outline: 0;border-radius: 3px;background: #fff;-webkit-appearance: none; margin-top: 14px;}
+.range-slider__range::-webkit-slider-thumb {width: 10px;height: 10px;border-radius: 50%;background: #9fd2f6;cursor: pointer;transition: background .15s ease-in-out;-webkit-appearance: none;appearance: none;}
+.range-slider__range::-webkit-slider-thumb:hover, .range-slider__range:active::-webkit-slider-thumb {background: #49a9ee;}
+.range-slider__range::-moz-range-thumb {width: 10px;height: 10px;border: 0;border-radius: 50%;background: #49a9ee;cursor: pointer;transition: background .15s ease-in-out;}
+.range-slider__range::-moz-range-thumb:hover, .range-slider__range:active::-moz-range-thumb {background: #49a9ee;}
+::-moz-range-track {border: 0;background: #fff;}
+input::-moz-focus-inner, input::-moz-focus-outer {border: 0;}
+.editor-icon-list {position: static;right: 0 !important;bottom: -81px;}
+.editor-icon-list:after {clear: both;display: block;visibility: hidden;height: 0;content: "";}
+.editor-icon-list > span {float: left;box-sizing: border-box;width: 43px;height: 44px;}
+.editor-icon-list > .line {display: flex;padding: 8px 6px;width: 100%;border-top: 1px solid #444;}
+.editor-icon-list > .line .item {flex: 1;}
+.editor-icon-list > .line .item .text {display: inline-block;margin-right: 5px;}
+.editor-icon-list > .line .item .color-box {position: relative;top: 3px;display: inline-block;margin-left: 5px;width: 15px;height: 15px;border: 1px solid #444;}
+.edui-icon.edui-icon-svg {overflow: hidden;background-image: none !important;color: #666;vertical-align: middle;fill: currentColor;}
+.edui-default .edui-toolbar .edui-for-autotypeset .edui-default .edui-icon, .wxb-editor-autotypeset {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -30px;}
+.edui-default .edui-toolbar .edui-for-backcolor .edui-default .edui-icon, .wxb-editor-backcolor {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -660px;}
+.edui-default .edui-toolbar .edui-for-background-image .edui-default .edui-icon, .wxb-editor-background-image {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -60px;}
+.edui-default .edui-toolbar .edui-for-blockquote .edui-default .edui-icon, .wxb-editor-blockquote {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -90px;}
+.edui-default .edui-toolbar .edui-for-bold .edui-default .edui-icon, .wxb-editor-bold {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -90pt;}
+.edui-default .edui-toolbar .edui-for-custom-emjio .edui-default .edui-icon, .wxb-editor-custom-emjio {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -150px;}
+.edui-default .edui-toolbar .edui-for-emotion .edui-default .edui-icon, .wxb-editor-emotion {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -180px;}
+.edui-default .edui-toolbar .edui-for-font-shadow .edui-default .edui-icon, .wxb-editor-font-shadow {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -210px;}
+.edui-default .edui-toolbar .edui-for-fontborder .edui-default .edui-icon, .wxb-editor-fontborder {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -15pc;}
+.edui-default .edui-toolbar .edui-for-forecolor .edui-default .edui-icon, .wxb-editor-forecolor {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -270px;}
+.edui-default .edui-toolbar .edui-for-formatmatch .edui-default .edui-icon, .wxb-editor-formatmatch {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -300px;}
+.edui-default .edui-toolbar .edui-for-horizontal .edui-default .edui-icon, .wxb-editor-horizontal {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -330px;}
+.edui-default .edui-toolbar .edui-for-icon-cut .edui-default .edui-icon, .wxb-editor-icon-cut {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -360px;}
+.edui-default .edui-toolbar .edui-for-icon-swap .edui-default .edui-icon, .wxb-editor-icon-swap {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -390px;}
+.edui-default .edui-toolbar .edui-for-import-word .edui-default .edui-icon, .wxb-editor-import-word {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -420px;}
+.edui-default .edui-toolbar .edui-for-indent .edui-default .edui-icon, .wxb-editor-indent {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -450px;}
+.edui-default .edui-toolbar .edui-for-insert-image .edui-default .edui-icon, .wxb-editor-insert-image,
+.edui-default .edui-toolbar .edui-for-simpleupload .edui-default .edui-icon, .wxb-editor-simpleupload {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -5in;}
+
+.edui-default .edui-toolbar .edui-for-insert-music .edui-default .edui-icon, .wxb-editor-insert-music,
+.edui-default .edui-toolbar .edui-for-music .edui-default .edui-icon, .wxb-editor-music {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -510px;}
+.edui-default .edui-toolbar .edui-for-insert-video .edui-default .edui-icon, .wxb-editor-insert-video,
+.edui-default .edui-toolbar .edui-for-insertvideo .edui-default .edui-icon, .wxb-editor-insertvideo {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -540px;}
+.edui-default .edui-toolbar .edui-for-insert-voice .edui-default .edui-icon, .wxb-editor-insert-voice {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -570px;}
+.edui-default .edui-toolbar .edui-for-insertorderedlist .edui-default .edui-icon, .wxb-editor-insertorderedlist {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -600px;}
+.edui-default .edui-toolbar .edui-for-inserttable .edui-default .edui-icon, .wxb-editor-inserttable {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -630px;}
+.edui-default .edui-toolbar .edui-for-insertunorderedlist .edui-default .edui-icon, .wxb-editor-insertunorderedlist {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 0;}
+.edui-default .edui-toolbar .edui-for-italic .edui-default .edui-icon, .wxb-editor-italic {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -690px;}
+.edui-default .edui-toolbar .edui-for-justifycenter .edui-default .edui-icon, .wxb-editor-justifycenter {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -45pc;}
+.edui-default .edui-toolbar .edui-for-justifyjustify .edui-default .edui-icon, .wxb-editor-justifyjustify {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -750px;}
+.edui-default .edui-toolbar .edui-for-justifyleft .edui-default .edui-icon, .wxb-editor-justifyleft {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -780px;}
+.edui-default .edui-toolbar .edui-for-justifyright .edui-default .edui-icon, .wxb-editor-justifyright {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -810px;}
+.edui-default .edui-toolbar .edui-for-lineheight .edui-default .edui-icon, .wxb-editor-lineheight {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -840px;}
+.edui-default .edui-toolbar .edui-for-link .edui-default .edui-icon, .wxb-editor-link {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -870px;}
+.edui-default .edui-toolbar .edui-for-pasteplain .edui-default .edui-icon, .wxb-editor-pasteplain {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -900px;}
+.edui-default .edui-toolbar .edui-for-redo .edui-default .edui-icon, .wxb-editor-redo {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -930px;}
+.edui-default .edui-toolbar .edui-for-removeformat .edui-default .edui-icon, .wxb-editor-removeformat {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -60pc;}
+.edui-default .edui-toolbar .edui-for-rowspacingbottom .edui-default .edui-icon, .wxb-editor-rowspacingbottom {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -990px;}
+.edui-default .edui-toolbar .edui-for-rowspacingtop .edui-default .edui-icon, .wxb-editor-rowspacingtop {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -765pt;}
+.edui-default .edui-toolbar .edui-for-searchreplace .edui-default .edui-icon, .wxb-editor-searchreplace {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -1050px;}
+.edui-default .edui-toolbar .edui-for-source .edui-default .edui-icon, .wxb-editor-source {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -810pt;}
+.edui-default .edui-toolbar .edui-for-spechars .edui-default .edui-icon, .wxb-editor-spechars {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -1110px;}
+.edui-default .edui-toolbar .edui-for-strikethrough .edui-default .edui-icon, .wxb-editor-strikethrough {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -855pt;}
+.edui-default .edui-toolbar .edui-for-underline .edui-default .edui-icon, .wxb-editor-underline {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -1170px;}
+.edui-default .edui-toolbar .edui-for-undo .edui-default .edui-icon, .wxb-editor-undo {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -75pc;}
+.edui-default .edui-toolbar .edui-for-unlink .edui-default .edui-icon, .wxb-editor-unlink {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -1230px;}
+.edui-default .edui-toolbar .edui-for-vote .edui-default .edui-icon, .wxb-editor-vote {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -945pt;}
+.edui-default .edui-toolbar .edui-for-weapp .edui-default .edui-icon, .wxb-editor-weapp {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -1290px;}
+.edui-default .edui-toolbar .edui-for-weixin-link .edui-default .edui-icon, .wxb-editor-weixin-link {width: 20px;height: 20px;background-image: url(../icon/tool-0332.png);background-position: 0 -990pt;}
+@media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
+    .edui-default .edui-toolbar .edui-for-autotypeset .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-backcolor .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-background-image .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-blockquote .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-bold .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-custom-emjio .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-emotion .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-font-shadow .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-fontborder .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-forecolor .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-formatmatch .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-horizontal .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-icon-cut .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-icon-swap .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-import-word .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-indent .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-insert-image .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-insert-music .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-insert-video .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-insert-voice .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-insertorderedlist .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-inserttable .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-insertunorderedlist .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-italic .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-justifycenter .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-justifyjustify .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-justifyleft .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-justifyright .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-lineheight .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-link .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-music .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-pasteplain .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-redo .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-removeformat .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-rowspacingbottom .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-rowspacingtop .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-searchreplace .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-source .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-spechars .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-strikethrough .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-underline .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-undo .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-unlink .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-vote .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-weapp .edui-default .edui-icon, .edui-default .edui-toolbar .edui-for-weixin-link .edui-default .edui-icon, .wxb-editor-autotypeset, .wxb-editor-backcolor, .wxb-editor-background-image, .wxb-editor-blockquote, .wxb-editor-bold, .wxb-editor-custom-emjio, .wxb-editor-emotion, .wxb-editor-font-shadow, .wxb-editor-fontborder, .wxb-editor-forecolor, .wxb-editor-formatmatch, .wxb-editor-horizontal, .wxb-editor-icon-cut, .wxb-editor-icon-swap, .wxb-editor-import-word, .wxb-editor-indent, .wxb-editor-insert-image, .wxb-editor-insert-music, .wxb-editor-insert-video, .wxb-editor-insert-voice, .wxb-editor-insertorderedlist, .wxb-editor-inserttable, .wxb-editor-insertunorderedlist, .wxb-editor-italic, .wxb-editor-justifycenter, .wxb-editor-justifyjustify, .wxb-editor-justifyleft, .wxb-editor-justifyright, .wxb-editor-lineheight, .wxb-editor-link, .wxb-editor-music, .wxb-editor-pasteplain, .wxb-editor-redo, .wxb-editor-removeformat, .wxb-editor-rowspacingbottom, .wxb-editor-rowspacingtop, .wxb-editor-searchreplace, .wxb-editor-source, .wxb-editor-spechars, .wxb-editor-strikethrough, .wxb-editor-underline, .wxb-editor-undo, .wxb-editor-unlink, .wxb-editor-vote, .wxb-editor-weapp, .wxb-editor-weixin-link {background-image: url(../icon/tool-0332@2x.png);background-size: 20px 1340px;}
+}
+
+
+.edui-default .edui-editor-toolbarbox .edui-editor-toolbarboxinner { padding: 8px; }
+.edui-default .edui-editor-toolbarbox .edui-editor-toolbarboxinner .edui-toolbar { padding: 0 0 5px; }
+.edui-default .edui-editor-toolbarbox .edui-editor-toolbarboxinner .edui-toolbar:last-child { padding-bottom: 0; }
+
+.edui-default.edui-popup.popup-click .color-bread { border: 1px solid #666;}
+.edui-default.edui-popup.popup-click .color-select-list:before { background-color: #444;}
+.edui-default.edui-popup.popup-click .editor-color-picker .usedColorContainer { border-bottom-color: #444; }
+.edui-default.edui-popup.popup-click .editor-color-picker .usedColorContainer .usedColorHead { color: #fff; }
+.edui-default.edui-popup.popup-click .editor-color-picker .colorPane { background-color: rgba(0, 0, 0, .8); border-width: 0; }
+.edui-default.edui-popup.popup-click .editor-color-picker .colorPane .color-pane-tab-header .active { color: #fff; }
+.edui-default.edui-popup.popup-click .editor-color-picker .colorBlock, .edui-default.edui-popup.popup-click .editor-color-picker .colorBlockClear, .edui-default.edui-popup.popup-click .editor-color-picker .currentAreaBlock { border: 1px solid #666; }
+.edui-default.edui-popup.popup-click .editor-color-picker .currentColorArea { border-top-color: #444; }
+.edui-default.edui-popup.popup-click .editor-color-picker .currentColorArea .currentAreaInput { border-radius: 0; border-width: 0; }
+
+.edui-shortcutmenu.edui-toolbar .edui-combox-body .edui-button-body { width: 50px !important; }
+.edui-default .edui-shortcutmenu { width: 270px !important; height: 80px !important; }
+.edui-editor div.layui-colorpicker,.edui-default div.layui-colorpicker {filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;-webkit-opacity: 0; opacity: 0; }
+
+
+
+.editor-icon-list > span { display: inline-block; padding: 3px 6px; color: #aaa; text-align: center; background-color: rgba(0, 0, 0, .8); cursor: pointer; box-shadow: 0 0 6px rgba(0, 0, 0, .3); border-right: 1px solid #444; }
+.editor-icon-list > span:last-child { border-right-width: 0; }
+.editor-icon-list > span > i { display: block; margin: 0 auto; }
+.editor-icon-list > span span { display: block; padding: 0 3px; font-family: -apple-system, BlinkMacSystemFont, PingFangSC-Regular, Roboto, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif; }
+.editor-icon-list.ant { bottom: 5px; }
+.editor-icon-list > i.anticon { display: inline-block; padding: 5px; margin-right: 3px; background-color: rgba(0, 0, 0, .7); color: #fff; text-align: center; cursor: pointer; }
+.editor-icon-list > i.anticon:before { font-size: 14px; }
+.editor-icon-list > i.anticon:last-child { margin-right: 0; }
+.editor-icon-list > i.anticon span { display: block; margin-top: 5px; padding: 0 3px; }
+.editor-icon-list > i.anticon span { font-family: -apple-system, BlinkMacSystemFont, PingFangSC-Regular, Roboto, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif; }
+
+.editor-icon-list .input-number-margin{ box-sizing: border-box;-webkit-flex: border-box; }
+
+.edui-default .edui-toolbar .edui-for-fullscreen {float: none !important;}

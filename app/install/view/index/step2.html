@@ -1,0 +1,139 @@
+<script src="/plugins/layer-v3.1.0/layer.js"></script>
+<style type="text/css">
+    .btn_a { width: 58px; }
+    table td { text-align: center; }
+    table td.first { text-align: left; }
+</style>
+<div class="blank30"></div>
+<div class="go go2"></div>
+<div class="blank30"></div>
+<div class="server">
+    <table width="100%" class="table" cellspacing="1">
+        <tr>
+            <td class="td1">环境检测</td>
+            <td class="td1" width="23%">推荐配置</td>
+            <td class="td1" width="46%">当前状态</td>
+        </tr>
+        <tr>
+            <td class="first">服务器环境</td>
+            <td>IIS/apache2.0以上/nginx1.6以上</td>
+            <td><?php echo $_SERVER['SERVER_SOFTWARE']; ?></td>
+        </tr>
+        <tr>
+            <td class="first">PHP版本</td>
+            <td>7.1及7.1以上</td>
+            <td><?php echo $phpvStr; ?></td>
+        </tr>
+        <tr>
+            <td class="first">safe_mode</td>
+            <td><font title="影响缓存清除、系统升级、模板管理等功能">基础配置</font></td>
+            <td><?php echo $safe_mode; ?></td>
+        </tr>
+        <tr>
+            <td class="first">GD库</td>
+            <td><font title="影响验证码是否显示、图片水印、以及图像处理等问题">必须开启</font></td>
+            <td><?php echo $gd; ?></td>
+        </tr>
+        <tr>
+            <td class="first">mysqli</td>
+            <td><font title="影响数据库的连接和一系列读、写、删、改操作">必须开启</font></td>
+            <td><?php echo $mysql; ?></td>
+        </tr>
+        <tr>
+            <td class="first">pdo</td>
+            <td><font title="影响数据库的连接和一系列读、写、删、改操作">必须开启</font></td>
+            <td><?php echo $pdo; ?></td>
+        </tr>
+        <tr>
+            <td class="first">pdo_mysql</td>
+            <td><font title="影响数据库的连接和一系列读、写、删、改操作">必须开启</font></td>
+            <td><?php echo $pdo_mysql; ?></td>
+        </tr>
+        <tr>
+            <td class="first">fileinfo</td>
+            <td><font title="影响图片上传、文件处理">必须开启</font></td>
+            <td><?php echo $fileinfo; ?></td>
+        </tr>
+        <tr>
+            <td class="first">mbstring</td>
+            <td><font title="影响文章文字处理、字符编码处理">必须开启</font></td>
+            <td><?php echo $mbstring; ?></td>
+        </tr>
+        <tr>
+            <td class="first">Zip</td>
+            <td><font title="影响程序升级">必须开启</font></td>
+            <td><?php echo $zip; ?></td>
+        </tr>
+    </table>
+
+    <table width="100%" class="table" cellspacing="1">
+        <tr>
+            <td class="td1">函数检测</td>
+            <td class="td1" width="23%">推荐配置</td>
+            <td class="td1" width="46%">是否通过</td>
+        </tr>
+        <tr>
+            <td class="first">curl_init</td>
+            <td><font title="影响插件功能、伪静态、系统升级、采集文章等功能">必须扩展</font></td>
+            <td><?php echo $curl; ?></td>
+        </tr>
+        <tr>
+            <td class="first">file_put_contents</td>
+            <td><font title="影响系统安装、文件上传、数据库备份、百度地图xml等功能">必须扩展</font></td>
+            <td><?php echo $file_put_contents; ?></td>
+        </tr>
+        <tr>
+            <td class="first">scandir</td>
+            <td><font title="影响模板文件读取功能、安装程序">必须扩展</font></td>
+            <td><?php echo $scandir; ?></td>
+        </tr>
+        <tr>
+            <td class="first">chmod</td>
+            <td><font title="影响文件上传等文件操作">必须扩展</font></td>
+            <td><?php echo $chmod; ?></td>
+        </tr>
+    </table>
+
+    <table width="100%" class="table" cellspacing="1">
+        <tr>
+            <td class="td1">目录、文件权限检查</td>
+            <td class="td1" width="23%">推荐配置</td>
+            <td class="td1" width="46%">是否通过</td>
+        </tr>
+        <?php
+        foreach ($folder as $dir) {
+            $is_write = false;
+            $Testdir = $rootPath . $dir;
+            if (file_exists($Testdir) && is_file($Testdir)) {
+                $is_write = is_writable($Testdir);
+                !empty($is_write) && $is_write = is_readable($Testdir);
+            } else {
+                dir_create($Testdir);
+                $is_write = testwrite($Testdir);
+                !empty($is_write) && $is_write = is_readable($Testdir);
+            }
+            if ($is_write) {
+                $w = '<img src="/setup/images/ok.png">';
+              } else {
+                $w = '<img src="/setup/images/del.png">';
+                $err++;
+              }
+        ?>
+        <tr>
+            <td class="first"><?php echo $dir; ?></td>
+            <td>读写</td>
+            <td><?php echo $w; ?></td>
+        </tr>
+        <?php } ?>
+    </table>
+
+</div>
+<div class="bottom tac">
+    <div class="blank20"></div>
+    <a href="javascript:location.reload();" class="btn_b">重新检测</a>
+    <?php if ($err > 0) { ?>
+    <a href="javascript:;" onClick="layer.alert('安装环境检测未通过，请检查', {icon: 5, title: false})" class="btn_a"  style="background: gray;">下一步</a>
+    <?php } else { ?>
+    <a  href="{:url('Index/step3')}" class="btn_a">下一步</a>
+    <?php } ?>
+</div>

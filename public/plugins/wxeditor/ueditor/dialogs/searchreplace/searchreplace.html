@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <link rel="stylesheet" href="/plugins/layui-v2.5.6/css/layui.css" media="all">
+    <script type="text/javascript" src="../internal.js"></script>
+    <style>
+        .warpper{ position:relative;width: 380px; height: 100%; margin: 10px auto 0;}
+        .layui-tab-content{border:1px solid #e2e2e2;padding-bottom: 0;border-top:0}
+        .layui-btn-sm{width:62px;height:30px;line-height:30px;padding: 0 10px}
+    </style>
+</head>
+<body>
+<div class="warpper">
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this"><var id="lang_tab_search"></var></li>
+            <li><var id="lang_tab_replace"></var></li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form layui-form-pane">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><var id="lang_search1"></var></label>
+                        <div class="layui-input-block">
+                            <input type="text" id="findtxt" required lay-verify="required" placeholder="输入要查找的内容" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item" pane>
+                        <label class="layui-form-label"><var id="lang_case_sensitive1"></var></label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" id="matchCase" lay-skin="switch" lay-text="是|否">
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="height:30px">
+                        <div class="layui-input-block" style="margin-left:1px">
+                            <input class="layui-btn layui-btn-sm layui-btn-normal" id="nextFindBtn"></button>
+                            <input class="layui-btn layui-btn-sm layui-btn-normal" id="preFindBtn"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-tab-item">
+                <form class="layui-form layui-form-pane">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><var id="lang_search2"></var></label>
+                        <div class="layui-input-block">
+                            <input type="text" id="findtxt1" required lay-verify="required" placeholder="输入要查找的内容" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><var id="lang_replace"></var></label>
+                        <div class="layui-input-block">
+                            <input type="text" id="replacetxt" required lay-verify="required" placeholder="输入要替换的内容" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item" pane>
+                        <label class="layui-form-label"><var id="lang_case_sensitive2"></var></label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" id="matchCase1" lay-skin="switch" lay-text="是|否">
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="height:30px">
+                        <div class="layui-input-block" style="margin-left:1px">
+                            <input class="layui-btn layui-btn-sm layui-btn-normal" id="nextReplaceBtn"></button>
+                            <input class="layui-btn layui-btn-sm layui-btn-normal" id="preReplaceBtn"></button>
+                            <input class="layui-btn layui-btn-sm layui-btn-normal" id="repalceBtn"></button>
+                            <input class="layui-btn layui-btn-sm layui-btn-normal" id="repalceAllBtn" style="width: 80px;"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/plugins/layui-v2.5.6/layui.all.js"></script>
+<script type="text/javascript" src="searchreplace.js"></script>
+</body>
+</html>

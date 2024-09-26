@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <title>{$rrz.seo_title}</title>
+    <meta name="description" content="{$rrz.seo_description}"/>
+    <meta name="keywords" content="{$rrz.seo_keywords}"/>
+    <meta name="author" content="order by rrzcms.com"/>
+    <link href="{rrz:env name='website.favicon' /}" rel="shortcut icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    {rrz:skin href="skin/css/cui.css,skin/css/style.css,skin/css/less.css"/}
+    {rrz:skin href="skin/js/jquery.js"/}
+</head>
+<body>
+
+    {include file="block/header" /}
+    <div id="bd">
+        <div class="cur">
+            <div class="wp">您的当前位置：{rrz:crumbs /} </div>
+        </div>
+        <div class="wp">
+            <div class="article">
+                <h1>{$rrz.title}</h1>
+                <p class="time">时间：{$rrz.pubtime|date='Y-m-d'}</p>
+                <div class="article-con"> {$rrz.content|raw} </div>
+                <div class="h20"></div>
+                <div class="share">
+                    <span>分享到：</span>
+                    <div class="bdsharebuttonbox">
+                        <a href="#" class="bds_more" data-cmd="more"></a>
+                        <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                        <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+                        <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+                        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                    </div>
+                    <script>
+                        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    {include file="block/footer" /}
+    {rrz:skin href="skin/js/lib.js"/}
+
+
+</body>
+</html>

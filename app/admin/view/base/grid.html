@@ -1,0 +1,7 @@
+<div class="layui-card layui-grid flex flex-column {$grid_class|default=''}" data-url="{$ajax_url}" data-curpage="{$curr}" data-pagetotal="{$page_count}" data-check-type="{$checkType}">
+    {include file="base/grid/tabs" /}
+    {include file="base/grid/centent" /}
+    {if isset($grid_desc)&&$grid_desc /}
+    <div class="layui-grid-desc">{:$grid_desc}</div>
+    {/if}
+</div>

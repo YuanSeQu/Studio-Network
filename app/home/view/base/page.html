@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <title>{$rrz.title}</title>
+    <meta name="author" content="order by www.rrzcms.com" />
+    <link href="{rrz:env name='website.favicon' empty='/favicon.ico' /}" rel="shortcut icon" />
+    <link rel="stylesheet" type="text/css" href="/static/css/comm/kb.min.css?v={:C('config.version')}"/>
+    <link rel="stylesheet" type="text/css" href="/plugins/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css?v={:C('config.version')}">
+    <link rel="stylesheet" type="text/css" href="/static/css/user/rrzcms.css?v={:C('config.version')}"/>
+    <script src="/plugins/jquery/jquery-3.2.1/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    {$rrz.body|raw}
+    <script src="/static/js/admin/formplus.js?v={:C('config.version')}" async></script>
+    <script src="/plugins/layui/layui.js"></script>
+    <script src="/static/js/user/public.js?v={:C('config.version')}"></script>
+    <script src="/static/js/user/rrzcms.js?v={:C('config.version')}"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{rrz:sidebar}
+<div class="tit-i">
+    <h3>{$sidebar.top.title}</h3>
+    <h5><span>{$sidebar.top.en_title??''}</span></h5>
+</div>
+
+<div class="sub-nav">
+    <ul>
+        {foreach $sidebar.list as $item}
+        <li><a href="{$item.url}" class="{$item.class?'mycur':''}">{$item.title}</a></li>
+        {/foreach}
+    </ul>
+</div>
+<div class="c"></div>
+{/rrz:sidebar}

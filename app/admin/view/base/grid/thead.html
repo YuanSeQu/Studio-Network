@@ -1,0 +1,24 @@
+<thead>
+    <tr>
+        {if condition="$checkType"}
+        <td class="checkbox" width="50" align="center">
+            <div class="layui-form" lay-filter="layui-grid-form">
+            {if $checkType=='checkbox'}
+            <input class="checkAll" lay-filter="layui-grid-checkbox" type="checkbox" lay-skin="primary"/>
+            {else /}
+            {/if}
+            </div>
+        </td>
+        {/if}
+        {if condition="$colsNo"}<td width="{:$fixedColumn?80:50}" align="center">序号</td>{/if}
+        {foreach name="columns" item="col"}
+        <?php isset($col['align']) or $col['align']='center'; ?>
+        <td {foreach name="col" item="ov"} {if condition="!in_array($key,array('html','field','object','tag','enum','callback'))" } {$key}="{$ov}" {/if} {/foreach} >
+        {$col.title??''}
+        </td>
+        {/foreach}
+        {if condition="$fixedColumn"}
+        <td>&nbsp;</td>
+        {/if}
+    </tr>
+</thead>

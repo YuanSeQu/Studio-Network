@@ -1,0 +1,16 @@
+<div class="h200 pr20 pt30">
+    <form class="layui-form" method="post" action="{:U('Article/changeNode')}">
+        <table>
+            <tr>
+                <th width="100">选择栏目</th>
+                <td width="300">
+                    {select class="w js-select-nodes lay-panel-body" name="node_id" value="" placeholder="请选择栏目" }{$nodes|raw}{/select}
+                    <input type="hidden" name="ids" value="{$ids|raw}"/>
+                </td>
+            </tr>
+        </table>
+        <div class="tc ptb20">
+            <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+        </div>
+    </form>
+</div>

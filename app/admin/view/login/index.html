@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台登录</title>
+    <meta http-equiv="Content-Language" content="zh-cn"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta name="robots" content="noindex,nofollow"/>
+    <script src="/static/js/testBrowser.min.js?v={:C('config.version')}"></script>
+    <link rel="stylesheet" href="/static/css/comm/kb.min.css?v={:C('config.version')}">
+    <link rel="stylesheet" href="/plugins/layui-v2.5.6/css/layui.css">
+    <link rel="stylesheet" href="/static/css/base.css?v={:C('config.version')}">
+
+    <link rel="stylesheet" href="/static/css/admin/login.css?v={:C('config.version')}">
+
+    <script src="/plugins/jquery/jquery-3.2.1/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="/plugins/layer-v3.1.0/theme/default/layer.css" media="all">
+    <script src="/plugins/layer-v3.1.0/layer.js"></script>
+    <script src="/plugins/layui-v2.5.6/layui.js"></script>
+
+    <script src="/static/js/admin/public.js?v={:C('config.version')}"></script>
+
+    <link href="{rrz:env name='website.favicon' empty='/favicon.ico' /}" rel="shortcut icon" />
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="{:sysConfig('admin.logo')}?v={:C('config.version')}"/>
+        </div>
+        <div class="box">
+            <form class="layui-form" method="post" action="{:U('Login/submit')}">
+                <div class="layui-form-item">
+                    <input class="layui-input" type="text" name="user_name" lay-verify="required" autocomplete="off" value="" placeholder="用户名" autofocus />
+                </div>
+                <div class="layui-form-item">
+                    <input class="layui-input" type="password" name="password" lay-verify="required" autocomplete="off" value="" placeholder="密码" />
+                </div>
+                {if C('captcha.enabled')}
+                <div class="layui-form-item pr">
+                    <input class="layui-input" type="text" name="vertify" lay-verify="required" autocomplete="off" value="" placeholder="验证码" />
+                    <img class="pa js-verify" src="{:U('Login/verify')}" style="right: 3px;top: 3px;height: 36px;">
+                </div>
+                {/if}
+                <div class="text-right">
+                    <a href="javascript:;" class="cl-38f unl js-wjmima">忘记密码?</a>
+                </div>
+                <div class="tc mt20">
+                    <button type="submit" lay-submit class="layui-btn layui-btn-normal layui-btn-fluid">登录</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        (function () {
+
+            layui.use('form', function(){
+                var form = layui.form;
+                form.config.verType = 'tips';
+                form.on('submit', function (data) {
+                    $(data.form).ajax();
+                    return false;
+                });
+            });
+
+            var $verify = $('.js-verify');
+
+            function refshverify() {
+                $verify.attr('src', '{:U("Login/verify")}?v=' + Math.floor(Math.random() * 100));
+            }
+
+            $verify.on('click', refshverify);
+
+            $('.layui-form').data('callback', function (rs) {
+                rs.msg && $.msg(rs.msg);
+                rs.url && setTimeout(function () {
+                    window.location.href = rs.url;
+                }, rs.msg ? 1500 : 0);
+                rs.code == 0 && refshverify();
+                return false;
+            });
+
+            $('.js-wjmima').click(function () {
+                layer.alert('请联系网站管理员！', { title: '提示' });
+            });
+
+            try {
+                var root = '{:getRootUrl()}';
+                $.post('{:url("Login/setInlet")}', { inlet: 0 });
+                setTimeout(function () {
+                    $.ajax({
+                        url: root + '{:getAppName("admin")}/Login/setInlet',
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            jqXHR.status == 404 && $.post(root + 'index.php/{:getAppName("admin")}/Login/setInlet', { inlet: 2 });
+                        }
+                    });
+                }, 500);
+            } catch (e) {
+            }
+        })();
+    </script>
+</body>
+</html>

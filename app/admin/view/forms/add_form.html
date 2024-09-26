@@ -1,0 +1,118 @@
+<div class="layui-card js-view-addForm">
+    <div class="layui-card-header">
+        <a class="cl-38f" target="page" href="{:U('Forms/config')}">表单配置</a> / {$row?'编辑':'添加'}表单
+    </div>
+    <div class="layui-card-body">
+        <form class="layui-form" method="post" action="{:U('Forms/addForm')}?id={$row.id??''}" lay-filter="js-formm-addForm">
+            <table lay-th-vtop>
+                <tr>
+                    <th width="80"><em>*</em>表单名称</th>
+                    <td>
+                        <input type="text" name="title" value="{$row.title??''}" lay-verify="required" autocomplete="off" class="layui-input w200" maxlength="200"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>表单字段</th>
+                    <td>
+                        <div class="js-list w600">
+                            {if $row['config']??0}
+                            {foreach name="row['config']" item="item"}
+                            <div class="item bd-ddd p10 mb5 pr flex bg-w" data-key="_{$key}">
+                                <div class="flex-1 wrap" data-key="_{$key}">
+                                    <select class="js-type" name="list[_{$key}][type]" lay-ignore>
+                                        <option value="text" {if $item['type']=='text'}selected{/if}>单行文本</option>
+                                        <option value="textarea" {if $item['type']=='textarea'}selected{/if}>多行文本</option>
+                                        <option value="radio" {if $item['type']=='radio'}selected{/if}>单项选择</option>
+                                        <option value="checkbox" {if $item['type']=='checkbox'}selected{/if}>多项选择</option>
+                                    </select>
+                                    <input class="layui-input layui-input-sm w150 mr5" name="list[_{$key}][name]" value="{$item.name}" placeholder="自定义名称" size="13"/>
+
+                                    <input lay-skin="primary" title="必填" type="checkbox" name="list[_{$key}][required]" value="1" unvalue="0" {if $item['required']}checked{/if} />
+                                    <span class="close-modal ps ml10">×</span>
+                                    {if $item['option']??0}
+                                    {foreach name="item['option']" item="option" key="k"}
+                                        <div class="w mt5 js-option">
+                                            <input class="layui-input layui-input-sm w150" name="list[_{$key}][option][]" value="{$option}" maxlength="10" placeholder="选项名称" size="15"/>
+                                            <a class="js-add unl cl-38f lineblock ml5">添加</a>
+                                            {if $k!=0}
+                                            <a class="js-del unl cl-38f lineblock ml5">删除</a>
+                                            {/if}
+                                        </div>
+                                    {/foreach}
+                                    {/if}
+                                </div>
+                                <div class="w100 drag tc noselect">
+                                    <i class="layui-icon cl-38f">&#xe619;</i><i class="layui-icon cl-38f">&#xe61a;</i>
+                                </div>
+                            </div>
+                            {/foreach}
+                            {/if}
+                        </div>
+                        <a href="javascript:;" class="bd-ddd p5 dashed tc block noselect js-list-add">+添加字段</a>
+                        <p class="f12 cl-999 mt5">字段名称不填或留空保存时将自动删除</p>
+                    </td>
+                </tr>
+            </table>
+            <div class="mt30 pl100 pb30">
+                <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+            </div>
+        </form>
+    </div>
+    <script type="text/template" class="js-tpl-addlist">
+        <div class="flex-1 wrap" data-key="{key}">
+            <select class="js-type" name="list[{key}][type]" lay-ignore>
+                <option value="text">单行文本</option>
+                <option value="textarea">多行文本</option>
+                <option value="radio">单项选择</option>
+                <option value="checkbox">多项选择</option>
+            </select>
+            <input class="layui-input layui-input-sm w150 mr5" name="list[{key}][name]" value="字段名称" placeholder="自定义名称" size="13" />&nbsp;
+            <input lay-skin="primary" title="必填" type="checkbox" name="list[{key}][required]" value="1" unvalue="0"/>
+            <span class="close-modal ps ml10">×</span>
+        </div>
+        <div class="w100 drag tc noselect">
+            <i class="layui-icon cl-38f">&#xe619;</i><i class="layui-icon cl-38f">&#xe61a;</i>
+        </div>
+    </script>
+</div>
+<script>
+    (function () {
+        var $view = $('.js-view-addForm'),
+            $list = $('.js-list', $view);
+        $('.js-list-add', $view).click(function () {
+            var key = '_' + (new Date()).valueOf(), tpl = $('.js-tpl-addlist', $view).html(),
+                $dev = $('<div>', {
+                    class: 'item bd-ddd p10 mb5 pr flex bg-w',
+                    data: { key: key },
+                    html: tpl.substitute({ key: key })
+                });
+            $list.append($dev);
+            layui.form.render('checkbox', 'js-formm-addForm');
+        });
+        $list.on('click', '.close-modal', function () {
+            $(this).closest('.item').remove();
+        }).on('change', 'select.js-type', function () {
+            var $p = $(this).closest('.wrap');
+            if ($(this).val() == 'text' || $(this).val() == 'textarea') {
+                $('.js-option', $p).remove();
+                return;
+            }
+            if ($('.js-option', $p).length) return;
+
+            var key = $p.data('key'), $div = $('<div>', {
+                class: 'w mt5 js-option',
+                html: '<input class="layui-input layui-input-sm w150" name="list[' + key + '][option][]" value="选项" placeholder="选项名称" maxlength="10" size="15"/> <a class="js-add unl cl-38f lineblock ml5">添加</a>',
+            });
+            $p.append($div);
+        }).on('click', 'a.js-add', function () {
+            var $p = $(this).closest('.js-option'),
+                $copy = $p.clone();
+            $('.js-del', $copy).remove();
+            $('input', $copy).val('选项');
+            $copy.append(' <a class="js-del unl cl-38f lineblock ml5">删除</a>');
+            $p.after($copy);
+        }).on('click', 'a.js-del', function () {
+            $(this).closest('.js-option').remove();
+        }).dad({ draggable: '.drag', });
+    })();
+</script>

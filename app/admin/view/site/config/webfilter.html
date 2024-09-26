@@ -1,0 +1,23 @@
+<form class="layui-form w800 js-view-webfilter-config" method="post" action="{:U('Site/saveConfig')}" lay-label-w100 lay-filter="webfilter-config">
+    <div class="layui-form-item">
+        <label class="layui-form-label">词语替换</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="webfilter[status]" lay-skin="switch" lay-text="开启|关闭" value="1" {$webfilter['status']?'checked':''} unvalue="0"/>
+            <p class="cl-999 mt5 f12">使用本功能会影响HTML生成速度</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">敏感词语</label>
+        <div class="layui-input-block">
+            <textarea name="webfilter[replace]" placeholder="请输入内容" class="layui-textarea h300">{$webfilter.replace|default=''}</textarea>
+            <p class="cl-999 mt5">
+                为应对国家新广告法，避免企业遭受高额罚款，人人站CMS已导入较全违禁词，前台自动以***显示，其他词汇可自行添加，多个词语之间用“ | ”隔开！
+            </p>
+        </div>
+    </div>
+    <div class="layui-form-item mt30">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+        </div>
+    </div>
+</form>

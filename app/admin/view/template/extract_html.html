@@ -1,0 +1,185 @@
+<style>
+    select { border: 1px solid #e7e7e7; box-sizing: border-box; -webkit-box-sizing: border-box; vertical-align:middle; }
+    select { position: relative; height: 30px; line-height: 28px; padding: 0 5px; text-align: left; cursor: pointer; }
+</style>
+
+<div class="layui-card js-view-extractHtml">
+    <div class="layui-card-header">
+        <a class="cl-38f" target="page" href="{:U('Template/fileList')}?path={$dir|urlencode}">文件列表</a> / 修改页面内容
+    </div>
+    <div class="layui-card-body">
+        <form class="layui-form" method="post" action="{:U('Template/extractHtml')}">
+            <input name="path" value="{$path}" type="hidden"/>
+            {foreach $list as $key=>$val}
+            {if $val.type=='ads'}
+            {assign name="ad" value="$val.value" /}
+            <div class="layui-form-item">
+                <label class="layui-form-label">{$key+1}：轮播图</label>
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm mt5 js-add-ads" type="button"> + 添加 </button>
+                    <div class="js-ads-list mt10">
+                        {foreach $ad['items'] as $k=>$item}
+                        <div class="w300 bd-ddd inline-block mr10 mb10 p5 pr" data-key="{$key}" data-k="{$k}">
+                            <?php $imgName='ads['.$key.']['.$k.'][img]'; ?>
+                            <div>
+                                <div class="imgspace" style="width:300px;height:100px;" lay-type-img lay-up>
+                                    <img class="tips-img" src="{$item.img??''}" lay-upsrc>
+                                    <input type="hidden" name="{$imgName}" value="{$item.img??''}" lay-upvalue>
+                                </div>
+                            </div>
+                            <input placeholder="http://" name="ads[{$key}][{$k}][url]" value="{$item.url}" class="layui-input w200 lineblock"/>
+                            <select name="ads[{$key}][{$k}][target]" lay-ignore>
+                                <option value="_blank" {if $item.target=='_blank'}selected{/if}>_blank</option>
+                                <option value="_self" {if $item.target=='_self'}selected{/if}>_self</option>
+                            </select>
+                            <input placeholder="标题" name="ads[{$key}][{$k}][title]" value="{$item.title}" class="layui-input mt5"/>
+                            <i class="close-modal">×</i>
+                        </div>
+                        {/foreach}
+                    </div>
+                </div>
+            </div>
+            {elseif $val.type=='links'/}
+            {assign name="link" value="$val.value" /}
+            <div class="layui-form-item">
+                <label class="layui-form-label">{$key+1}：链接组</label>
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm mt5 js-add-links" type="button"> + 添加 </button>
+                    <div class="js-links-list mt10">
+                        {foreach $link['items'] as $k=>$item}
+                        <div class="w200 bd-ddd inline-block mr10 mb10 p5 pr" data-key="{$key}" data-k="{$k}">
+                            <input placeholder="链接标题" name="links[{$key}][{$k}][title]" value="{$item.title}" class="layui-input"/>
+                            <input placeholder="链接地址：http://" name="links[{$key}][{$k}][url]" value="{$item.url}" class="layui-input mt5"/>
+                            <div class="mt5">
+                                <label>打开方式：</label>
+                                <select name="links[{$key}][{$k}][target]" lay-ignore>
+                                    <option value="_blank" {if $item.target=='_blank'}selected{/if}>_blank</option>
+                                    <option value="_self" {if $item.target=='_self'}selected{/if}>_self</option>
+                                </select>
+                            </div>
+                            <i class="close-modal">×</i>
+                        </div>
+                        {/foreach}
+                    </div>
+                </div>
+            </div>
+            {elseif $val.type=='img'/}
+            {assign name="img" value="$val.value" /}
+            <div class="layui-form-item">
+                <label class="layui-form-label">{$key+1}：图片</label>
+                <div class="layui-input-block">
+                    <div>
+                        <?php $imgName='img['.$key.'][img]'; ?>
+                        <div class="imgspace" style="width:300px;height:100px;" lay-type-img lay-up>
+                            <img class="tips-img" src="{$img.img??''}" lay-upsrc>
+                            <input type="hidden" name="{$imgName}" value="{$img.img??''}" lay-upvalue>
+                        </div>
+                    </div>
+                    <div class="w500">
+                        {if $img.url!==false&&$img.url!=='' }
+                        <div>
+                            <label>链接：</label>
+                            <input name="img[{$key}][url]" value="{$img.url?:''}" class="layui-input w200 lineblock" />
+                            {if $img.target!==false }
+                            <select name="img[{$key}][target]" lay-ignore>
+                                <option value="_blank" {if $img.target=='_blank'}selected{/if}>_blank</option>
+                                <option value="_self" {if $img.target=='_self'}selected{/if}>_self</option>
+                            </select>
+                            {/if}
+                        </div>
+                        {/if}
+                        {if $img.title!==false }
+                        <div class="mt5">
+                            <label>标题：</label>
+                            <input name="img[{$key}][title]" value="{$img.title?:''}" class="layui-input w200 lineblock" />
+                        </div>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            {elseif $val.type=='texts'/}
+            {assign name="text" value="$val.value" /}
+            <div class="layui-form-item">
+                <label class="layui-form-label">{$key+1}：文本组</label>
+                <div class="layui-input-block flex flex-w">
+                    {foreach $text['items'] as $k=>$item}
+                    <div class="mr10 mb10"><input name="texts[{$key}][{$k}]" value="{$item}" class="layui-input w200"/></div>
+                    {/foreach}
+                </div>
+            </div>
+            {/if}
+            {/foreach}
+
+            {if $list}
+            <div class="layui-form-item mt30">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+                    <p class="mt10 f12 cl-999">修改完内容需要清除缓存方可生效</p>
+                </div>
+            </div>
+            {else/}
+            <span>没有可修改的内容</span>
+            <div class="layui-form-item mt30">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal" type="button" target="page" href="{:U('Template/fileList')}?path={$dir|urlencode}">返回</button>
+                </div>
+            </div>
+            {/if}
+        </form>
+    </div>
+</div>
+<script>
+    (function () {
+        var $view = $('.js-view-extractHtml');
+
+        $('.js-ads-list', $view).on('click', 'i.close-modal', function () {
+            var $p = $(this).parent();
+            if (!$p.siblings().length) {
+                $.showMsg(false, '每组轮播图至少保留一个！');
+                return false;
+            }
+            $p.remove();
+            return false;
+        });
+        $('.js-add-ads',$view).click(function () {
+            var $list = $(this).next('.js-ads-list');
+            var $item = $list.children().eq(0).clone(true);
+            var key = $item.data('key'), k = $item.data('k'), idx = (new Date()).valueOf(),
+                html = $item.html();
+            var reg = new RegExp('ads\\[' + key + '\\]\\[' + k + '\\]', 'g');
+            html = html.replace(reg, 'ads[' + key + '][' + idx + ']');
+            $item.html(html);
+            $item.data('k', idx).attr('data-k', idx);
+
+            $('img', $item).attr('src', '');
+            $('input', $item).val('');
+            $list.append($item);
+            return false;
+        });
+
+        $('.js-links-list', $view).on('click', 'i.close-modal', function () {
+            var $p = $(this).parent();
+            if (!$p.siblings().length) {
+                $.showMsg(false, '链接至少保留一个！');
+                return false;
+            }
+            $p.remove();
+            return false;
+        });
+        $('.js-add-links',$view).click(function () {
+            var $list = $(this).next('.js-links-list');
+            var $item = $list.children().eq(0).clone(true);
+            var key = $item.data('key'), k = $item.data('k'), idx = (new Date()).valueOf(),
+                html = $item.html();
+            var reg = new RegExp('links\\[' + key + '\\]\\[' + k + '\\]', 'g');
+            html = html.replace(reg, 'links[' + key + '][' + idx + ']');
+            $item.html(html);
+            $item.data('k', idx).attr('data-k', idx);
+
+            $('input', $item).val('');
+            $list.append($item);
+            return false;
+        });
+
+    })();
+</script>

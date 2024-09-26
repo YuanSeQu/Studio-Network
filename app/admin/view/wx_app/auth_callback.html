@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跳转提示</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+    <style type="text/css">
+        * { padding: 0; margin: 0; }
+        body { background: #fff; font-family: '微软雅黑'; color: #CCC; font-size: 16px; }
+        .system-message { padding: 24px 48px; margin: auto; box-shadow: 0px 0px 10px rgba(0, 0, 0, .2) !important; top: 50%; width: 500px; max-width: 93%; box-sizing: border-box; border-radius: 2px; -moz-border-radius: 10px; /* Old Firefox */}
+        .system-message .jump { padding-top: 10px; color: #999;text-align: center;}
+        .system-message .success, .system-message .error { line-height: 1.8em; color: #000; font-size: 18px;font-weight: bold; text-align: center;}
+        .system-message .detail { font-size: 12px; line-height: 20px; margin-top: 12px; display: none}
+        .status-ico {margin: 20px auto;width: 73px;height: 76px;display: block;background: url(/static/images/ico_right_wrong.png) no-repeat}
+        .status-ico-ok {background-position: 0 0}
+        .status-ico-error {background-position: -97px 0}
+    </style>
+    <link rel="stylesheet" href="/static/css/comm/kb.min.css">
+    <script src="/plugins/jquery/jquery-3.2.1/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<div class="system-message" style="margin-top:10%;">
+    <div class="status-ico status-ico-ok"></div>
+    <p class="success"></p>
+    <p class="jump">
+        页面自动关闭 等待时间： <b id="wait" data-wait="3">3</b>
+    </p>
+</div>
+<script type="text/javascript">
+    (function () {
+        var wait = 3;
+        var interval = setInterval(function () {
+            $('#wait').html(--wait);
+            if (wait <= 0) {
+                clearInterval(interval);
+                top.window.wxAppH5AuthCallback && top.window.wxAppH5AuthCallback();
+                window.close();
+            }
+        }, 1000);
+    })();
+</script>
+</body>
+</html>

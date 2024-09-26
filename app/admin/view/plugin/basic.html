@@ -1,0 +1,39 @@
+<div class="layui-card">
+    <div class="layui-card-body">
+        <blockquote class="layui-elem-quote cl-r ml5">
+            1、手动加载：在显示插件的页面里放置以下代码&#123;:pluginexec("{$row.code}")&#125;<br/>
+            2、自动加载：插件将在指定页面里自动加载，不选则默认加载到所有前台页面<br/>
+            3、加载顺序：自动加载时插件间的加载优先级，值越小优先级越高，插件无特殊要求无需配置<br/>
+        </blockquote>
+        <form class="layui-form plr15" method="post" action="{:U('Plugin/basic')}?id={$row.id??''}">
+            <table>
+                <tr>
+                    <th width="80">加载方式</th>
+                    <td>
+                        <select name="isload">
+                            <option value="0" {if condition="$row.isload == 0"}selected="true"{/if}>手动加载</option>
+                            <option value="1" {if condition="$row.isload == 1"}selected="true"{/if}>自动加载</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="80">加载顺序</th>
+                    <td>
+                        <input type="text" name="sort" value="{$row.sort??'0'}" placeholder="请输入加载顺序" autocomplete="off" class="layui-input lineblock w200"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>指定页面</th>
+                    <td>
+                        {foreach $temps as $tinfo}
+                        <input type="checkbox" name="loadtemp[]" value="{$tinfo.value}" title="{$tinfo.name}" lay-skin="primary" {$tinfo['ischeck']?'checked':''} />
+                        {/foreach}
+                    </td>
+                </tr>
+            </table>
+            <div class="mt30 pl100 pb30">
+                <button type="submit" class="layui-btn layui-btn-normal w100" lay-submit>确认提交</button>
+            </div>
+        </form>
+    </div>
+</div>

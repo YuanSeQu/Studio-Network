@@ -1,0 +1,100 @@
+<div class="layui-card js-view-addUserAttribute">
+    <div class="layui-card-header">
+        <a class="cl-38f" target="page" href="{:U('Users/attribute')}">会员属性</a> / {$row?'编辑':'添加'}属性
+    </div>
+    <div class="layui-card-body">
+        <form class="layui-form" method="post" action="{:U('Users/addAttribute')}?id={$row.id??''}" lay-filter="js-view-addUserAttribute-form">
+            <table lay-th-vtop width="800">
+                <tr>
+                    <th width="150"><em>*</em>属性标题</th>
+                    <td>
+                        <input name="title" value="{$row.title??''}" placeholder="请输入属性标题" lay-verify="required"  class="layui-input w350"/>
+                    </td>
+                </tr>
+                <tr {if $row&&$row.is_system}style="display: none;"{/if}>
+                    <th><em>*</em>属性名称</th>
+                    <td>
+                        <input name="name" value="{$row.name??''}" placeholder="只允许字母、数字和下划线的任意组合" lay-verify="required"  class="layui-input w350"
+                               onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'');"
+                               onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^0-9a-zA-Z_]/g,''));"/>
+                        <span class="f12 cl-999 mt5">保持唯一性</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th><em>*</em>数据类型</th>
+                    <td class="td_radio">
+                        {if $row&&$row.is_system}
+                        <p class="mt5 cl-999">{$row.dtype}</p>
+                        <input name="dtype" value="{$row.dtype}" type="hidden"/>
+                        {else}
+                        <select name="dtype" lay-filter="addUserAttr-dtype">
+                            {foreach $fieldType as $key=>$item}
+                            <option value="{$item.name}" {if !$key||($row&&$row.dtype==$item.name)}selected{/if} data-isoption="{$item.is_option}" data-isdfvalue="{$item.is_dfvalue}">{$item.title}</option>
+                            {/foreach}
+                        </select>
+                        {/if}
+                    </td>
+                </tr>
+                <tr class="js-tr-dfvalue">
+                    <th class="js-th-dfvalue">默认值</th>
+                    <td>
+                        <textarea name="dfvalue" class="layui-textarea"
+                                  placeholder="如果定义属性类型为下拉框、单选项、多选项时，此处填写被选择的项目(用“|”分开，如“男|女|人妖”)。"
+                                  maxlength="500">{$row.dfvalue??''}</textarea>
+                        <p class="f12 cl-999">1、如果定义字段类型为下拉框、单选项、多选项时，此处填写被选择的项目(用“|”分开，如“男|女|人妖”)。<br>2、特殊符号会被过滤掉，比如：&amp;、=、?等</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>是否禁用 </th>
+                    <td>
+                        <input type="checkbox" name="is_hidden" lay-skin="switch" lay-text="开启|关闭" value="1" {$row['is_hidden']?'checked':''} unvalue="0"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>是否必填</th>
+                    <td>
+                        <input type="checkbox" name="is_required" lay-skin="switch" lay-text="开启|关闭" value="1" {$row['is_required']?'checked':''} unvalue="0"/>
+                        <span class="f12 cl-999 mt5">只针对前台的会员属性有效。</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>是否注册表单</th>
+                    <td>
+                        <input type="checkbox" name="is_reg" lay-skin="switch" lay-text="开启|关闭" value="1" {if !$row||$row['is_reg'] }checked{/if} unvalue="0"/>
+                        <span class="f12 cl-999 mt5">开启后，会员注册时显示。</span>
+                    </td>
+                </tr>
+            </table>
+            <div class="mt30 pl100 ml50 pb30">
+                <button class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    (function () {
+        var $view = $('.js-view-addUserAttribute');
+
+        function dtypeChange(elem) {
+            var item = $(elem).data();
+            if (item) {
+                $('.js-tr-dfvalue', $view)[item.isdfvalue == 1 ? 'show' : 'hide']();
+                $('.js-th-dfvalue', $view).html(item.isoption == 1 ? '<em>*</em>默认值' : '默认值');
+                $('.js-tr-dfvalue textarea[name="dfvalue"]', $view).attr('vtype', item.isoption == 1 ? 'required' : '').removeClass('layui-form-danger');
+                $('.js-tr-isfilter', $view)[item.isfilter == 1 ? 'show' : 'hide']();
+                if (item.isdfvalue != 1) {
+                    $('.js-tr-dfvalue textarea[name="dfvalue"]', $view).val('');
+                }
+            }
+        }
+
+        var $dtype = $('[name="dtype"]', $view);
+        $dtype.length && dtypeChange($('option:selected', $dtype));
+
+        layui.form.on('select(addUserAttr-dtype)', function (data) {
+            var elem = data.elem,
+                item = $('option:selected', elem);
+            dtypeChange(item);
+        });
+    })();
+</script>

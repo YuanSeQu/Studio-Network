@@ -1,0 +1,79 @@
+<div class="layui-card js-view-addArticle">
+    <div class="layui-card-header">
+        <a class="cl-38f" target="page" href="{:U('Users/index')}">会员列表</a> / {$row?'编辑':'添加'}会员
+    </div>
+    <div class="layui-card-body">
+        <form class="layui-form" method="post" action="{:U('Users/addUser')}?id={$row.id??''}" lay-filter="js-view-addUser-form">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">基本资料</li>
+                    <li>更多资料</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <table>
+                            <tr>
+                                <th width="100">会员头像</th>
+                                <td>
+                                    {imgspace name="head_pic"  width="60px"  height="60px" type="img" value="$row.head_pic??'/static/images/dfboy.png'" title="更换头像" /}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>用  户  名</th>
+                                <td>
+                                    {if $row}
+                                    {$row.name}
+                                    {else}
+                                    <input type="text" name="name" value="{$row.name??''}" lay-verify="required" autocomplete="off" placeholder="登陆账号" class="layui-input" maxlength="20" size="30"/>
+                                    {/if}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>会员昵称</th>
+                                <td>
+                                    <input type="text" name="nickname" value="{$row.nickname??''}" autocomplete="off" placeholder="会员昵称" class="layui-input" maxlength="30" size="30"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>登录密码</th>
+                                <td>
+                                    <input type="text" name="password" value="" placeholder="不修改留空" autocomplete="off" class="layui-input" maxlength="30" size="30"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>是否激活</th>
+                                <td>
+                                    <input type="checkbox" name="is_activation" lay-skin="switch" lay-text="是|否" value="1" {if !isset($row['is_activation'])||$row['is_activation']}checked{/if} unvalue="0"/>
+                                </td>
+                            </tr>
+                            {if $row}
+                            <tr>
+                                <th>注册日期</th>
+                                {if $row.reg_time}
+                                <td>{$row.reg_time|date='Y-m-d H:i:s'}</td>
+                                {else}
+                                <td class="cl-999">无</td>
+                                {/if}
+                            </tr>
+                            <tr>
+                                <th>最后登录</th>
+                                {if $row.last_login}
+                                <td>{$row.last_login|date='Y-m-d H:i:s'}</td>
+                                {else}
+                                <td class="cl-999">未登陆</td>
+                                {/if}
+                            </tr>
+                            {/if}
+                        </table>
+                    </div>
+                    <div class="layui-tab-item">
+                        {include file="users/user_field"/}
+                    </div>
+                </div>
+            </div>
+            <div class="mt30 pl100 pb30">
+                <button  type="submit" class="layui-btn layui-btn-normal" lay-submit>确认提交</button>
+            </div>
+        </form>
+    </div>
+</div>

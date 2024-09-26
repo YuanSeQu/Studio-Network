@@ -1,0 +1,31 @@
+<div class="blank10"></div>
+<div class="blank30"></div>
+<div class="go go4"></div>
+<div class="blank10"></div>
+<div class="blank30"></div>
+
+<div class="">
+    <div class="result cc">
+        <h1>恭喜您，RRZCMS已经成功安装完成！</h1>
+    </div>
+    <div class="bottom tac">
+        <a href="{rrz:env name='rrz.cmsurl'/}" class="btn_b" style="color: #fff">访问网站首页 </a>
+        <a id="next_submit" href="{:getAppRootUrl('admin')}" class="btn_a btn_submit J_install_btn">登陆网站后台 </a>
+    </div>
+    <div class=""></div>
+</div>
+<script>
+    try {
+        $.post('{:url("/".getAppName("admin")."/Login/setInlet")}', { inlet: 0 });
+        var root = '{:getRootUrl()}';
+        setTimeout(function () {
+            $.ajax({
+                url: root + '{:getAppName("admin")}/Login/setInlet',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    jqXHR.status == 404 && $.post(root + 'index.php/{:getAppName("admin")}/Login/setInlet', { inlet: 2 });
+                }
+            });
+        }, 500);
+    } catch (e) {
+    }
+</script>

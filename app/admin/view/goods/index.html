@@ -1,0 +1,55 @@
+<script>
+    (function () {
+        var $view = $('.' + '{$grid_class}');
+        function del(id, title, elem) {
+            $.confirm(title, {
+                title: '提示',
+                closeBtn: 2,
+                btn: ['彻底删除', '放入回收站'], //按钮
+                yes: function (layero, index) {
+                    $.loading.show();
+                    $.get('{:U("Recycle/delGoods")}', { id: id }, function (rs) {
+                        $.loading.hide();
+                        $.callbackSuccess.call(elem, rs);
+                    }, 'json');
+                },
+                cancel: function (layero, index) {
+                    $.loading.show();
+                    $.get('{:U("Goods/delGoods")}', { id: id }, function (rs) {
+                        $.loading.hide();
+                        $.callbackSuccess.call(elem, rs);
+                    }, 'json');
+                },
+            });
+        }
+
+        $('.js-del', $view).on('click', function () {
+            var id = $(this).closest('tr').data('id'), vthis = this;
+            del(id, '将删除该文档，请选择操作？', this);
+            return false;
+        });
+
+        $('.vjs-batch-del', $view).on('click', function () {
+            var ids = [];
+            $('.selected .checkbox:checked', $view).each(function () {
+                ids.push($(this).val());
+            });
+            if (!ids.length) {
+                $.showMsg(false,'请选择要操作的数据行！');
+                return false;
+            }
+            var id = ids.join(',');
+            del(id, '将批量删除文档，请选择操作？', this);
+            return false;
+        });
+        $view.on('blur', '.js-sort', function () {
+            var $tr = $(this).closest('tr'), id = $tr.data('id'), vthis = this,
+                val = parseInt($(this).data('val') || 0) || 0,
+                sort = parseInt($(this).val().trim() || 0) || 0;
+            if (val == sort) return;
+            $.post('{:U("Goods/sortGoods")}?id=' + id, { sort: sort }, function (rs) {
+                rs.code && $(vthis).data('val', sort);
+            }, 'json');
+        });
+    })();
+</script>
