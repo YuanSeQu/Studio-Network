@@ -1,37 +1,32 @@
-# 通用响应式网络工作室公司官网
+# 项目介绍
+1.通用响应式网络工作室公司官网开源官网模板<br/>
+2.响应式网络工作室公司网站人人站CMS模板带手机端，本模板自带rrzcms内核，无需再下载人人站cms系统，人人站CMS是基于TP6.0框架为核心开发的开源、免费、安全、易用的企业建站系统，能够满足各类企业网站开发建设的需要。系统采用简单的模板标签，只要懂HTML就可快速开发企业网站，商业授权是对使用人人站建站框架商业化用途的凭证，避免后续法律纠纷; <br/>
+3.将下载下来的模板直接上传服务器，网站效果和演示站一样，采用开源免费的PHP企业网站开发建设管理系统，后台操作简单，安装非常方便，更适合新手朋友，可免费提供咨询服务！<br/>
 
-#### 介绍
-响应式网络工作室公司网站人人站CMS模板带手机端，本模板自带rrzcms内核，无需再下载人人站cms系统，人人站CMS是基于TP6.0框架为核心开发的开源、免费、安全、易用的企业建站系统，能够满足各类企业网站开发建设的需要。系统采用简单的模板标签，只要懂HTML就可快速开发企业网站，商业授权是对使用人人站建站框架商业化用途的凭证，避免后续法律纠纷; 
+# 模板特点
+1、将源码上传到站点根目录<br/>
+2、直接运行域名安装即可<br/>
+3、填写数据库信息和设置管理员账号及密码<br/>
+4、提示安装完成后即可进入网站后台<br/>
 
-#### 软件架构
-软件架构说明
+# 更多源码
+1.更多500套高级源码可以选购，更多案例查看：https://kdocs.cn/l/ceE9t0WJiSaH <br/>
+2.高级源码和商务合作可以联系淘宝小店链接：https://shop398787089.taobao.com/ <br/>
+3.猿社区有强大的开发者与产品经理社区支持，可以联系客服加入，目前已有100+的伙伴加入我们，平时也有开源项目组队 <br/>
+4.UI设计/系统前端开发定制200一个页面，会匹配安排猿社区内开发者，不满意可用换人。
 
+# 系统图片
+![输入图片说明](https://gitee.com/apehub/Fashion-Clothing-Clothing/raw/master/1727286531481.jpg)
 
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+# 配套资料
+DedeCMS使用（快速入门）手册：https://help.dedecms.com/chujie//<br/>
+DedeCMS模板手册：https://help.dedecms.com/mubanshouce/<br/>
 
 
-#### 特技
+# 关于我们
+1.猿社区ApeHub，专为外贸企业与初创企业提供独立站解决方案社区。我们汇聚技术精英，提供前沿的底层建设方案，助力微创/出海企业构建高效、安全的网站<br/>
+2.不定期gitee和github官网号更新免费全开源模板，有兴趣请帮点一下 **Star** 哦<br/>
+3.**客服微信：yuansequ 有技术交流群可以联系客服加入，长期有资深开发者提供答疑**<br/>
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+<img src="https://gitee.com/apehub/ChemicalIndustry/raw/master/kefu.jpg"  width="284.5" height="284.5"/>
+
